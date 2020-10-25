@@ -2,18 +2,33 @@ import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import logoImg from '../../assets/images/logo_taro.png'
-import './index.scss'
+import './bxbx-home.css'
 
 export default class Index extends Taro.Component {
   config = {
-    navigationBarTitleText: '贝鑫保险'
+    navigationBarTitleText: '保管家'
   }
 
   constructor () {
     super(...arguments)
 
     this.state = {
-      content: '贝鑫保险首页'
+        homeMenuIndex: {
+            line1: [
+                {
+                    label: '保单保全',
+                    icons: 'icon1.png'
+                },
+                {
+                    label: '申请理赔',
+                    icons: 'icon2.png'
+                },
+                {
+                    label: '医疗绿道',
+                    icons: 'icon3.png'
+                }
+            ]
+        }
     }
   }
 
@@ -33,22 +48,47 @@ export default class Index extends Taro.Component {
     })
   }
 
-  goToDemo = e => {
+  goToDetailOrder = e => {
     Taro.navigateTo({
       // url: `/pages/panel/index?id=${id.toLowerCase()}`
-      url: `/pages/demo/demo`
+      url: `/pages/startBxOrder/index`
     })
   }
 
   render () {
-    const { content } = this.state
+    const { homeMenuIndex } = this.state
+    const { line } = homeMenuIndex
 
     return (
-      <View className='page page-index'>
-        <View>
-          {content}
+      <View className='bx-page'>
+        <View className="home-title-menu">
+            {Object.keys(homeMenuIndex).map((v, k) => {
+                return (
+                    <View className="home-title-menu-row">
+                        {homeMenuIndex[v].map((item) => {
+                            console.log('读取图片', './'+item.icons)
+                            let menuIcon = `./${item.icons}`
+                            return (
+                                <View className="home-title-menu-col">
+                                    <Image className="home-title-menu-icons" src={require('./img/icon1.png')} />
+                                    <View style={{marginTop: '16rpx'}}>
+                                        <Text>{item.label}</Text>
+                                    </View>
+                                </View>
+                            )
+                        })}
+                    </View>
+                )
+            })}
         </View>
-        <AtButton type='primary' onClick={this.goToDemo}>点击跳转</AtButton>
+        <View className="bx-home-content">
+            <View className="start-bx-button" onClick={this.goToDetailOrder}>
+                <Image className="start-bx-button-image" src={require('./img/start_button.png')} />
+                <View className="start-bx-button-text">
+                    <Text>立马托管</Text>
+                </View>
+            </View>
+        </View>
       </View>
     )
   }

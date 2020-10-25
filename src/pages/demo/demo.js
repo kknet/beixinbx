@@ -1,18 +1,33 @@
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import logoImg from '../../assets/images/logo_taro.png'
-import './index.scss'
+
 
 export default class Index extends Taro.Component {
   config = {
-    navigationBarTitleText: '贝鑫保险跳转'
+    navigationBarTitleText: '保管家'
   }
 
   constructor () {
     super(...arguments)
 
     this.state = {
-      content: '贝鑫保险跳转'
+      homeMenuIndex: {
+          line1: [
+              {
+                  label: '保单保全',
+                  icons: 'icon1.png'
+              },
+              {
+                  label: '申请理赔',
+                  icons: 'icon2.png'
+              },
+              {
+                  label: '医疗绿道',
+                  icons: 'icon3.png'
+              }
+          ]
+      }
     }
   }
 

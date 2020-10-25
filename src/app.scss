@@ -3,11 +3,13 @@
 @import "./assets/font-awesome/font-awesome.scss";
 @import "./assets/font/iconfont.scss";
 
-.page {
+.bx-page {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   min-height: 100vh;
+  fonst-size: 28rpx;
+  background: #EFEFF4;
 }
 
 view {

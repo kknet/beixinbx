@@ -1,0 +1,52 @@
+.home-page {
+    width: 100%;
+}
+
+.home-title-menu{
+    margin-top: 20rpx;
+    background-color: white;
+}
+
+.home-title-menu-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40rpx 81rpx;
+}
+
+.home-title-menu-col{
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.home-title-menu-icons{
+    width: 100rpx;
+    height: 100rpx;
+    display: block;
+    margin:0 auto;
+}
+
+.bx-home-content{
+    margin-top: 20rpx;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 811rpx;
+}
+.start-bx-button{
+    text-align: center;
+}
+
+.start-bx-button-text{
+    font-size: 36rpx;
+    color: #333;
+    margin-top: 22rpx;
+}
+
+.start-bx-button-image{
+    text-align: center;
+    width: 200rpx;
+    height: 200rpx;
+    display: block;
+}
