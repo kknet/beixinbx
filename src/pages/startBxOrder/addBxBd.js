@@ -48,7 +48,7 @@ export default class AddBxBd extends Taro.Component {
                         <Text style={{fontSize: '26rpx', color: '#999999'}}>请拍照添加保单</Text>
                     </View>
 
-                    <View className="line"></View>
+                    <View className="line" style={{marginTop: '16rpx'}}></View>
 
                     <View className="bx-order-image-section">
                         <View className="bx-order-image-row-title">
@@ -66,6 +66,55 @@ export default class AddBxBd extends Taro.Component {
                                 <Image src={require('./image/addNewPic.png')} className="add-pic-icons" />
                             </View>
                         </View>
+                    </View>
+
+                    <View className="line" style={{marginTop: '30rpx'}}></View>
+
+                    <View className="bx-order-image-section">
+                        <View className="bx-order-image-row-title">
+                            <View>
+                                <Text style={{color: '#222222', fontSize: '34rpx'}}>投保单或银行卡</Text>
+                            </View>
+
+                            <View>
+                                <Text style={{fontSize: '26rpx', color: '#999999'}}>0/2</Text>
+                            </View>
+                        </View>
+
+                        <View className="bx-order-image-row">
+                            <View className="bx-order-image-col">
+                                <Image src={require('./image/addNewPic.png')} className="add-pic-icons" />
+                            </View>
+                        </View>
+                    </View>
+
+                    <View className="line" style={{marginTop: '30rpx'}}></View>
+
+                    <View className="bx-order-image-section">
+                        <View className="bx-order-image-row-title">
+                            <View>
+                                <Text style={{color: '#222222', fontSize: '34rpx'}}>其他(现价单价或批单页)</Text>
+                            </View>
+
+                            <View>
+                                <Text style={{fontSize: '26rpx', color: '#999999'}}>0/2</Text>
+                            </View>
+                        </View>
+
+                        <View className="bx-order-image-row">
+                            <View className="bx-order-image-col">
+                                <Image src={require('./image/addNewPic.png')} className="add-pic-icons" />
+                            </View>
+                        </View>
+                    </View>
+
+                    <View className="line" style={{marginTop: '30rpx'}}></View>
+
+                    <View style={{fontSize: '26rpx', marginTop: '30rpx', color: '#111'}}>
+                        <Text>
+                            可上传保单页，投保单页，现价单和批单页。所上传图片均需同一张保单号下的保单信息，请确保图片清晰和保单内容完整。
+                        </Text>
+                        <Text style={{textDecoration: 'underline', color: '#576b95'}}>查看实例</Text>
                     </View>
                 </View>
             </View>

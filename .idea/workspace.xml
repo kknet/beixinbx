@@ -20,25 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfd3a48d-0a7a-4a69-88a3-14d32f5bb1d1" name="Default Changelist" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/images/one-serve.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/images/order-report.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/image/addNewPic.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/confirmOrder/components/confirmInfo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/confirmOrder/confirm-order.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/confirmOrder/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/img/twice-ceshi.jpg" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/img/analyse-icons.png" afterPath="$PROJECT_DIR$/src/assets/images/analyse-icons.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/img/xf.png" afterPath="$PROJECT_DIR$/src/assets/images/xf.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/img/xzlp.png" afterPath="$PROJECT_DIR$/src/assets/images/xzlp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/images/twice-ceshi.jpg" afterPath="$PROJECT_DIR$/src/assets/images/twice-ceshi.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.js" afterPath="$PROJECT_DIR$/src/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.scss" afterPath="$PROJECT_DIR$/src/app.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/home/home.js" afterPath="$PROJECT_DIR$/src/pages/home/home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/index.js" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/startBxOrder.scss" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/startBxOrder.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -120,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addBxBd.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="addBxBd.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="677">
-              <caret line="64" column="63" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="63" />
+            <state relative-caret-position="352">
+              <caret line="45" column="53" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="53" />
               <folding>
                 <element signature="e#54#85#0" expanded="true" />
               </folding>
@@ -132,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addBxBd.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="addBxBd.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+            <state relative-caret-position="475">
+              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -200,8 +184,8 @@
         <option value="$PROJECT_DIR$/src/pages/confirmOrder/index.js" />
         <option value="$PROJECT_DIR$/src/app.js" />
         <option value="$PROJECT_DIR$/src/pages/home/home.js" />
-        <option value="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" />
         <option value="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss" />
+        <option value="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" />
       </list>
     </option>
   </component>
@@ -507,12 +491,12 @@
       <updated>1603085692825</updated>
       <workItem from="1603085694338" duration="2971000" />
       <workItem from="1603091058671" duration="3400000" />
-      <workItem from="1603514431509" duration="15508000" />
+      <workItem from="1603514431509" duration="16493000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15508000" />
+    <option name="totallyTimeSpent" value="16493000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -681,21 +665,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="64" column="63" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="63" />
-          <folding>
-            <element signature="e#54#85#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="475">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss">
+    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="352">
+          <caret line="45" column="53" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="53" />
+          <folding>
+            <element signature="e#54#85#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
