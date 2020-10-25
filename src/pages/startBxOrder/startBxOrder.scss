@@ -16,6 +16,7 @@
   background-color: white;
   width: 100%;
   margin-top: 20rpx;
+  position: relative;
 
   .start-bx-title-row{
     padding: 0 103rpx;
@@ -29,9 +30,12 @@
     padding: 27rpx 0;
     box-sizing: border-box;
     width: 170rpx;
-    border-bottom: 6rpx solid #FE9B14;
     font-size: 28rpx;
     color: #353535;
+  }
+
+  .start-bx-title-checked {
+    border-bottom: 6rpx solid #FE9B14;
   }
 }
 
@@ -65,6 +69,25 @@
   font-size: 20rpx;
 }
 .12Font{
+  max-width: 120rpx;
   font-size: 24rpx;
   color: #111;
 }
+
+   .go-to-pay-button{
+     width: 90%;
+     position: absolute;
+     left:50%;
+     margin-left: -45%;
+     bottom: 40rpx;
+     padding: 22rpx;
+     box-sizing: border-box;
+     border-radius: 10rpx;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 94rpx;
+     background-color: #FE9B14;
+     color: white;
+     font-size: 36rpx;
+   }

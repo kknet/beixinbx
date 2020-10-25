@@ -1,0 +1,70 @@
+@import "~taro-ui/dist/style/components/input-number.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+
+.confirm-info-content{
+  padding: 0 30rpx;
+  margin-top: 60rpx;
+}
+.tg-confirm-content{
+  margin-top: 20rpx;
+  background-color: white;
+  height:90vh;
+}
+
+.serve-content-rows{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 194rpx;
+  margin-top: 60rpx;
+}
+
+.serve-content-col{
+  font-size: 24rpx;
+  color: #111;
+}
+.serve-content-icons{
+  width: 54rpx;
+  height:54rpx;
+  display: block;
+  margin: 0 auto;
+}
+.start-bx-small-words{
+  font-size: 20rpx;
+}
+
+.buy-count-row{
+  padding: 30rpx;
+  font-size: 30rpx;
+  text-align: right;
+  margin-top: 65rpx;
+}
+.confirm-bottom-row {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 0px 0px #E5E5E5;
+  padding: 33rpx 30rpx;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.float-right-pay-button{
+  position: absolute;
+  right: 0;
+  top:0;
+  width: 260rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 36rpx;
+  background-color: #FE9B14;
+}
+.12Font{
+     max-width: 120rpx;
+     font-size: 24rpx;
+     color: #111;
+   }
+
+

@@ -55,6 +55,13 @@ export default class Index extends Taro.Component {
     })
   }
 
+  goToPage = e => {
+      Taro.navigateTo({
+          // url: `/pages/panel/index?id=${id.toLowerCase()}`
+          url: `/pages/startBxOrder/addBxBd`
+      })
+  }
+
   render () {
     const { homeMenuIndex } = this.state
     const { line } = homeMenuIndex
@@ -69,7 +76,7 @@ export default class Index extends Taro.Component {
                             console.log('读取图片', './'+item.icons)
                             let menuIcon = `./${item.icons}`
                             return (
-                                <View className="home-title-menu-col">
+                                <View className="home-title-menu-col" onClick={this.goToPage}>
                                     <Image className="home-title-menu-icons" src={require('./img/icon1.png')} />
                                     <View style={{marginTop: '16rpx'}}>
                                         <Text>{item.label}</Text>

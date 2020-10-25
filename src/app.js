@@ -7,8 +7,10 @@ import './app.scss'
 class App extends Component {
   config = {
     pages: [
-      'pages/home/home',
-      'pages/startBxOrder/index' 
+      'pages/home/home',  // 首页
+      'pages/startBxOrder/index', // 填写保单信息页
+      'pages/confirmOrder/index', // 确认订单页
+      'pages/startBxOrder/addBxBd'  // 添加保单
     ],
     window: {
       backgroundTextStyle: 'light',
