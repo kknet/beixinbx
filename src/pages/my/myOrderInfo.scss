@@ -1,0 +1,44 @@
+.bx-header-info{
+  background-image: linear-gradient(to right, #FE6714, #FE9B14);
+  margin: 20px 0 0 0;
+  padding: 30px;
+  font-size: 48px;
+  color: white;
+  position: relative;
+}
+.bx-info-small-words{
+  font-size: 26px;
+  color: white;
+}
+
+.bz-online-image{
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  right: 20px;
+}
+.basic-info-section{
+  margin-top: 20px;
+  background-color: white;
+}
+.basic-info-row{
+  display: flex;
+  padding: 20px 30px;
+}
+
+.basic-info-title-name{
+  font-size: 34px;
+  color: #000000;
+  width: 230px;
+}
+
+.basic-info-title-tips{
+  font-size: 34px;
+  color: #B2B2B2;
+}
+
+.basic-info-line {
+  width: 100%;
+  height: 2px;
+  background-color: #E5E5E5;
+}

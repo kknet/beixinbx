@@ -3,9 +3,8 @@
  */
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
-import { AtTabs, AtTabsPane, AtInputNumber } from 'taro-ui'
+import { AtTabs, AtTabsPane, AtInputNumber, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
 import ConfirmInfo from './components/confirmInfo'
-import logoImg from '../../assets/images/logo_taro.png'
 import './confirm-order.scss'
 
 export default class ConfirmOrder extends Taro.Component {
@@ -18,7 +17,8 @@ export default class ConfirmOrder extends Taro.Component {
 
         this.state = {
             current: 0,
-            buyCount: 1
+            buyCount: 1,
+            isShowServeInfo: true
         }
     }
 
@@ -54,13 +54,19 @@ export default class ConfirmOrder extends Taro.Component {
         }
     }
 
+    hideModal = () => {
+        this.setState({
+            isShowServeInfo: !this.state.isShowServeInfo
+        })
+    }
+
     handleChange() {
 
     }
 
 
     render () {
-        const { current } = this.state
+        const { current, isShowServeInfo } = this.state
 
         return (
             <View className="bx-page">
@@ -126,6 +132,25 @@ export default class ConfirmOrder extends Taro.Component {
                         确定支付
                     </View>
                 </View>
+
+                <AtModal isOpened={isShowServeInfo} className="confirm-order-modal">
+                    <AtModalContent>
+                        <Image src={require('./image/logo.png')} className="logo-image" />
+                        <View style={{margin: '14rpx 0 18rpx 0', textAlign: 'center'}}>
+                            <Text style={{textIndent: '2em', fontSize: '36rpx', color: '#000'}}>消费者权益保障服务</Text>
+                        </View>
+                        <View>
+                            <Text style={{textIndent: '2em', fontSize: '30rpx', color: '#888'}}>·15天无理由退 ·理赔无忧 ·客服协助 ·风险提示</Text>
+                        </View>
+
+                        <View style={{margin: '37rpx 0 66rpx 0'}}>
+                            <Text style={{textIndent: '2em', fontSize: '30rpx', color: '#111'}}>你已进入蚂蚁保保险代理有限公司投保流程，请仔细阅读保险条款、投保须知、客户告知书等内容并关注承保保险公司信息。为保障你的权益，我们将会安全记录你的操作。</Text>
+                        </View>
+                    </AtModalContent>
+                    <AtModalAction>
+                        <Button style={{color: '#FE9B14'}} onClick={this.hideModal}>知道了</Button>
+                    </AtModalAction>
+                </AtModal>
             </View>
         )
     }

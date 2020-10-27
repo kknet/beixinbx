@@ -80,21 +80,21 @@ export default class StartBxOrder extends Taro.Component {
 
                             <View className="serve-content-rows">
                                 <View className="serve-content-col">
-                                    <Image src={require('./img/analyse-icons.png')} className="serve-content-icons" />
+                                    <Image src={require('../../assets/images/analyse-icons.png')} className="serve-content-icons" />
                                     <View style={{marginTop: '20rpx'}}>
                                         <Text className="12Font">保障分析</Text>
                                     </View>
                                 </View>
 
                                 <View className="serve-content-col">
-                                    <Image src={require('./img/xf.png')} className="serve-content-icons" />
+                                    <Image src={require('../../assets/images/xf.png')} className="serve-content-icons" />
                                     <View style={{marginTop: '20rpx'}}>
                                         <Text className="12Font">续费提醒</Text>
                                     </View>
                                 </View>
 
                                 <View className="serve-content-col">
-                                    <Image src={require('./img/xzlp.png')} className="serve-content-icons" />
+                                    <Image src={require('../../assets/images/xzlp.png')} className="serve-content-icons" />
                                     <View style={{marginTop: '20rpx'}}>
                                         <Text className="12Font">协助理赔</Text>
                                     </View>

@@ -4,6 +4,10 @@ import { AtButton } from 'taro-ui'
 import logoImg from '../../assets/images/logo_taro.png'
 import './bxbx-home.css'
 
+import Icon1 from './img/icon1.png'
+import Icon2 from './img/icon2.png'
+import Icon3 from './img/icon3.png'
+
 export default class Index extends Taro.Component {
   config = {
     navigationBarTitleText: '保管家'
@@ -17,15 +21,15 @@ export default class Index extends Taro.Component {
             line1: [
                 {
                     label: '保单保全',
-                    icons: 'icon1.png'
+                    icons: Icon1
                 },
                 {
                     label: '申请理赔',
-                    icons: 'icon2.png'
+                    icons: Icon2
                 },
                 {
                     label: '医疗绿道',
-                    icons: 'icon3.png'
+                    icons: Icon3
                 }
             ]
         }
@@ -71,13 +75,11 @@ export default class Index extends Taro.Component {
         <View className="home-title-menu">
             {Object.keys(homeMenuIndex).map((v, k) => {
                 return (
-                    <View className="home-title-menu-row">
+                    <View className="home-title-menu-row" key={`home-${k}`}>
                         {homeMenuIndex[v].map((item) => {
-                            console.log('读取图片', './'+item.icons)
-                            let menuIcon = `./${item.icons}`
                             return (
-                                <View className="home-title-menu-col" onClick={this.goToPage}>
-                                    <Image className="home-title-menu-icons" src={require('./img/icon1.png')} />
+                                <View key={item.icons} className="home-title-menu-col" onClick={this.goToPage}>
+                                    <Image className="home-title-menu-icons" src={item.icons} />
                                     <View style={{marginTop: '16rpx'}}>
                                         <Text>{item.label}</Text>
                                     </View>

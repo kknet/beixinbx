@@ -1,0 +1,40 @@
+.my-score-section{
+  padding: 40px 30px;
+  background-color: white;
+  margin-top: 20px;
+}
+.my-score-info{
+  display: flex;
+  margin-top: 32px;
+}
+.ver-line{
+  background-color: #ECEBEB;
+  width: 2px;
+  height: 107px;
+  margin: 0 19px 0 53px;
+}
+
+.my-score-info-list-section{
+  background-color: white;
+  margin-top: 20px;
+  height: 74%;
+  overflow: auto;
+}
+
+.my-score-info-list-row{
+  padding: 19px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.small-tips{
+  font-size: 26px;
+  color: #999;
+}
+
+.my-score-info-line{
+  width: 100%;
+  height: 2px;
+  background-color: #ECEBEB;
+}

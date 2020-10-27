@@ -1,5 +1,6 @@
 @import "~taro-ui/dist/style/components/input-number.scss";
 @import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/modal.scss";
 
 .confirm-info-content{
   padding: 0 30rpx;
@@ -60,6 +61,17 @@
   color: white;
   font-size: 36rpx;
   background-color: #FE9B14;
+}
+.logo-image{
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx auto 14rpx auto;
+  display: block;
+}
+.confirm-order-modal {
+  .at-modal__container{
+    width: 690rpx!important;
+  }
 }
 .12Font{
      max-width: 120rpx;
