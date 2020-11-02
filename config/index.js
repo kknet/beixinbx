@@ -80,10 +80,7 @@ const config = {
         }
       }
     }
-  },
-  alias: {
-      '@/utils': 'src/utils'
-  }  
+  }
 }
 
 module.exports = function (merge) {
