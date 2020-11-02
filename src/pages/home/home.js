@@ -7,6 +7,7 @@ import './bxbx-home.css'
 import Icon1 from './img/icon1.png'
 import Icon2 from './img/icon2.png'
 import Icon3 from './img/icon3.png'
+import * as service from './services'
 
 export default class Index extends Taro.Component {
   config = {
@@ -34,6 +35,33 @@ export default class Index extends Taro.Component {
             ]
         }
     }
+  }
+
+  componentDidMount() {
+    this.loginMethods()
+  }
+
+  loginMethods() {
+    Taro.login({
+      success: function (res) {
+        console.log(res)
+        if (res.code) {
+          //发起网络请求
+          // Taro.request({
+          //   url: 'https://test.com/onLogin',
+          //   data: {
+          //     code: res.code
+          //   }
+          // })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+    const loginData = {}
+    service.LoginServe(loginData, {}).then((res) => {
+      console.log(res)
+    })
   }
 
   onShareAppMessage () {
