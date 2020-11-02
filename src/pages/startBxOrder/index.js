@@ -4,7 +4,6 @@
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
-import logoImg from '../../assets/images/logo_taro.png'
 import './startBxOrder.scss'
 
 export default class StartBxOrder extends Taro.Component {

@@ -76,9 +76,9 @@ export default class Index extends Taro.Component {
             {Object.keys(homeMenuIndex).map((v, k) => {
                 return (
                     <View className="home-title-menu-row" key={`home-${k}`}>
-                        {homeMenuIndex[v].map((item) => {
+                        {homeMenuIndex[v].map((item, index) => {
                             return (
-                                <View key={item.icons} className="home-title-menu-col" onClick={this.goToPage}>
+                                <View key={`child-${index}`} className="home-title-menu-col" onClick={this.goToPage}>
                                     <Image className="home-title-menu-icons" src={item.icons} />
                                     <View style={{marginTop: '16rpx'}}>
                                         <Text>{item.label}</Text>

@@ -60,8 +60,10 @@ export default class ConfirmOrder extends Taro.Component {
         })
     }
 
-    handleChange() {
-
+    changeBuyCount = (val) => {
+        this.setState({
+            buyCount: val
+        })
     }
 
 
@@ -114,11 +116,11 @@ export default class ConfirmOrder extends Taro.Component {
                     <View className="buy-count-row">
                         <Text style={{marginRight: '30rpx'}}>本次购买份数</Text>
                         <AtInputNumber
-                            min={0}
-                            max={10}
+                            min={1}
+                            max={99}
                             step={1}
                             value={this.state.buyCount}
-                            onChange={this.handleChange.bind(this)}
+                            onChange={this.changeBuyCount}
                         />
                     </View>
                 </View>
