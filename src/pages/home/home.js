@@ -37,30 +37,19 @@ export default class Index extends Taro.Component {
     }
   }
 
-  componentDidMount() {
-    this.loginMethods()
+  async componentDidMount() {
+    // await this.getOpenId()
+    // this.getUserInfo()
   }
 
-  loginMethods() {
-    Taro.login({
-      success: function (res) {
-        console.log(res)
-        if (res.code) {
-          //发起网络请求
-          // Taro.request({
-          //   url: 'https://test.com/onLogin',
-          //   data: {
-          //     code: res.code
-          //   }
-          // })
-        } else {
-          console.log('登录失败！' + res.errMsg)
+  loginMethodsGetCode() {
+    return new Promise((reslove, reject) => {
+      Taro.login({
+        success: (res) => {
+          console.log('登录成功', res)
+          reslove(res)
         }
-      }
-    })
-    const loginData = {}
-    service.LoginServe(loginData, {}).then((res) => {
-      console.log(res)
+      })
     })
   }
 
@@ -94,12 +83,72 @@ export default class Index extends Taro.Component {
       })
   }
 
+  getOpenId() {
+    const queryData = {}
+    return new Promise((reslove, reject) => {
+      Taro.login({
+        success: (res) => {
+          queryData.code = res.code
+          service.requestGetOpenId(queryData, {}).then((result) => {
+            console.log('获取open', result)
+            Taro.setStorage({
+              key:"openId",
+              data:result.data.data.openid
+            })
+            Taro.setStorage({
+              key:"sessionKey",
+              data:result.data.data.session_key
+            })
+            queryData.openId = result.data.data.openid
+            reslove(queryData)
+          })
+        }
+      })
+    })
+  }
+
+  getUserInfo = async (userInfo) => {
+    let submitData = {}
+    const res2 = await this.getOpenId()
+    const loginData = Object.assign({}, userInfo.target.userInfo)
+    loginData.openId = res2.openId
+    loginData.code = res2.code
+
+    Object.keys(loginData).forEach((item) => {
+      submitData[item.toLowerCase()] = loginData[item]
+    })
+    submitData.avatar = submitData.avatarurl
+    submitData.openId = submitData.openid
+    delete submitData.openid
+    delete submitData.avatarurl
+    delete submitData.gender
+    delete submitData.language
+    console.log('登录信息', submitData)
+    service.LoginGetToken(submitData, {}).then((res) => {
+      console.log(res)
+    })
+  }
+
   render () {
     const { homeMenuIndex } = this.state
     const { line } = homeMenuIndex
 
     return (
       <View className='bx-page'>
+          <View className="login-panel">
+              <View className="login-panel-title">保管家授权</View>
+              <View className="line" style={{marginBottom: '7px'}}></View>
+              <Button
+                  className="login-button"
+                  size="mini"
+                  openType="getUserInfo"
+                  onGetUserInfo={this.getUserInfo}
+              >
+                  登录授权
+              </Button>
+          </View>  
+        <View className="bg-wall">
+        </View>
         <View className="home-title-menu">
             {Object.keys(homeMenuIndex).map((v, k) => {
                 return (

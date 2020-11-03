@@ -3,6 +3,11 @@
  */
 import httpInstance from "../../utils/http";
 
-export function LoginServe(data, options={}) {
+export function LoginGetToken(data, options={}) {
   return httpInstance.post('/app/wechat/loginOrRegist', data, options)
+}
+
+// 获取openid 唯一标识符
+export function requestGetOpenId(data, options={}) {
+  return httpInstance.post(`/app/wechat/getUserInfoByCode?code=${data.code}`, data, options)
 }

@@ -10,7 +10,7 @@ function HttpConstructor(url, methods, data, headers) {
     Taro.request({
       url: host + baseUrl + url,
       data: data,
-      methods: methods,
+      method: methods,
       header: headers,
       success: (res) => {
         reslove(res)
@@ -25,10 +25,10 @@ function HttpConstructor(url, methods, data, headers) {
 // http request 拦截器
 const httpInstance = {
   post(url, data, headers) {
-    return HttpConstructor(url, 'post', data, headers)
+    return HttpConstructor(url, 'POST', data, headers)
   },
-  get() {
-    return HttpConstructor(url, 'get', data, headers)
+  get(url, data, headers) {
+    return HttpConstructor(url, 'GET', data, headers)
   }
 }
 
