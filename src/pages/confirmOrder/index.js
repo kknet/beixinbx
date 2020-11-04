@@ -5,6 +5,7 @@ import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtTabs, AtTabsPane, AtInputNumber, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
 import ConfirmInfo from './components/confirmInfo'
+import ProduceIcons from './components/produceIcons'
 import './confirm-order.scss'
 
 export default class ConfirmOrder extends Taro.Component {
@@ -16,16 +17,25 @@ export default class ConfirmOrder extends Taro.Component {
         super(...arguments)
 
         this.state = {
-            current: 0,
-            buyCount: 1,
-            isShowServeInfo: true
+          totalPrice: 0,  // 乘以数量的总价格
+          current: 0,
+          buyCount: 1,
+          preSalePrice: 39.9,
+          salePrice: 9.9,
+          isShowServeInfo: true,
+          currentType: 0  // 0 单份保险  1  家庭保险
         }
     }
 
     componentDidMount (options) {
-        console.log('测试', this.$router, this)
-        if(this.$router.params.type) {
-            const type = this.$router.params.type
+        const type = this.$router.params.type
+        this.setState({
+          totalPrice: type == 1? 699: 9.9,
+          preSalePrice: type == 1? 999: 39.9,
+          salePrice: type == 1? 699: 9.9,
+          currentType: parseInt(this.$router.params.type, 10)
+        })
+        if(type) {
             if(type === '0') {
                 // 微信环境下
                 if(wx) {
@@ -61,57 +71,33 @@ export default class ConfirmOrder extends Taro.Component {
     }
 
     changeBuyCount = (val) => {
-        this.setState({
-            buyCount: val
-        })
+      let result = parseFloat((this.state.salePrice * val).toFixed(1))
+      this.setState({
+        buyCount: val,
+        totalPrice: result
+      })
     }
 
 
     render () {
-        const { current, isShowServeInfo } = this.state
+        const {
+          current,
+          isShowServeInfo,
+          currentType,
+          preSalePrice,
+          salePrice,
+          totalPrice
+        } = this.state
 
         return (
             <View className="bx-page">
                 <View className="tg-confirm-content">
-                    <View className="serve-content-rows" style={{padding: '0 27rpx'}}>
-                        <View className="serve-content-col">
-                            <Image src={require('../../assets/images/order-report.png')} className="serve-content-icons" />
-                            <View style={{marginTop: '20rpx'}}>
-                                <Text className="12Font">保单诊断报告</Text>
-                            </View>
-                        </View>
-
-                        <View className="serve-content-col">
-                            <Image src={require('../../assets/images/analyse-icons.png')} className="serve-content-icons" />
-                            <View style={{marginTop: '20rpx'}}>
-                                <Text className="12Font">保障分析</Text>
-                            </View>
-                        </View>
-
-                        <View className="serve-content-col">
-                            <Image src={require('../../assets/images/xf.png')} className="serve-content-icons" />
-                            <View style={{marginTop: '20rpx'}}>
-                                <Text className="12Font">续费提醒</Text>
-                            </View>
-                        </View>
-
-                        <View className="serve-content-col">
-                            <Image src={require('../../assets/images/xzlp.png')} className="serve-content-icons" />
-                            <View style={{marginTop: '20rpx'}}>
-                                <Text className="12Font">协助理赔</Text>
-                            </View>
-                        </View>
-
-                        <View className="serve-content-col">
-                            <Image src={require('../../assets/images/one-serve.png')} className="serve-content-icons" />
-                            <View style={{marginTop: '20rpx'}}>
-                                <Text className="12Font">一对一服务</Text>
-                            </View>
-                        </View>
-                    </View>
-
-
-                    <ConfirmInfo />
+                    <ProduceIcons currentType={currentType} />
+                    <ConfirmInfo
+                      currentType={currentType}
+                      preSalePrice={preSalePrice}
+                      salePrice={salePrice}
+                    />
 
                     <View className="buy-count-row">
                         <Text style={{marginRight: '30rpx'}}>本次购买份数</Text>
@@ -128,7 +114,7 @@ export default class ConfirmOrder extends Taro.Component {
                 <View className="confirm-bottom-row">
                     <View>
                         <Text>实付金额</Text>
-                        <Text style={{color: '#FE9B14', fontSize: '40rpx', marginLeft: '18rpx'}}>¥14888</Text>
+                        <Text style={{color: '#FE9B14', fontSize: '40rpx', marginLeft: '18rpx'}}>¥{totalPrice}</Text>
                     </View>
                     <View className="float-right-pay-button">
                         确定支付

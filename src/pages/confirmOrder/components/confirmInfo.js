@@ -11,18 +11,13 @@ export default class ConfirmInfo extends Taro.Component {
         super(...arguments)
 
         this.state = {
-            bxType: 0
+            bxType: 0,
         }
     }
 
     componentDidMount (options) {
-        console.log('测试', this.$router, this)
-        if(this.$router.params.type) {
-            const type = this.$router.params.type
-            this.setState({
-                bxType: parseInt(type, 10)
-            })
-        }
+        console.log('测试', this.props.currentType)
+
     }
 
     onShareAppMessage () {
@@ -36,25 +31,41 @@ export default class ConfirmInfo extends Taro.Component {
 
     render () {
         const { bxType } = this.state
+        const { preSalePrice, salePrice, currentType } = this.props
 
         return (
             <View className="confirm-info-content">
                 <View style={{fontSize: '32rpx'}}>
                     限时推广价：
-                    <Text style={{color: '#FE9B14', fontSize: '60rpx'}}>699</Text>
+                    <Text style={{color: '#FE9B14', fontSize: '60rpx'}}>{salePrice}</Text>
                     元/年(每份)
                 </View>
                 <View>
                     <Text style={{fontSize: '20rpx', color:'#111', textDecoration: 'line-through'}}>
-                        原价999元/年 (每份)
+                        原价{preSalePrice}元/年 (每份)
                     </Text>
                 </View>
 
-                <View>
+                {currentType === 0?
+                  <View>
+                    <View>
+                      <Text style={{fontSize: '20rpx', color:'#111'}}>
+                        单份托管指每份保单1年托管费用
+                      </Text>
+                    </View>
+                    <View>
+                      <Text style={{fontSize: '20rpx', color:'#111'}}>
+                        适合10份保单以下
+                      </Text>
+                    </View>
+                  </View>
+                  :
+                  <View>
                     <Text style={{fontSize: '20rpx', color:'#111'}}>
-                        家庭保单托管不限保单份数
+                      家庭保单托管不限保单份数
                     </Text>
-                </View>
+                  </View>
+                }
             </View>
         )
     }

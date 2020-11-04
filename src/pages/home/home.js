@@ -18,6 +18,7 @@ export default class Index extends Taro.Component {
     super(...arguments)
 
     this.state = {
+      isShowLogin: false,
         homeMenuIndex: {
             line1: [
                 {
@@ -40,6 +41,12 @@ export default class Index extends Taro.Component {
   async componentDidMount() {
     // await this.getOpenId()
     // this.getUserInfo()
+    let token = Taro.getStorageSync('token')
+    if(!token) {
+      this.setState({
+        isShowLogin: true
+      })
+    }
   }
 
   loginMethodsGetCode() {
@@ -123,32 +130,46 @@ export default class Index extends Taro.Component {
     delete submitData.avatarurl
     delete submitData.gender
     delete submitData.language
-    console.log('登录信息', submitData)
+
+    Taro.setStorage({
+      key:'userInfo',
+      data:submitData
+    })
     service.LoginGetToken(submitData, {}).then((res) => {
-      console.log(res)
+      console.log('token', res.data)
+      Taro.setStorage({
+        key:'token',
+        data:res.data.data.token
+      })
     })
   }
 
   render () {
-    const { homeMenuIndex } = this.state
+    const { homeMenuIndex, isShowLogin } = this.state
     const { line } = homeMenuIndex
 
     return (
       <View className='bx-page'>
+        {isShowLogin?
+        <View>
           <View className="login-panel">
-              <View className="login-panel-title">保管家授权</View>
-              <View className="line" style={{marginBottom: '7px'}}></View>
-              <Button
-                  className="login-button"
-                  size="mini"
-                  openType="getUserInfo"
-                  onGetUserInfo={this.getUserInfo}
-              >
-                  登录授权
-              </Button>
-          </View>  
-        <View className="bg-wall">
+            <View className="login-panel-title">保管家授权</View>
+            <View className="line" style={{marginBottom: '7px'}}></View>
+            <Button
+              className="login-button"
+              size="mini"
+              openType="getUserInfo"
+              onGetUserInfo={this.getUserInfo}
+            >
+              登录授权
+            </Button>
+          </View>
+          <View className="bg-wall">
+          </View>
         </View>
+            :
+          ''
+        }
         <View className="home-title-menu">
             {Object.keys(homeMenuIndex).map((v, k) => {
                 return (

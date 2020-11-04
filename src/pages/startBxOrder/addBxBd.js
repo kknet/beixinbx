@@ -5,6 +5,7 @@
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtInput } from 'taro-ui'
+import httpService from '../../utils/http'
 import logoImg from '../../assets/images/logo_taro.png'
 import './addBxBd.scss'
 
@@ -18,7 +19,10 @@ export default class AddBxBd extends Taro.Component {
 
         this.state = {
             current: 0,
-            value: ''
+            value: '',
+            orderObj: {
+              insurant: ''
+            }
         }
     }
 
@@ -32,15 +36,53 @@ export default class AddBxBd extends Taro.Component {
 
     handleChange() {}
 
+  InputHandler = (event) => {
+    let value = event.detail.value
+    this.setState({
+      insurant: value
+    })
+  }
+
+  sendFile = (files) => {
+    let token = Taro.getStorageSync('token')
+    console.log('开始上传')
+    Taro.uploadFile({
+      url: httpService.host + httpService.baseUrl + '/common/fileApi/file?type=1', //仅为示例，非真实的接口地址
+      filePath: files[0],
+      header: {token: token},
+      name: 'file',
+      success: (res) => {
+        const result = JSON.parse(res.data)
+        if(result.code === 50004) {
+          console.log('登录异常')
+          httpService.refreshStorageToken()
+          // this.sendFile(files)
+        }
+        console.log('上传成功', res)
+        //do something
+      }
+    })
+  }
+
+  // 上传图片
+  chooseImage = () => {
+    Taro.chooseImage({
+      success: (res) => {
+        const tempFilePaths = res.tempFilePaths
+        this.sendFile(tempFilePaths)
+      }
+    })
+  }
+
 
     render () {
-        const { current } = this.state
+        const { current, insurant } = this.state
 
         return (
             <View className="bx-page">
                 <View className="bx-person-input">
                     <View>被保人</View>
-                    <Input className="bx-person-input-control" type='text' placeholder='请输入保单中的被保人' />
+                    <Input onInput={this.InputHandler} value={insurant} className="bx-person-input-control" type='text' placeholder='请输入保单中的被保人' />
                 </View>
 
                 <View className="bx-order-image-block">
@@ -62,7 +104,7 @@ export default class AddBxBd extends Taro.Component {
                         </View>
                         
                         <View className="bx-order-image-row">
-                            <View className="bx-order-image-col">
+                            <View className="bx-order-image-col" onClick={this.chooseImage}>
                                 <Image src={require('./image/addNewPic.png')} className="add-pic-icons" />
                             </View>
                         </View>
