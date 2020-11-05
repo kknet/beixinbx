@@ -11,10 +11,22 @@ export default class MyOrder extends Taro.Component {
     super(...arguments)
 
     this.state = {
-      
+      orderId: '',
+      schemeId: ''
     }
   }
-    
+
+  componentDidMount() {
+    const orderId = this.$router.params.orderId
+    const schemeId = this.$router.params.schemeId
+    if(orderId) {
+      this.setState({
+        orderId: orderId,
+        schemeId: schemeId
+      })
+    }
+    console.log('路由', this)
+  }
 
   render () {
 

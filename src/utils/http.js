@@ -8,9 +8,8 @@ import Taro, { Component } from '@tarojs/taro'
 function HttpConstructor(url, methods, data, headers) {
   return new Promise((reslove, reject) => {
     const headersObj = Object.assign({}, headers)
-    const token = Taro.getStorage({
-      key:'token'
-    })
+    const token = Taro.getStorageSync('token')
+    console.log('token', token)
     headersObj.token = token
     Taro.request({
       url: host + baseUrl + url,
@@ -41,7 +40,7 @@ function refreshStorageToken() {
         httpInstance.post('/app/wechat/loginOrRegist', loginData, {}).then((result) => {
           Taro.setStorageSync({
             key:'token',
-            data:result.data
+            data:result.data.data.token
           })
           reslove()
         })
@@ -51,14 +50,15 @@ function refreshStorageToken() {
 }
 
 function reSetToken(preUrl, preMethods, preData, preHeaders) {
-  const loginData = {}
+  let userInfo = Taro.getStorageSync('userInfo')
+  const loginData = Object.assign({}, userInfo)
   Taro.login({
     success: (res) => {
       loginData.code = res.code
       httpInstance.post('/app/wechat/loginOrRegist', loginData, {}).then((result) => {
         Taro.setStorage({
           key:'token',
-          data:result.data
+          data:result.data.data.token
         })
         httpInstance[preMethods](preUrl, preData, preHeaders)
       })

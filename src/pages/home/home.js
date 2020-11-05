@@ -137,9 +137,16 @@ export default class Index extends Taro.Component {
     })
     service.LoginGetToken(submitData, {}).then((res) => {
       console.log('token', res.data)
+      this.setState({
+        isShowLogin: false
+      })
       Taro.setStorage({
         key:'token',
         data:res.data.data.token
+      })
+      Taro.setStorage({
+        key:'userId',
+        data:res.data.data.userInfo.id
       })
     })
   }

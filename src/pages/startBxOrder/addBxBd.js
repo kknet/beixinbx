@@ -6,6 +6,7 @@ import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtInput } from 'taro-ui'
 import httpService from '../../utils/http'
+import * as service from './services'
 import logoImg from '../../assets/images/logo_taro.png'
 import './addBxBd.scss'
 
@@ -21,7 +22,11 @@ export default class AddBxBd extends Taro.Component {
             current: 0,
             value: '',
             orderObj: {
-              insurant: ''
+              insurant: '',
+              policyImgs: [],
+              bankCards: [],
+              otherImg: [],
+              schemeId: '1'  // 1 单份  2 家庭
             }
         }
     }
@@ -38,45 +43,90 @@ export default class AddBxBd extends Taro.Component {
 
   InputHandler = (event) => {
     let value = event.detail.value
+    let formObj = this.state.orderObj
+    formObj.insurant = value
     this.setState({
-      insurant: value
+      orderObj: formObj
     })
   }
 
   sendFile = (files) => {
     let token = Taro.getStorageSync('token')
-    console.log('开始上传')
-    Taro.uploadFile({
-      url: httpService.host + httpService.baseUrl + '/common/fileApi/file?type=1', //仅为示例，非真实的接口地址
-      filePath: files[0],
-      header: {token: token},
-      name: 'file',
-      success: (res) => {
-        const result = JSON.parse(res.data)
-        if(result.code === 50004) {
-          console.log('登录异常')
-          httpService.refreshStorageToken()
-          // this.sendFile(files)
+    return new Promise((reslove, reject) => {
+      Taro.uploadFile({
+        url: httpService.host + httpService.baseUrl + '/common/fileApi/file?type=1', //仅为示例，非真实的接口地址
+        filePath: files[0],
+        header: {token: token},
+        name: 'file',
+        success: (res) => {
+          const result = JSON.parse(res.data)
+          if(result.code === 50004) {
+            console.log('登录异常')
+            httpService.refreshStorageToken()
+            this.sendFile(files)
+          }
+          const uploadFile = `${httpService.host}${httpService.baseUrl}${result.data[0]}`
+          reslove(uploadFile)
+          //do something
         }
-        console.log('上传成功', res)
-        //do something
+      })
+    })
+
+  }
+
+  // 上传图片
+  chooseImage(type) {
+    Taro.chooseImage({
+      count: 1,
+      sourceType: ["album", "camera"],
+      success: async (res) => {
+        const {policyImgs, bankCards, otherImg} = this.state.orderObj
+        const tempFilePaths = res.tempFilePaths
+        let imgFile = await this.sendFile(tempFilePaths)
+        let orderObj = this.state.orderObj
+        console.log('图片地址', imgFile)
+        if(type === 'policy') {
+          policyImgs.push(imgFile)
+          orderObj.policyImgs = policyImgs
+        } else if(type === 'bankCard') {
+          bankCards.push(imgFile)
+          orderObj.bankCards = bankCards
+        } else if(type === 'otherImg') {
+          otherImg.push(imgFile)
+          orderObj.otherImg = bankCards
+        }
+        this.setState({
+          orderObj: orderObj
+        })
       }
     })
   }
 
-  // 上传图片
-  chooseImage = () => {
-    Taro.chooseImage({
-      success: (res) => {
-        const tempFilePaths = res.tempFilePaths
-        this.sendFile(tempFilePaths)
-      }
+  createNewOrder = () => {
+    const {policyImgs, bankCards, otherImg, insurant, schemeId} = this.state.orderObj
+    const orderForm = {
+      imageVO: [
+        {
+          bankCardImg: policyImgs.join(';'),
+          otherImg: bankCards.join(';'),
+          policyImg: otherImg.join(';')
+        }
+      ],
+      insurant: insurant,
+      orderId: '3',
+      schemeId: schemeId,
+      userId: Taro.getStorageSync('userId').toString()
+    }
+    console.log('插入数据', orderForm)
+    service.createOrder(orderForm, {}).then((res) => {
+      console.log('创建成功', res.data)
     })
   }
 
 
     render () {
-        const { current, insurant } = this.state
+        const { current } = this.state
+        const {insurant, policyImgs, bankCards, otherImg} = this.state.orderObj
 
         return (
             <View className="bx-page">
@@ -99,13 +149,18 @@ export default class AddBxBd extends Taro.Component {
                             </View>
 
                             <View>
-                                <Text style={{fontSize: '26rpx', color: '#999999'}}>0/2</Text>
+                                <Text style={{fontSize: '26rpx', color: '#999999'}}>{policyImgs.length}/2</Text>
                             </View>
                         </View>
                         
                         <View className="bx-order-image-row">
-                            <View className="bx-order-image-col" onClick={this.chooseImage}>
-                                <Image src={require('./image/addNewPic.png')} className="add-pic-icons" />
+                            <View className="bx-order-image-col">
+                                {policyImgs.map((item, index) => {
+                                  return (
+                                    <Image src={item} key={index} className="add-pic-icons" alt="保单图片" />
+                                  )
+                                })}
+                                <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('policy')} className="add-pic-icons" />
                             </View>
                         </View>
                     </View>
@@ -125,7 +180,12 @@ export default class AddBxBd extends Taro.Component {
 
                         <View className="bx-order-image-row">
                             <View className="bx-order-image-col">
-                                <Image src={require('./image/addNewPic.png')} className="add-pic-icons" />
+                              {bankCards.map((item, index) => {
+                                return (
+                                  <Image src={item} key={index} className="add-pic-icons" alt="银行卡图片" />
+                                )
+                              })}
+                                <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('bankCard')} className="add-pic-icons" />
                             </View>
                         </View>
                     </View>
@@ -145,7 +205,12 @@ export default class AddBxBd extends Taro.Component {
 
                         <View className="bx-order-image-row">
                             <View className="bx-order-image-col">
-                                <Image src={require('./image/addNewPic.png')} className="add-pic-icons" />
+                              {otherImg.map((item, index) => {
+                                return (
+                                  <Image src={item} key={index} className="add-pic-icons" alt="其他图片" />
+                                )
+                              })}
+                                <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('otherImg')} className="add-pic-icons" />
                             </View>
                         </View>
                     </View>
@@ -159,6 +224,15 @@ export default class AddBxBd extends Taro.Component {
                         <Text style={{textDecoration: 'underline', color: '#576b95'}}>查看实例</Text>
                     </View>
                 </View>
+
+              <View className="confirm-bottom-row">
+                <View>
+                  
+                </View>
+                <View className="float-right-pay-button" onClick={this.createNewOrder}>
+                  保存保单
+                </View>
+              </View>
             </View>
         )
     }

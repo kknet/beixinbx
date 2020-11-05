@@ -1,39 +1,65 @@
 .bx-person-input{
   background-color: white;
-  font-style: 34rpx;
+  font-style: 34px;
   display: flex;
   align-items: center;
-  padding: 20rpx 30rpx;
-  margin: 20rpx 0;
+  padding: 20px 30px;
+  margin: 20px 0;
 }
 
 .bx-person-input-control{
-  margin-left: 78rpx;
+  margin-left: 78px;
 }
 .bx-order-image-block{
-  padding: 34rpx 30rpx;
+  height: 80%;
+  overflow: auto;
+  padding: 34px 30px;
   background-color: white;
 }
 
 .line {
   width: 100%;
-  height:2rpx;
+  height:2px;
   background-color: #E5E5E5;
 }
 
 .bx-order-image-row-title{
   display: flex;
   justify-content: space-between;
-  margin: 30rpx 0;
+  margin: 30px 0;
 }
 .bx-order-image-row{
   display: flex;
   align-items: center;
 }
 .bx-order-image-col:not(:first-child){
-  margin-left: 30rpx;
+  margin-left: 30px;
 }
 .add-pic-icons{
-  width: 120rpx;
-  height: 120rpx;
+  width: 120px;
+  height: 120px;
+}
+
+.confirm-bottom-row {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 0px 0px #E5E5E5;
+  padding: 56px 0px;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.float-right-pay-button{
+  position: absolute;
+  right: 0;
+  top:0;
+  width: 260px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 36px;
+  background-color: #FE9B14;
 }
