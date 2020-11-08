@@ -52,7 +52,7 @@ export default class MyOrder extends Taro.Component {
       })
     })
   }
-    
+
 
   render () {
     const {insuranceList} = this.state
@@ -63,7 +63,12 @@ export default class MyOrder extends Taro.Component {
                 {insuranceList.map((item, index) => {
                   return (
                     <View>
-                      <View onClick={Taro.goToTarget} data-url={`/pages/my/page/myOrderDetail?orderId=${item.orderId}&schemeId=${item.schemeId}`} className="my-menu-row" key={index}>
+                      <View
+                        onClick={Taro.goToTarget}
+                        data-url={`/pages/my/page/myOrderDetail?orderId=${item.orderId}&schemeId=${item.schemeId}`}
+                        className="my-menu-row"
+                        key={index}
+                      >
                         <View style={{display: 'flex', alignItems: 'center'}}>
                           <Image src={item.icons} className="my-menu-icons" />
                           <Text className="my-menu-content">{item.schemeId == 1?'单份保单': '家庭保单'}</Text>

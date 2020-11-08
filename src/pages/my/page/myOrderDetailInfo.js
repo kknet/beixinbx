@@ -1,26 +1,27 @@
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
+import * as service from '../services'
 import '../myOrderInfo.scss'
 import BZOnline from '../image/online-icons.png'
 
-const fields = [
+let fields = [
     {
         title: '',
         children: [
             {
                 filedsName: '投保人名称',
-                value: '',
-                filedsValue: '张三'
+                value: 'policyHolder',
+                filedsValue: ''
             },
             {
                 filedsName: '被投保人名称',
-                value: '',
-                filedsValue: '张三'
+                value: 'insurant',
+                filedsValue: ''
             },
             {
                 filedsName: '被保险人是',
-                value: '',
-                filedsValue: '张三'
+                value: 'relationship',
+                filedsValue: ''
             }
         ]
     },
@@ -29,28 +30,28 @@ const fields = [
         children: [
             {
                 filedsName: '保险公司',
-                value: '',
-                filedsValue: '平安保险'
+                value: 'company',
+                filedsValue: ''
             },
             {
                 filedsName: '产品名称',
-                value: '',
-                filedsValue: '平安福'
+                value: 'name',
+                filedsValue: ''
             },
             {
                 filedsName: '保单生效日',
-                value: '',
-                filedsValue: '2020-02-20'
+                value: 'effectiveDate',
+                filedsValue: ''
             },
             {
                 filedsName: '保费',
-                value: '',
-                filedsValue: '1000元/年'
+                value: 'cost',
+                filedsValue: ''
             },
             {
-                filedsName: '交费时长',
-                value: '',
-                filedsValue: '20年'
+                filedsName: '缴费时长',
+                value: 'costYear',
+                filedsValue: ''
             },
         ]
     },
@@ -64,12 +65,12 @@ const fields = [
             },
             {
                 filedsName: '保额',
-                value: '',
+                value: 'mainReturnVO.type',
                 filedsValue: '20万'
             },
             {
                 filedsName: '保障期限',
-                value: '',
+                value: 'mainReturnVO.duration',
                 filedsValue: '终身'
             }
         ]
@@ -120,26 +121,60 @@ export default class MyOrder extends Taro.Component {
     super(...arguments)
 
     this.state = {
-      
+      insuranceId: '',
+      insuranceObj: {},
+      fields: fields
     }
   }
-    
+
+  componentDidMount() {
+    const insuranceId = this.$router.params.insuranceId
+    if(insuranceId) {
+      this.setState({
+        insuranceId: insuranceId
+      }, () => {
+        this.getInsuranceDetailById()
+      })
+    }
+  }
+
+  getInsuranceDetailById() {
+    let params = {
+      insuranceId: this.state.insuranceId
+    }
+    service.requestGetMyInsuranceDetailById(params, {}).then((res) => {
+      fields.forEach((v, k) => {
+        v.children.forEach((val) => {
+          if(val.value !== '') {
+            console.log('字段', res.data.data[val.value], val.value)
+            val.fieldsValue = res.data.data[val.value]
+          }
+        })
+      })
+      this.setState({
+        insuranceObj: res.data.data,
+        fields: fields
+      })
+    })
+  }
+
 
   render () {
+      const {insuranceObj, fields} = this.state
       return (
       <View className='bx-page'>
         <View className="bx-header-info">
             <Image src={BZOnline} className="bz-online-image" />
             <View>
-                <Text className="bx-info-small-words">平安保险</Text>
+                <Text className="bx-info-small-words">{insuranceObj.name}</Text>
             </View>
 
             <View>
-                <Text>平安福</Text>
+                <Text>{insuranceObj.company}</Text>
             </View>
 
             <View>
-                <Text className="bx-info-small-words">保单号：P0488000000092</Text>
+                <Text className="bx-info-small-words">保单号：{insuranceObj.orderNo}</Text>
             </View>
         </View>
 

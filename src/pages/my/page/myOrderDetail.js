@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
+import * as service from '../services'
 import '../my.scss'
 
 export default class MyOrder extends Taro.Component {
@@ -12,7 +13,8 @@ export default class MyOrder extends Taro.Component {
 
     this.state = {
       orderId: '',
-      schemeId: ''
+      schemeId: '',
+      insuranceList: []
     }
   }
 
@@ -23,13 +25,28 @@ export default class MyOrder extends Taro.Component {
       this.setState({
         orderId: orderId,
         schemeId: schemeId
+      }, () => {
+        console.log('订单id', orderId)
+        this.getInsuranceDetailById()
       })
     }
-    console.log('路由', this)
+  }
+
+  getInsuranceDetailById() {
+    let queryParams = {
+      orderId: "1",
+      schemeId: this.state.schemeId,
+      userId: this.state.userId
+    }
+    service.requestGetMyInsuranceList(queryParams, {}).then((res) => {
+      this.setState({
+        insuranceList: res.data.data
+      })
+    })
   }
 
   render () {
-
+    const {insuranceList} = this.state
     return (
       <View className='bx-page'>
         <View className="my-family-section">
@@ -47,50 +64,59 @@ export default class MyOrder extends Taro.Component {
             家庭保单
         </View>
 
-        <View className="order-detail-info-section" onClick={Taro.goToTarget} data-url="/pages/my/page/myOrderDetailInfo">
-            <View className="order-detail-info-row">
-                <View className="float-right-button">
-                    <Text style={{color: '#FE9B14', fontSize: '26rpx'}}>保障中</Text>
-                </View>
+        <View className="order-detail-info-section">
+            {insuranceList.map((item) => {
+              return (
                 <View>
-                    <Text>重疾险</Text>
-                </View>
-                <View>
-                    <Text className="order-detail-info-tips">被保险人：张三</Text>
-                </View>
+                  <View
+                    className="order-detail-info-row"
+                    onClick={Taro.goToTarget}
+                    data-url={`/pages/my/page/myOrderDetailInfo?insuranceId=${item.id}`}
+                  >
+                    <View className="float-right-button">
+                      <Text style={item.status == 0?{color: '#999999', fontSize: '26rpx'}:{color: '#FE9B14', fontSize: '26rpx'}}>{item.status == 0?'已失效':'保险中'}</Text>
+                    </View>
+                    <View>
+                      <Text>重疾险</Text>
+                    </View>
+                    <View>
+                      <Text className="order-detail-info-tips">被保险人：{item.insurant}</Text>
+                    </View>
 
-                <View>
-                    <Text className="order-detail-info-tips">保额: 10万</Text>
-                </View>
+                    <View>
+                      <Text className="order-detail-info-tips">保额: {item.coverage}</Text>
+                    </View>
 
-                <View>
-                    <Text className="order-detail-info-tips">保障期限：2020年10月02日</Text>
+                    <View>
+                      <Text className="order-detail-info-tips">保障期限：{item.limit}</Text>
+                    </View>
+                  </View>
+                  <View className="order-detail-line"></View>
                 </View>
-            </View>
-            
-            <View className="order-detail-line"></View>
+              )
+            })}
 
-            <View className="order-detail-info-row">
-                <View className="float-right-button">
-                    <Text style={{color: '#999999', fontSize: '26rpx'}}>已失效</Text>
-                </View>
-                <View>
-                    <Text>重疾险</Text>
-                </View>
-                <View>
-                    <Text className="order-detail-info-tips">被保险人：张三</Text>
-                </View>
+            {/*<View className="order-detail-info-row">*/}
+            {/*    <View className="float-right-button">*/}
+            {/*        <Text style={{color: '#999999', fontSize: '26rpx'}}>已失效</Text>*/}
+            {/*    </View>*/}
+            {/*    <View>*/}
+            {/*        <Text>重疾险</Text>*/}
+            {/*    </View>*/}
+            {/*    <View>*/}
+            {/*        <Text className="order-detail-info-tips">被保险人：张三</Text>*/}
+            {/*    </View>*/}
 
-                <View>
-                    <Text className="order-detail-info-tips">保额: 10万</Text>
-                </View>
+            {/*    <View>*/}
+            {/*        <Text className="order-detail-info-tips">保额: 10万</Text>*/}
+            {/*    </View>*/}
 
-                <View>
-                    <Text className="order-detail-info-tips">保障期限：2020年10月02日</Text>
-                </View>
-            </View>
+            {/*    <View>*/}
+            {/*        <Text className="order-detail-info-tips">保障期限：2020年10月02日</Text>*/}
+            {/*    </View>*/}
+            {/*</View>*/}
 
-            <View className="order-detail-line" style={{ margin: '24px 0 0 0'}}></View>
+            {/*<View className="order-detail-line" style={{ margin: '24px 0 0 0'}}></View>*/}
 
 
             <View className="add-new-order">
