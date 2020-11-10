@@ -84,10 +84,19 @@ export default class Index extends Taro.Component {
   }
 
   goToPage = e => {
-      Taro.navigateTo({
-          // url: `/pages/panel/index?id=${id.toLowerCase()}`
-          url: `/pages/startBxOrder/addBxBd`
-      })
+    console.log('点击', e)
+    let row = e.currentTarget.dataset.item
+    let url = ''
+    if(row.label === '保单保全') {
+      url = '/pages/article/list'
+    }
+    if(row.label === '申请理赔') {
+      url = '/pages/startBxOrder/addBxBd'
+    }
+    Taro.navigateTo({
+      // url: `/pages/panel/index?id=${id.toLowerCase()}`
+      url: url
+    })
   }
 
   getOpenId() {
@@ -183,7 +192,7 @@ export default class Index extends Taro.Component {
                     <View className="home-title-menu-row" key={`home-${k}`}>
                         {homeMenuIndex[v].map((item, index) => {
                             return (
-                                <View key={`child-${index}`} className="home-title-menu-col" onClick={this.goToPage}>
+                                <View key={`child-${index}`} className="home-title-menu-col" data-item={item} onClick={this.goToPage}>
                                     <Image className="home-title-menu-icons" src={item.icons} />
                                     <View style={{marginTop: '16rpx'}}>
                                         <Text>{item.label}</Text>

@@ -20,13 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfd3a48d-0a7a-4a69-88a3-14d32f5bb1d1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/bxbx-miniPrograme.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bxbx-miniPrograme.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/article/image/twice-ceshi.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/article/list.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/article/list.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/my/page/myOrder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/my/page/myOrder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/my/page/myOrderDetailInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/my/page/myOrderDetailInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/my/services.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/my/services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/home.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +77,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/article/image" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.stylelint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -92,16 +91,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/pages/my/image" />
-      <recent name="$PROJECT_DIR$/src/pages/startBxOrder" />
-      <recent name="$PROJECT_DIR$/src/pages/my/page" />
-      <recent name="$PROJECT_DIR$/src/pages/my" />
-      <recent name="$PROJECT_DIR$/src/pages/home/img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/assets/images" />
       <recent name="$PROJECT_DIR$/src/assets" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\my-work\beixinbx\src\pages\article\image" />
+      <recent name="E:\my-work\beixinbx\src\pages\article" />
+      <recent name="$PROJECT_DIR$/src/pages/my/image" />
+      <recent name="$PROJECT_DIR$/src/pages/startBxOrder" />
+      <recent name="$PROJECT_DIR$/src/pages/my/page" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -162,7 +161,8 @@
       <workItem from="1603091058671" duration="3400000" />
       <workItem from="1603514431509" duration="35132000" />
       <workItem from="1604314591771" duration="29335000" />
-      <workItem from="1604839507863" duration="4235000" />
+      <workItem from="1604839507863" duration="4922000" />
+      <workItem from="1605017165227" duration="2807000" />
     </task>
     <servers />
   </component>

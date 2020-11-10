@@ -8,6 +8,7 @@ class App extends Component {
   config = {
     pages: [
         'pages/home/home',  // 首页
+        'pages/article/list',  // 文章列表
         'pages/my/my',  // 我的
         'pages/my/page/myOrder',  // 我的保单
         'pages/my/page/myOrderDetail',  // 我的保单详情
@@ -46,7 +47,7 @@ class App extends Component {
           'borderStyle': 'white'
       },
   }
-    
+
   componentWillMount () {
       Taro.goToTarget = (e) => {
           console.log('点击', e , this)
@@ -55,7 +56,7 @@ class App extends Component {
               url: `${routeUrl}`
           })
       }
-  }  
+  }
 
   componentDidMount () {}
 
@@ -64,7 +65,7 @@ class App extends Component {
   componentDidHide () {}
 
   componentCatchError () {}
-    
+
   render () {
     return <Home />
   }
