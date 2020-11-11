@@ -4,7 +4,6 @@
 // 添加保单
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
-import { AtInput } from 'taro-ui'
 import httpService from '../../utils/http'
 import * as service from './services'
 import logoImg from '../../assets/images/logo_taro.png'
@@ -21,6 +20,8 @@ export default class AddBxBd extends Taro.Component {
         this.state = {
             current: 0,
             value: '',
+            orderId: '',
+            schemeId: '',
             orderObj: {
               insurant: '',
               policyImgs: [],
@@ -116,7 +117,32 @@ export default class AddBxBd extends Taro.Component {
   }
 
   createNewOrder = () => {
-    const {policyImgs, bankCards, otherImg, insurant, schemeId} = this.state.orderObj
+    const {policyImgs, bankCards, otherImg, insurant, schemeId, orderId} = this.state.orderObj
+    if(insurant === '') {
+      Taro.showToast({
+        title: '请输入保险人名称',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+    if(bankCards.length === 0) {
+      Taro.showToast({
+        title: '请上传银行卡',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+    if(policyImgs.length === 0) {
+      Taro.showToast({
+        title: '请上传保单',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+
     const orderForm = {
       imageVO: [
         {
@@ -126,13 +152,20 @@ export default class AddBxBd extends Taro.Component {
         }
       ],
       insurant: insurant,
-      orderId: '3',
-      schemeId: schemeId,
+      orderId: this.state.orderId,
+      schemeId: this.state.schemeId,
       userId: Taro.getStorageSync('userId').toString()
     }
-    console.log('插入数据', orderForm)
+
     service.createOrder(orderForm, {}).then((res) => {
-      console.log('创建成功', res.data)
+      Taro.showToast({
+        title: '创建成功',
+        icon: 'success',
+        duration: 2000
+      })
+      Taro.navigateBack({
+        delta: 1
+      })
     })
   }
 
@@ -165,7 +198,7 @@ export default class AddBxBd extends Taro.Component {
                                 <Text style={{fontSize: '26rpx', color: '#999999'}}>{policyImgs.length}/2</Text>
                             </View>
                         </View>
-                        
+
                         <View className="bx-order-image-row">
                             <View className="bx-order-image-col">
                                 {policyImgs.map((item, index) => {
@@ -240,7 +273,7 @@ export default class AddBxBd extends Taro.Component {
 
               <View className="confirm-bottom-row">
                 <View>
-                  
+
                 </View>
                 <View className="float-right-pay-button" onClick={this.createNewOrder}>
                   保存保单
