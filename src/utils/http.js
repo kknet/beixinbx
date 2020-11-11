@@ -60,7 +60,7 @@ function reSetToken(preUrl, preMethods, preData, preHeaders) {
           key:'token',
           data:result.data.data.token
         })
-        httpInstance[preMethods](preUrl, preData, preHeaders)
+        // HttpConstructor(preUrl, 'post', preData, preHeaders)
       })
     }
   })

@@ -60,18 +60,18 @@ let fields = [
         children: [
             {
                 filedsName: '保障类型',
-                value: '',
-                filedsValue: '重疾险'
+                value: 'mainReturnVO.type',
+                filedsValue: ''
             },
             {
                 filedsName: '保额',
-                value: 'mainReturnVO.type',
-                filedsValue: '20万'
+                value: 'mainReturnVO.coverage',
+                filedsValue: ''
             },
             {
                 filedsName: '保障期限',
                 value: 'mainReturnVO.duration',
-                filedsValue: '终身'
+                filedsValue: ''
             }
         ]
     },
@@ -80,23 +80,18 @@ let fields = [
         children: [
             {
                 filedsName: '附加险名称',
-                value: '',
-                filedsValue: '重疾险'
-            },
-            {
-                filedsName: '附加险名称',
-                value: '',
-                filedsValue: '重疾险'
+                value: 'appendReturnVO.name',
+                filedsValue: ''
             },
             {
                 filedsName: '保额',
-                value: '',
-                filedsValue: '20万'
+                value: 'appendReturnVO.coverage',
+                filedsValue: ''
             },
             {
                 filedsName: '保障期限',
-                value: '',
-                filedsValue: '终身'
+                value: 'appendReturnVO.duration',
+                filedsValue: ''
             }
         ]
     },
@@ -105,8 +100,8 @@ let fields = [
         children: [
             {
                 filedsName: '受益人',
-                value: '',
-                filedsValue: '李四'
+                value: 'benificiaryReturnVO.name',
+                filedsValue: ''
             }
         ]
     }
@@ -143,14 +138,23 @@ export default class MyOrder extends Taro.Component {
       insuranceId: this.state.insuranceId
     }
     service.requestGetMyInsuranceDetailById(params, {}).then((res) => {
+      let fields = this.state.fields.slice()
       fields.forEach((v, k) => {
-        v.children.forEach((val) => {
+        v.children.forEach((val, key) => {
           if(val.value !== '') {
-            console.log('字段', res.data.data[val.value], val.value)
-            val.fieldsValue = res.data.data[val.value]
+            // 深层对象
+            if(val.value.indexOf('.') !== -1) {
+              let obj = val.value.split('.')[0]
+              let objChild = val.value.split('.')[1]
+              console.log('对象', val.value,obj , objChild , res.data)
+              fields[k].children[key].filedsValue = res.data.data[obj][objChild]
+            } else {
+              fields[k].children[key].filedsValue = res.data.data[val.value]
+            }
           }
         })
       })
+      console.log('字段', fields)
       this.setState({
         insuranceObj: res.data.data,
         fields: fields
@@ -162,8 +166,9 @@ export default class MyOrder extends Taro.Component {
   render () {
       const {insuranceObj, fields} = this.state
       return (
-      <View className='bx-page'>
+      <View className='bx-page' style={{overflow: 'auto'}}>
         <View className="bx-header-info">
+            {insuranceObj.status}
             <Image src={BZOnline} className="bz-online-image" />
             <View>
                 <Text className="bx-info-small-words">{insuranceObj.name}</Text>

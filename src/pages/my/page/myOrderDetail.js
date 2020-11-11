@@ -34,11 +34,10 @@ export default class MyOrder extends Taro.Component {
 
   getInsuranceDetailById() {
     let queryParams = {
-      orderId: "1",
-      schemeId: this.state.schemeId,
-      userId: this.state.userId
+      orderId: this.state.orderId
     }
     service.requestGetMyInsuranceList(queryParams, {}).then((res) => {
+      console.log('查询列表', res.data)
       this.setState({
         insuranceList: res.data.data
       })
@@ -46,7 +45,7 @@ export default class MyOrder extends Taro.Component {
   }
 
   render () {
-    const {insuranceList} = this.state
+    const {insuranceList, schemeId, orderId} = this.state
     return (
       <View className='bx-page'>
         <View className="my-family-section">
@@ -77,7 +76,7 @@ export default class MyOrder extends Taro.Component {
                       <Text style={item.status == 0?{color: '#999999', fontSize: '26rpx'}:{color: '#FE9B14', fontSize: '26rpx'}}>{item.status == 0?'已失效':'保险中'}</Text>
                     </View>
                     <View>
-                      <Text>重疾险</Text>
+                      <Text>{item.name}</Text>
                     </View>
                     <View>
                       <Text className="order-detail-info-tips">被保险人：{item.insurant}</Text>
@@ -119,7 +118,11 @@ export default class MyOrder extends Taro.Component {
             {/*<View className="order-detail-line" style={{ margin: '24px 0 0 0'}}></View>*/}
 
 
-            <View className="add-new-order">
+            <View
+              className="add-new-order"
+              onClick={Taro.goToTarget}
+              data-url={`/pages/confirmOrder/index?schemeId=${schemeId}&orderId=${orderId}`}
+            >
                 <Image src={require('../image/add-new-order.png')} className="add-new-order-button-image" />
                 <View>
                     <Text style={{color: '#999999', fontSize: '26rpx'}}>添加保单</Text>

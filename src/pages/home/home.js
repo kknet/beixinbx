@@ -88,10 +88,13 @@ export default class Index extends Taro.Component {
     let row = e.currentTarget.dataset.item
     let url = ''
     if(row.label === '保单保全') {
-      url = '/pages/article/list'
+      url = '/pages/article/list?type=1'
     }
     if(row.label === '申请理赔') {
-      url = '/pages/startBxOrder/addBxBd'
+      url = '/pages/article/list?type=2'
+    }
+    if(row.label === '医疗绿道') {
+      url = '/pages/article/list?type=3'
     }
     Taro.navigateTo({
       // url: `/pages/panel/index?id=${id.toLowerCase()}`

@@ -9,6 +9,7 @@ class App extends Component {
     pages: [
         'pages/home/home',  // 首页
         'pages/article/list',  // 文章列表
+        'pages/article/detail',  // 文章详情
         'pages/my/my',  // 我的
         'pages/my/page/myOrder',  // 我的保单
         'pages/my/page/myOrderDetail',  // 我的保单详情

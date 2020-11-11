@@ -31,6 +31,19 @@ export default class AddBxBd extends Taro.Component {
         }
     }
 
+  componentDidMount() {
+    const orderId = this.$router.params.orderId
+    const schemeId = this.$router.params.schemeId
+    if(orderId) {
+      this.setState({
+        orderId: orderId,
+        schemeId: schemeId
+      }, () => {
+        console.log('订单id', orderId)
+      })
+    }
+  }
+
     onShareAppMessage () {
         return {
             title: 'Taro UI',
