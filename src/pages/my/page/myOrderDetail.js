@@ -121,7 +121,7 @@ export default class MyOrder extends Taro.Component {
             <View
               className="add-new-order"
               onClick={Taro.goToTarget}
-              data-url={`/pages/confirmOrder/index?schemeId=${schemeId}&orderId=${orderId}`}
+              data-url={`/pages/startBxOrder/addBxBd?schemeId=${schemeId}&orderId=${orderId}`}
             >
                 <Image src={require('../image/add-new-order.png')} className="add-new-order-button-image" />
                 <View>

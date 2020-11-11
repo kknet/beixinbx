@@ -20,19 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfd3a48d-0a7a-4a69-88a3-14d32f5bb1d1" name="Default Changelist" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/article/detail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/article/detail.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/article/services.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.js" afterPath="$PROJECT_DIR$/src/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/article/list.js" afterPath="$PROJECT_DIR$/src/pages/article/list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/article/list.scss" afterPath="$PROJECT_DIR$/src/pages/article/list.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/home/home.js" afterPath="$PROJECT_DIR$/src/pages/home/home.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/my/my.scss" afterPath="$PROJECT_DIR$/src/pages/my/my.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js" afterPath="$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/my/page/myOrderDetailInfo.js" afterPath="$PROJECT_DIR$/src/pages/my/page/myOrderDetailInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/http.js" afterPath="$PROJECT_DIR$/src/utils/http.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="myOrderDetail.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="myOrderDetail.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="123" column="44" selection-start-line="123" selection-start-column="44" selection-end-line="123" selection-end-column="44" />
+              <caret line="123" column="52" selection-start-line="123" selection-start-column="52" selection-end-line="123" selection-end-column="52" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -90,7 +79,7 @@
       <file leaf-file-name="addBxBd.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3749">
+            <state relative-caret-position="-3662">
               <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -122,7 +111,7 @@
       <file leaf-file-name="myOrderDetailInfo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetailInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
+            <state relative-caret-position="1007">
               <caret line="170" column="33" selection-start-line="170" selection-start-column="33" selection-end-line="170" selection-end-column="33" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -146,7 +135,7 @@
       <file leaf-file-name="myOrder.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1653">
+            <state relative-caret-position="-2038">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -155,10 +144,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1624">
+            <state relative-caret-position="-2088">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -558,12 +547,12 @@
       <workItem from="1604314591771" duration="29335000" />
       <workItem from="1604839507863" duration="4922000" />
       <workItem from="1605017165227" duration="2829000" />
-      <workItem from="1605061307799" duration="6291000" />
+      <workItem from="1605061307799" duration="6579000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6291000" />
+    <option name="totallyTimeSpent" value="6579000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -728,36 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetailInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="170" column="33" selection-start-line="170" selection-start-column="33" selection-end-line="170" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3749">
-          <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="123" column="44" selection-start-line="123" selection-start-column="44" selection-end-line="123" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/my/page/myCustom.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-812">
@@ -768,9 +727,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2088">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3662">
+          <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetailInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1007">
+          <caret line="170" column="33" selection-start-line="170" selection-start-column="33" selection-end-line="170" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1653">
+        <state relative-caret-position="-2038">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
@@ -778,12 +767,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/index.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1624">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="123" column="52" selection-start-line="123" selection-start-column="52" selection-end-line="123" selection-end-column="52" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
