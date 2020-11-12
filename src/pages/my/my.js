@@ -14,6 +14,14 @@ export default class myIndex extends Taro.Component {
       
     }
   }
+
+  onShareAppMessage () {
+    return {
+      title: '贝鑫保险',
+      path: '/pages/home/index',
+      imageUrl: 'http://storage.360buyimg.com/mtd/home/share1535013100318.jpg'
+    }
+  }
     
 
   render () {
@@ -23,7 +31,7 @@ export default class myIndex extends Taro.Component {
         <View className="my-container">
             <View className="avator-section">
                 <View className="avator-row">
-                    <Image className="avator-icons" src={require('./image/ava-default.png')} className="avator-image" />
+                    <OpenData className="avator-icons avator-image" type='userAvatarUrl' />
                     <View>
                         <Text className="avator-name">李益钢</Text>
                     </View>
@@ -53,14 +61,16 @@ export default class myIndex extends Taro.Component {
 
                 <View className="line"></View>
 
+              <Button openType="contact" className="my-contact-button">
                 <View className="my-menu-row">
                     <View style={{display: 'flex', alignItems: 'center'}}>
                         <Image src={require('./image/kf.png')} className="my-menu-icons" />
-                        <Text className="my-menu-content">联系客服</Text>
+                          <Text className="my-menu-content">联系客服</Text>
                     </View>
 
                     <Image src={require('./image/right-arrow.png')} className="my-menu-right-arrow-icons" />
                 </View>
+              </Button>
 
                 <View className="line"></View>
 
@@ -75,14 +85,16 @@ export default class myIndex extends Taro.Component {
 
                 <View className="line"></View>
 
-                <View className="my-menu-row">
-                    <View style={{display: 'flex', alignItems: 'center'}}>
-                        <Image src={require('./image/share.png')} className="my-menu-icons" />
-                        <Text className="my-menu-content">分享好友</Text>
-                    </View>
+                <Button openType="share" className="my-contact-button">
+                  <View className="my-menu-row">
+                      <View style={{display: 'flex', alignItems: 'center'}}>
+                          <Image src={require('./image/share.png')} className="my-menu-icons" />
+                          <Text className="my-menu-content">分享好友</Text>
+                      </View>
 
-                    <Image src={require('./image/right-arrow.png')} className="my-menu-right-arrow-icons" />
-                </View>
+                      <Image src={require('./image/right-arrow.png')} className="my-menu-right-arrow-icons" />
+                  </View>
+                </Button>
 
                 <View className="line"></View>
             </View>

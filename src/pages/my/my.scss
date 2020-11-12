@@ -134,3 +134,13 @@
   margin-right: 10px;
   border: 2px dashed black;
 }
+
+.my-contact-button{
+  padding: 0;
+  background: transparent;
+  width: 100%;
+  line-height: 0;
+}
+.my-contact-button:after{
+  border: none;
+}

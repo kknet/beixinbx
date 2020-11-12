@@ -2,10 +2,12 @@
  * Created by liyigang on 24/10/2020.
  */
 import Taro from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Form } from '@tarojs/components'
 import { AtTabs, AtTabsPane, AtInputNumber, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
 import ConfirmInfo from './components/confirmInfo'
 import ProduceIcons from './components/produceIcons'
+import * as service from './services'
+import {startPayMethods} from '../../utils/payMethods'
 import './confirm-order.scss'
 
 export default class ConfirmOrder extends Taro.Component {
@@ -30,9 +32,9 @@ export default class ConfirmOrder extends Taro.Component {
     componentDidMount (options) {
         const type = this.$router.params.type
         this.setState({
-          totalPrice: type == 1? 699: 9.9,
+          totalPrice: type == 1? 699: 0.01,
           preSalePrice: type == 1? 999: 39.9,
-          salePrice: type == 1? 699: 9.9,
+          salePrice: type == 1? 699: 0.01,
           currentType: parseInt(this.$router.params.type, 10)
         })
         if(type) {
@@ -64,10 +66,27 @@ export default class ConfirmOrder extends Taro.Component {
         }
     }
 
-    hideModal = () => {
-        this.setState({
-            isShowServeInfo: !this.state.isShowServeInfo
+    hideModal = (e) => {
+      this.setState({
+        isShowServeInfo: !this.state.isShowServeInfo
+      })
+    }
+
+    goToPay = (event) => {
+      let postParams = {
+        amount: parseFloat(this.state.salePrice * this.state.buyCount),
+        number: this.state.buyCount,
+        schemeId: this.state.currentType,
+        userId: Taro.getStorageSync('userId').toString()
+      }
+      service.createBxOrder(postParams, {}).then((res) => {
+        let orderInfo = res.data.data
+        startPayMethods(orderInfo.id, postParams.amount).then((result) => {
+          Taro.navigateTo({
+            url: `/pages/startBxOrder/addBxBd?orderId=${result.orderId}&schemeId=${this.state.currentType}&buyCount=${this.state.buyCount}`
+          })
         })
+      })
     }
 
     changeBuyCount = (val) => {
@@ -75,6 +94,12 @@ export default class ConfirmOrder extends Taro.Component {
       this.setState({
         buyCount: val,
         totalPrice: result
+      })
+    }
+
+    showWarnInfo = () => {
+      this.setState({
+        isShowServeInfo: true
       })
     }
 
@@ -116,9 +141,15 @@ export default class ConfirmOrder extends Taro.Component {
                         <Text>实付金额</Text>
                         <Text style={{color: '#FE9B14', fontSize: '40rpx', marginLeft: '18rpx'}}>¥{totalPrice}</Text>
                     </View>
-                    <View className="float-right-pay-button">
+                    <Form onSubmit={this.goToPay} reportSubmit={false}>
+                      <Button
+                        formType="submit"
+                        className="float-right-pay-button"
+                        style={{borderRadius: 0}}
+                      >
                         确定支付
-                    </View>
+                      </Button>
+                    </Form>
                 </View>
 
                 <AtModal isOpened={isShowServeInfo} className="confirm-order-modal">

@@ -6,6 +6,7 @@ import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import httpService from '../../utils/http'
 import * as service from './services'
+import {startPayMethods} from '../../utils/payMethods'
 import logoImg from '../../assets/images/logo_taro.png'
 import './addBxBd.scss'
 
