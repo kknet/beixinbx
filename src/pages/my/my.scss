@@ -135,12 +135,17 @@
   border: 2px dashed black;
 }
 
-.my-contact-button{
+.my-contact-button, .my-image-share-button{
   padding: 0;
   background: transparent;
   width: 100%;
   line-height: 0;
 }
-.my-contact-button:after{
+.my-contact-button:after, .my-image-share-button:after{
   border: none;
+}
+.my-image-share-button{
+  margin: 0;
+  width: auto;
+  display: block;
 }

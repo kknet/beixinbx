@@ -1,0 +1,24 @@
+.kf-row{
+  padding: 35px;
+  font-size: 30px;
+  margin-top: 20px;
+  background-color: white;
+}
+.bx-page{
+
+}
+.line{
+  width: 100%;
+  height: 1px;
+  background-color: #ECEBEB;
+}
+
+.my-contact-button {
+  padding: 0;
+  background: transparent;
+  width: 100%;
+  line-height: 0;
+}
+.my-contact-button:after, .my-image-share-button:after{
+  border: none;
+}

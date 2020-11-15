@@ -8,6 +8,7 @@ class App extends Component {
   config = {
     pages: [
         'pages/home/home',  // 首页
+        'pages/kf/index',  // 客服
         'pages/article/list',  // 文章列表
         'pages/article/detail',  // 文章详情
         'pages/my/my',  // 我的
@@ -17,7 +18,8 @@ class App extends Component {
         'pages/my/page/myOrderDetailInfo',  // 我的保单详情信息
         'pages/startBxOrder/index', // 填写保单信息页
         'pages/confirmOrder/index', // 确认订单页
-        'pages/startBxOrder/addBxBd'  // 添加保单
+        'pages/startBxOrder/addBxBd',  // 添加保单
+        'pages/startBxOrder/finishBd'  // 已完成等待
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -34,7 +36,7 @@ class App extends Component {
           }, {
               iconPath: 'assets/resource/bottom-bar/kf.png',
               selectedIconPath: 'assets/resource/bottom-bar/kf-checked.png',
-              pagePath: 'pages/home/home',
+              pagePath: 'pages/kf/index',
               text: '联系客服'
           }, {
               iconPath: 'assets/resource/bottom-bar/my.png',
@@ -57,6 +59,8 @@ class App extends Component {
               url: `${routeUrl}`
           })
       }
+    
+      Taro.loadingText = '努力加载中...'
   }
 
   componentDidMount () {}

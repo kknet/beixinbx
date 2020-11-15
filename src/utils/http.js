@@ -1,7 +1,8 @@
 /**
  * Created by liyigang on 2/11/2020.
  */
-const host = 'http://120.78.84.243:9035'
+// const host = 'http://120.78.84.243:9035'
+const host = 'https://baoguanjia.ltd'
 const baseUrl = '/baoguanjia'
 import Taro, { Component } from '@tarojs/taro'
 
@@ -9,7 +10,6 @@ function HttpConstructor(url, methods, data, headers) {
   return new Promise((reslove, reject) => {
     const headersObj = Object.assign({}, headers)
     const token = Taro.getStorageSync('token')
-    console.log('token', token)
     headersObj.token = token
     Taro.request({
       url: host + baseUrl + url,
@@ -18,12 +18,22 @@ function HttpConstructor(url, methods, data, headers) {
       header: headersObj,
       success: (res) => {
         if(res.data.code === 50004) {
-          reSetToken(url, methods, data, headers)
+          reSetToken(url, methods, data, headers).then(() => {
+            HttpConstructor(url, 'post', data, headers).then((result) => {
+              reslove(result)
+            })
+          })
+          return
         }
         reslove(res)
       },
       error: (error) => {
         console.log('接口异常')
+        Taro.showToast({
+          title: `异常${error}`,
+          icon: 'none',
+          duration: 2000
+        })
         reject(error)
       }
     })
@@ -52,17 +62,16 @@ function refreshStorageToken() {
 function reSetToken(preUrl, preMethods, preData, preHeaders) {
   let userInfo = Taro.getStorageSync('userInfo')
   const loginData = Object.assign({}, userInfo)
-  Taro.login({
-    success: (res) => {
-      loginData.code = res.code
-      httpInstance.post('/app/wechat/loginOrRegist', loginData, {}).then((result) => {
-        Taro.setStorage({
-          key:'token',
-          data:result.data.data.token
+  return new Promise((reslove, reject) => {
+    Taro.login({
+      success: (res) => {
+        loginData.code = res.code
+        httpInstance.post('/app/wechat/loginOrRegist', loginData, {}).then((result) => {
+          Taro.setStorageSync('token', result.data.data.token)
+          reslove()
         })
-        // HttpConstructor(preUrl, 'post', preData, preHeaders)
-      })
-    }
+      }
+    })
   })
 }
 // http request 拦截器

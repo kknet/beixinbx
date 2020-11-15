@@ -57,7 +57,7 @@ export default class ArticleList extends Taro.Component {
                   data-url={`/pages/article/detail?id=${item.id}`}
                   onClick={Taro.goToTarget}
                 >
-                  <Image src={require('./image/twice-ceshi.jpg')} className='article-image' />
+                  <Image src={item.imageUrl} className='article-image' />
                   <View className='article-list-col'>
                     <View className='article-title'>{item.title}</View>
                     <View className='article-desc'>{item.content?item.content: ''}</View>

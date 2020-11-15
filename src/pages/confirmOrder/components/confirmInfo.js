@@ -46,7 +46,7 @@ export default class ConfirmInfo extends Taro.Component {
                     </Text>
                 </View>
 
-                {currentType === 0?
+                {currentType == 1?
                   <View>
                     <View>
                       <Text style={{fontSize: '20rpx', color:'#111'}}>

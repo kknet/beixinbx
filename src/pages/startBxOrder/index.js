@@ -4,6 +4,7 @@
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { AtTabs, AtTabsPane } from 'taro-ui'
+import * as service from './services'
 import './startBxOrder.scss'
 
 export default class StartBxOrder extends Taro.Component {
@@ -15,16 +16,26 @@ export default class StartBxOrder extends Taro.Component {
         super(...arguments)
 
         this.state = {
-            current: 0
+            current: 1,
+            itemList: []
         }
     }
 
-    onShareAppMessage () {
-        return {
-            title: 'Taro UI',
-            path: '/pages/index/index',
-            imageUrl: 'http://storage.360buyimg.com/mtd/home/share1535013100318.jpg'
-        }
+    componentDidMount (options) {
+      this.requestGetItemPrice()
+    }
+
+    requestGetItemPrice() {
+      Taro.showLoading({
+        title: '加载中'
+      })
+      service.requestGetSchemeList({}, {}).then((res) => {
+        Taro.hideLoading()
+        this.setState({
+          itemList: res.data.data
+        })
+        console.log('项目列表', res.data)
+      })
     }
     
     goToOrderConfirm = () => {
@@ -45,7 +56,7 @@ export default class StartBxOrder extends Taro.Component {
     }
 
     render () {
-        const { current } = this.state
+        const { current, itemList } = this.state
 
         return (
             <View className="bx-page">
@@ -55,22 +66,22 @@ export default class StartBxOrder extends Taro.Component {
 
                 <View className="start-bx-content">
                     <View className="start-bx-title-row">
-                        <View onClick={this.changeTabs} data-tabs="0" className={current === 0?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>单份托管</View>
-                        <View onClick={this.changeTabs} data-tabs="1" className={current === 1?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>家庭托管</View>
+                        <View onClick={this.changeTabs} data-tabs="1" className={current === 1?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>{itemList[0].title}</View>
+                        <View onClick={this.changeTabs} data-tabs="2" className={current === 2?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>{itemList[1].title}</View>
                     </View>
 
-                    {current === 0?
+                    {current === 1?
                         <View className="start-bx-info-content">
                             <View className="start-bx-info">
-                                <Text style={{color: '#FE9B14', fontSize: '60rpx'}}>9.9</Text>
+                                <Text style={{color: '#FE9B14', fontSize: '60rpx'}}>{itemList[0].price}</Text>
                                 <Text>元/年(每份)</Text>
                             </View>
                             <View className="start-bx-info">
-                                <Text className="start-bx-small-words">原价39.9元/年 (每份)</Text>
+                                <Text className="start-bx-small-words">原价{itemList[0].originalPrice}元/年 (每份)</Text>
                             </View>
 
                             <View className="start-bx-info">
-                                <Text className="start-bx-small-words">适合10份保单以下</Text>
+                                <Text className="start-bx-small-words">{itemList[0].subtitle}</Text>
                             </View>
 
                             <View style={{textAlign: 'center', marginTop: '50rpx'}}>
@@ -103,15 +114,15 @@ export default class StartBxOrder extends Taro.Component {
                         :
                         <View className="start-bx-info-content">
                             <View className="start-bx-info">
-                                <Text style={{color: '#FE9B14', fontSize: '60rpx'}}>699</Text>
+                                <Text style={{color: '#FE9B14', fontSize: '60rpx'}}>{itemList[1].price}</Text>
                                 <Text>元/年(每份)</Text>
                             </View>
                             <View className="start-bx-info">
-                                <Text className="start-bx-small-words">原价999元/年 (每份)</Text>
+                                <Text className="start-bx-small-words">原价{itemList[1].originalPrice}元/年 (每份)</Text>
                             </View>
 
                             <View className="start-bx-info">
-                                <Text className="start-bx-small-words">不限保单份数</Text>
+                                <Text className="start-bx-small-words">{itemList[1].subtitle}</Text>
                             </View>
 
                             <View style={{textAlign: 'center', marginTop: '50rpx'}}>

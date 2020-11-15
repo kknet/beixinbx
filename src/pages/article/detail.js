@@ -32,7 +32,9 @@ export default class ArticleDetail extends Taro.Component {
     }
     service.requestGetArticleInfoById(queryData, {}).then((res) => {
       console.log('查询文章详情', res.data)
-      res.data.data.times = res.data.data.createTime.split(' ')[0]
+      if(res.data.data.createTime !== null) {
+        res.data.data.times = res.data.data.createTime.split(' ')[0]
+      }
       this.setState({
         articleInfo: res.data.data
       })
@@ -43,8 +45,8 @@ export default class ArticleDetail extends Taro.Component {
   render () {
     const {articleInfo} = this.state
     return (
-      <View className='bx-page'>
-        <Image src={require('./image/twice-ceshi.jpg')} className="article-banner-image" />
+      <View className='bx-page' style={{overflow: 'auto'}}>
+        <Image src={articleInfo.imageUrl} className="article-banner-image" />
         <View className="article-content">
           <View className="article-info-title">
             <Text>{articleInfo.title}</Text>

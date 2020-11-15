@@ -16,37 +16,49 @@ export default class MyOrder extends Taro.Component {
     super(...arguments)
 
     this.state = {
-      insuranceList: []
+      insuranceList: [],
+      currentPage: 1
     }
   }
 
   componentDidMount() {
+
+  }
+
+  componentDidShow() {
     this.requestGetAllInsurance()
   }
 
   requestGetAllInsurance() {
+    Taro.showLoading({
+      title: Taro.loadingText,
+    })
     const queryData = {
-      userId: Taro.getStorageSync('userId').toString()
+      userId: Taro.getStorageSync('userId').toString(),
+      page: this.state.currentPage,
+      pageSize: 20
     }
 
     service.requestGetMyAllInsurance(queryData, {}).then((res) => {
-      console.log('请求成功', res.data)
+      Taro.hideLoading()
       // 遍历生成当前图标
-      res.data.data.forEach((v) => {
-        if(v.status == 1) {
-          if(v.schemeId == 1) {
-            v.icons = personOnline
+      if(res.data.data !== null) {
+        res.data.data.forEach((v) => {
+          if(v.status == 1) {
+            if(v.schemeId == 1) {
+              v.icons = personOnline
+            } else {
+              v.icons = homeOnline
+            }
           } else {
-            v.icons = homeOnline
+            if(v.schemeId == 1) {
+              v.icons = personUnline
+            } else {
+              v.icons = homeUnline
+            }
           }
-        } else {
-          if(v.schemeId == 1) {
-            v.icons = personUnline
-          } else {
-            v.icons = homeUnline
-          }
-        }
-      })
+        }) 
+      }
       this.setState({
         insuranceList: res.data.data
       })
@@ -61,11 +73,12 @@ export default class MyOrder extends Taro.Component {
         <View className="my-container">
             <View className="my-menu-section">
                 {insuranceList.map((item, index) => {
+                  let buyCount = parseInt(item.current, 10) - parseInt(item.total, 10)
                   return (
                     <View>
                       <View
                         onClick={Taro.goToTarget}
-                        data-url={`/pages/my/page/myOrderDetail?orderId=${item.orderId}&schemeId=${item.schemeId}`}
+                        data-url={`/pages/my/page/myOrderDetail?orderId=${item.orderId}&schemeId=${item.schemeId}&buyCount=${buyCount}`}
                         className="my-menu-row"
                         key={index}
                       >
@@ -76,7 +89,10 @@ export default class MyOrder extends Taro.Component {
                         </View>
 
                         <View>
-                          <Text>{item.current}/{item.total}份</Text>
+                          {item.schemeId == '1'?
+                            <Text>{item.current}/{item.total}份</Text>:
+                            <Text>{item.total}份</Text>
+                          }
                         </View>
                       </View>
                       <View className="line"></View>

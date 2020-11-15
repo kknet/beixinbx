@@ -31,14 +31,9 @@ export default class ConfirmOrder extends Taro.Component {
 
     componentDidMount (options) {
         const type = this.$router.params.type
-        this.setState({
-          totalPrice: type == 1? 699: 0.01,
-          preSalePrice: type == 1? 999: 39.9,
-          salePrice: type == 1? 699: 0.01,
-          currentType: parseInt(this.$router.params.type, 10)
-        })
+        this.requestGetItemPrice()
         if(type) {
-            if(type === '0') {
+            if(type == '1') {
                 // 微信环境下
                 if(wx) {
                     wx.setNavigationBarTitle({
@@ -47,7 +42,7 @@ export default class ConfirmOrder extends Taro.Component {
                 }
             }
 
-            if(type === '1') {
+            if(type == '2') {
                 // 微信环境下
                 if(wx) {
                     wx.setNavigationBarTitle({
@@ -57,6 +52,25 @@ export default class ConfirmOrder extends Taro.Component {
             }
         }
     }
+
+  requestGetItemPrice() {
+    Taro.showLoading({
+      title: '加载中'
+    })
+    service.requestGetSchemeList({}, {}).then((res) => {
+      console.log('请求数据')
+      Taro.hideLoading()
+      const type = parseInt(this.$router.params.type, 10)
+      const itemList = res.data.data
+      console.log('项目列表', res.data)
+      this.setState({
+        totalPrice: itemList[type-1].price,
+        preSalePrice: itemList[type-1].originalPrice,
+        salePrice: itemList[type-1].price,
+        currentType: parseInt(this.$router.params.type, 10)
+      })
+    })
+  }
 
     onShareAppMessage () {
         return {
@@ -90,7 +104,7 @@ export default class ConfirmOrder extends Taro.Component {
     }
 
     changeBuyCount = (val) => {
-      let result = parseFloat((this.state.salePrice * val).toFixed(1))
+      let result = parseFloat((this.state.salePrice * val).toFixed(2))
       this.setState({
         buyCount: val,
         totalPrice: result

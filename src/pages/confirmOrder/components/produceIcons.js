@@ -12,7 +12,7 @@ export default class ProduceIcons extends Taro.Component {
 
     return (
       <View>
-        {currentType === 0 ?
+        {currentType == 1 ?
         <View className="serve-content-rows" style={{padding: '0 27rpx', justifyContent: 'space-around'}}>
 
           <View className="serve-content-col">

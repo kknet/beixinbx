@@ -11,3 +11,9 @@ export function LoginGetToken(data, options={}) {
 export function requestGetOpenId(data, options={}) {
   return httpInstance.post(`/app/wechat/getUserInfoByCode?code=${data.code}`, data, options)
 }
+
+// 绑定分享人的关系
+export function requestAddShareRecord(data, options={}) {
+  return httpInstance.post(`/app/insurance/addShareRecord`, data, options)
+}
+

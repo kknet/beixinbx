@@ -42,9 +42,40 @@ export default class Index extends Taro.Component {
     // await this.getOpenId()
     // this.getUserInfo()
     let token = Taro.getStorageSync('token')
-    if(!token) {
+    let authorize = Taro.getStorageSync('authorize')
+    // 第一次进来没有授权的时候
+    if(!authorize) {
       this.setState({
         isShowLogin: true
+      })
+    } else {
+      this.registerShareRecord()
+    }
+  }
+
+  // 注册好友关系
+  registerShareRecord() {
+    const orderId = this.$router.params.orderId
+    const userId = this.$router.params.userId
+    const currentUserId = Taro.getStorageSync('userId').toString()
+    const goUrl = this.$router.params.url
+    if(orderId) {
+      let shareObj = {
+        orderId: orderId,
+        userId: userId,
+        sharedUserId: currentUserId
+      }
+
+      service.requestAddShareRecord(shareObj, {}).then((res) => {
+        Taro.showToast({
+          title: '绑定关系成功',
+          icon: 'success',
+          duration: 2000
+        })
+        // Taro.navigateTo({
+        //   // url: `/pages/panel/index?id=${id.toLowerCase()}`
+        //   url: '/pages/my/page/myOrderDetail'
+        // })
       })
     }
   }
@@ -78,7 +109,7 @@ export default class Index extends Taro.Component {
 
   goToDetailOrder = e => {
     Taro.navigateTo({
-      // url: `/pages/panel/index?id=${id.toLowerCase()}`
+      // url: '/pages/startBxOrder/finishBd'
       url: `/pages/startBxOrder/index`
     })
   }
@@ -143,22 +174,26 @@ export default class Index extends Taro.Component {
     delete submitData.gender
     delete submitData.language
 
-    Taro.setStorage({
-      key:'userInfo',
-      data:submitData
+    // 记录已经授权过
+    Taro.setStorageSync('authorize', true)
+    Taro.setStorageSync('userInfo', submitData)
+    Taro.showLoading({
+      title: '加载中'
     })
     service.LoginGetToken(submitData, {}).then((res) => {
-      console.log('token', res.data)
+      Taro.hideLoading()
       this.setState({
         isShowLogin: false
       })
-      Taro.setStorage({
-        key:'token',
-        data:res.data.data.token
-      })
-      Taro.setStorage({
-        key:'userId',
-        data:res.data.data.userInfo.id
+      Taro.setStorageSync('token', res.data.data.token)
+      Taro.setStorageSync('userId', res.data.data.userInfo.id)
+
+      this.registerShareRecord()
+    }, (err) => {
+      Taro.showToast({
+        title: `异常${err}`,
+        icon: 'none',
+        duration: 2000
       })
     })
   }

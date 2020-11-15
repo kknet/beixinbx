@@ -19,6 +19,7 @@ export default class AddBxBd extends Taro.Component {
         super(...arguments)
 
         this.state = {
+            buyCount: 0,
             current: 0,
             value: '',
             orderId: '',
@@ -34,14 +35,14 @@ export default class AddBxBd extends Taro.Component {
     }
 
   componentDidMount() {
-    const orderId = this.$router.params.orderId
-    const schemeId = this.$router.params.schemeId
+    const {orderId, schemeId, buyCount} = this.$router.params
     if(orderId) {
       this.setState({
         orderId: orderId,
-        schemeId: schemeId
+        schemeId: schemeId,
+        buyCount: buyCount
       }, () => {
-        console.log('订单id', orderId)
+        console.log('保单参数', orderId, schemeId, buyCount)
       })
     }
   }
@@ -76,7 +77,6 @@ export default class AddBxBd extends Taro.Component {
         success: (res) => {
           const result = JSON.parse(res.data)
           if(result.code === 50004) {
-            console.log('登录异常')
             httpService.refreshStorageToken()
             this.sendFile(files)
           }
@@ -95,11 +95,15 @@ export default class AddBxBd extends Taro.Component {
       count: 1,
       sourceType: ["album", "camera"],
       success: async (res) => {
+        Taro.showLoading({
+          title: Taro.loadingText
+        })
         const {policyImgs, bankCards, otherImg} = this.state.orderObj
         const tempFilePaths = res.tempFilePaths
         let imgFile = await this.sendFile(tempFilePaths)
+        Taro.hideLoading()
         let orderObj = this.state.orderObj
-        console.log('图片地址', imgFile)
+       
         if(type === 'policy') {
           policyImgs.push(imgFile)
           orderObj.policyImgs = policyImgs
@@ -117,8 +121,21 @@ export default class AddBxBd extends Taro.Component {
     })
   }
 
-  createNewOrder = () => {
-    const {policyImgs, bankCards, otherImg, insurant, schemeId, orderId} = this.state.orderObj
+  clearFormModel() {
+    let initModel = {
+      insurant: '',
+      policyImgs: [],
+      bankCards: [],
+      otherImg: [] // 1 单份  2 家庭
+    }
+    this.setState({
+      orderObj: initModel
+    })
+  }
+
+  createNewOrder = (ev) => {
+    let type = ev.currentTarget.dataset.type
+    const {policyImgs, bankCards, otherImg, insurant, schemeId, orderId, buyCount} = this.state.orderObj
     if(insurant === '') {
       Taro.showToast({
         title: '请输入保险人名称',
@@ -162,17 +179,31 @@ export default class AddBxBd extends Taro.Component {
       Taro.showToast({
         title: '创建成功',
         icon: 'success',
-        duration: 2000
+        duration: 1000
       })
-      Taro.navigateBack({
-        delta: 1
+      // buyCount 减1
+      this.setState({
+        buyCount: parseInt(buyCount, 10) - 1
+      }, () => {
+        setTimeout(() => {
+          let nextUrl = ''
+          if(type === 'next') {
+            this.clearFormModel()
+            return
+          } else {
+            nextUrl = '/pages/startBxOrder/finishBd?type=wait'
+          }
+          Taro.redirectTo({
+            url: nextUrl
+          })
+        }, 1000)
       })
     })
   }
 
 
     render () {
-        const { current } = this.state
+        const { current, buyCount, schemeId } = this.state
         const {insurant, policyImgs, bankCards, otherImg} = this.state.orderObj
 
         return (
@@ -273,10 +304,14 @@ export default class AddBxBd extends Taro.Component {
                 </View>
 
               <View className="confirm-bottom-row">
-                <View>
-
-                </View>
-                <View className="float-right-pay-button" onClick={this.createNewOrder}>
+                {buyCount > 1 || schemeId == 2?
+                  <View style={{right: '262rpx'}} className="float-right-pay-button" data-type="next" onClick={this.createNewOrder}>
+                    下一份
+                  </View>
+                  :
+                  ''
+                }
+                <View className="float-right-pay-button" data-type="submit" onClick={this.createNewOrder}>
                   保存保单
                 </View>
               </View>

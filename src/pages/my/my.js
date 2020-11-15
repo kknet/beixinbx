@@ -11,7 +11,7 @@ export default class myIndex extends Taro.Component {
     super(...arguments)
 
     this.state = {
-      
+      userInfo: Taro.getStorageSync('userInfo')
     }
   }
 
@@ -25,7 +25,7 @@ export default class myIndex extends Taro.Component {
     
 
   render () {
-
+    const {userInfo} = this.state
     return (
       <View className='bx-page'>
         <View className="my-container">
@@ -33,7 +33,7 @@ export default class myIndex extends Taro.Component {
                 <View className="avator-row">
                     <OpenData className="avator-icons avator-image" type='userAvatarUrl' />
                     <View>
-                        <Text className="avator-name">李益钢</Text>
+                        <Text className="avator-name">{userInfo.nickname}</Text>
                     </View>
                 </View>
             </View>
@@ -50,7 +50,7 @@ export default class myIndex extends Taro.Component {
                 
                 <View className="line"></View>
 
-                <View className="my-menu-row">
+                <View className="my-menu-row" data-url="/pages/startBxOrder/finishBd?type=report" onClick={Taro.goToTarget}>
                     <View style={{display: 'flex', alignItems: 'center'}}>
                         <Image src={require('./image/my-order.png')} className="my-menu-icons" />
                         <Text className="my-menu-content">保单报告</Text>
@@ -65,7 +65,7 @@ export default class myIndex extends Taro.Component {
                 <View className="my-menu-row">
                     <View style={{display: 'flex', alignItems: 'center'}}>
                         <Image src={require('./image/kf.png')} className="my-menu-icons" />
-                          <Text className="my-menu-content">联系客服</Text>
+                        <Text className="my-menu-content">联系客服</Text>
                     </View>
 
                     <Image src={require('./image/right-arrow.png')} className="my-menu-right-arrow-icons" />

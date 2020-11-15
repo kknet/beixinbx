@@ -10,3 +10,8 @@ export function uploadImage(data, options={}) {
 export function createOrder(data, options={}) {
   return httpInstance.post('/app/insurance/createInsurance', data, options)
 }
+
+// 获取项目列表
+export function requestGetSchemeList(data, options={}) {
+  return httpInstance.post('/app/insurance/getSchemeList', data, options)
+}
