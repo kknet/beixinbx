@@ -17,7 +17,8 @@ export default class MyOrder extends Taro.Component {
 
     this.state = {
       insuranceList: [],
-      currentPage: 1
+      currentPage: 1,
+      currentTab: 1
     }
   }
 
@@ -26,6 +27,9 @@ export default class MyOrder extends Taro.Component {
   }
 
   componentDidShow() {
+    this.setState({
+      currentTab: 1
+    })
     this.requestGetAllInsurance()
   }
 
@@ -65,42 +69,97 @@ export default class MyOrder extends Taro.Component {
     })
   }
 
+  requestGetShareList() {
+    Taro.showLoading({
+      title: Taro.loadingText,
+    })
+    const queryData = {
+      userId: Taro.getStorageSync('userId').toString(),
+      page: this.state.currentPage,
+      pageSize: 20
+    }
+    service.requestGetShareOrder(queryData, {}).then((res) => {
+      Taro.hideLoading()
+      // 遍历生成当前图标
+      if(res.data.data !== null) {
+        res.data.data.forEach((v) => {
+          if(v.status == 1) {
+            if(v.schemeId == 1) {
+              v.icons = personOnline
+            } else {
+              v.icons = homeOnline
+            }
+          } else {
+            if(v.schemeId == 1) {
+              v.icons = personUnline
+            } else {
+              v.icons = homeUnline
+            }
+          }
+        })
+      }
+      this.setState({
+        insuranceList: res.data.data
+      })
+    })
+  }
+
+  changeTabs = (e) => {
+    const tabsIndex = parseInt(e.currentTarget.dataset.tabs, 10)
+    this.setState({
+      currentTab: tabsIndex
+    }, () => {
+      if(tabsIndex === 1) {
+        this.requestGetAllInsurance()
+      } else {
+        this.requestGetShareList()
+      }
+    })
+  }
+
 
   render () {
-    const {insuranceList} = this.state
+    const {insuranceList, currentTab} = this.state
     return (
       <View className='bx-page'>
+        <View className="start-bx-title-row">
+          <View onClick={this.changeTabs} data-tabs="1" className={currentTab === 1?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>我的保单</View>
+          <View onClick={this.changeTabs} data-tabs="2" className={currentTab === 2?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>分享的保单</View>
+        </View>
         <View className="my-container">
             <View className="my-menu-section">
-                {insuranceList.map((item, index) => {
-                  let buyCount = parseInt(item.current, 10) - parseInt(item.total, 10)
-                  return (
-                    <View>
-                      <View
-                        onClick={Taro.goToTarget}
-                        data-url={`/pages/my/page/myOrderDetail?orderId=${item.orderId}&schemeId=${item.schemeId}&buyCount=${buyCount}`}
-                        className="my-menu-row"
-                        key={index}
-                      >
-                        <View style={{display: 'flex', alignItems: 'center'}}>
-                          <Image src={item.icons} className="my-menu-icons" />
-                          <Text className="my-menu-content">{item.schemeId == 1?'单份保单': '家庭保单'}</Text>
-                          <Text className="my-order-small-status">{item.status == 1?'保障中': '失效'}</Text>
-                        </View>
+                {
+                  insuranceList.map((item, index) => {
+                    let buyCount = parseInt(item.current, 10) - parseInt(item.total, 10)
+                    return (
+                      <View>
+                        <View
+                          onClick={Taro.goToTarget}
+                          data-url={`/pages/my/page/myOrderDetail?orderId=${item.orderId}&schemeId=${item.schemeId}&buyCount=${buyCount}&clickTab=${currentTab}`}
+                          className="my-menu-row"
+                          key={index}
+                        >
+                          <View style={{display: 'flex', alignItems: 'center'}}>
+                            <Image src={item.icons} className="my-menu-icons" />
+                            <Text className="my-menu-content">{item.schemeId == 1?'单份保单': '家庭保单'}</Text>
+                            <Text className="my-order-small-status">{item.status == 1?'保障中': '失效'}</Text>
+                          </View>
 
-                        <View>
-                          {item.schemeId == '1'?
-                            <Text>{item.current}/{item.total}份</Text>:
-                            <Text>{item.total}份</Text>
-                          }
+                          <View>
+                            {item.schemeId == '1'?
+                              <Text>{item.current}/{item.total}份</Text>:
+                              <Text>{item.current}份</Text>
+                            }
+                          </View>
                         </View>
+                        {insuranceList.length-1 === index?'':  <View className="line"></View>}
                       </View>
-                      <View className="line"></View>
-                    </View>
-                  )
-                })}
+                    )
+                  })
+                }
 
             </View>
+            {insuranceList.length === 0?<View className="null-words">暂无数据</View>: ''}
         </View>
       </View>
     )

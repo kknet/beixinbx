@@ -17,7 +17,8 @@ export default class MyOrder extends Taro.Component {
       schemeId: '',
       insuranceList: [],
       shareList: [],
-      currentPage: 1
+      currentPage: 1,
+      currentTab: 1
     }
   }
 
@@ -27,12 +28,13 @@ export default class MyOrder extends Taro.Component {
 
   // 对应 onShow
   componentDidShow () {
-    const {orderId, schemeId, buyCount} = this.$router.params
+    const {orderId, schemeId, buyCount, currentTab} = this.$router.params
     if(orderId) {
       this.setState({
         orderId: orderId,
         schemeId: schemeId,
-        buyCount: buyCount
+        buyCount: buyCount,
+        currentTab: currentTab
       }, () => {
         this.getInsuranceDetailById()
         this.getSharePersonList()
@@ -98,14 +100,14 @@ export default class MyOrder extends Taro.Component {
     const userId = Taro.getStorageSync('userId').toString()
     const orderId = this.state.orderId
     return {
-      title: '邀请你加入我的保险圈',
+      title: '这是我已经托管的家庭保险资产，很重要，亲爱的你也需要知道。',
       path: `/pages/home/home?userId=${userId}&orderId=${orderId}&jump=true&url=/page/my/myOrderDetail&type=shareRegister`,
       imageUrl: `${require('../image/scan.jpg')}`
     }
   }
 
   render () {
-    const {insuranceList, schemeId, orderId, shareList, buyCount} = this.state
+    const {insuranceList, schemeId, orderId, shareList, buyCount, currentTab} = this.state
     return (
       <View className='bx-page'>
         <View className="my-family-section">
@@ -119,7 +121,6 @@ export default class MyOrder extends Taro.Component {
               <Button openType="share" className="my-image-share-button">
                 <Image
                   src={require('../image/add-family.png')}
-                  style={{border: '2rpx dashed black'}}
                   className="family-avator-col"
                 />
               </Button>
@@ -189,7 +190,7 @@ export default class MyOrder extends Taro.Component {
             {/*<View className="order-detail-line" style={{ margin: '24px 0 0 0'}}></View>*/}
 
 
-            {buyCount == 0?
+            {(buyCount == 0 && schemeId == 1) || currentTab === 2?
               '':
               <View
                 className="add-new-order"

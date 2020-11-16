@@ -15,24 +15,25 @@
 }
 
 .home-title-menu-col{
-    font-size: 28rpx;
+    font-size: 28px;
     text-align: center;
 }
 
 .home-title-menu-icons{
-    width: 100rpx;
-    height: 100rpx;
+    width: 100px;
+    height: 100px;
     display: block;
     margin:0 auto;
 }
 
 .bx-home-content{
-    margin-top: 20rpx;
+    margin-top: 20px;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 811rpx;
+    /*height: 811rpx;*/
+    height: 74%;
 }
 .start-bx-button{
     text-align: center;

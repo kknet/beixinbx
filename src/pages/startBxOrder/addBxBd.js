@@ -182,22 +182,26 @@ export default class AddBxBd extends Taro.Component {
         duration: 1000
       })
       // buyCount 减1
-      this.setState({
-        buyCount: parseInt(buyCount, 10) - 1
-      }, () => {
-        setTimeout(() => {
-          let nextUrl = ''
-          if(type === 'next') {
-            this.clearFormModel()
-            return
-          } else {
-            nextUrl = '/pages/startBxOrder/finishBd?type=wait'
-          }
-          Taro.redirectTo({
-            url: nextUrl
-          })
-        }, 1000)
-      })
+      if(this.state.schemeId == 1) {
+        this.setState({
+          buyCount: parseInt(buyCount, 10) - 1
+        }, () => {
+
+        })
+      }
+
+      setTimeout(() => {
+        let nextUrl = ''
+        if(type === 'next') {
+          this.clearFormModel()
+          return
+        } else {
+          nextUrl = '/pages/startBxOrder/finishBd?type=wait'
+        }
+        Taro.redirectTo({
+          url: nextUrl
+        })
+      }, 1000)
     })
   }
 

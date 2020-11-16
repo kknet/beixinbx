@@ -1,13 +1,13 @@
 .my-container{
-  padding: 30rpx;
-  margin: 20rpx 0;
+  padding: 30px;
+  margin: 0 0 20px 0;
   background-color: white;
-  height: 1067rpx;
+  height: 100%;
 }
 .avator-section{
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  padding: 39rpx;
+  padding: 39px;
 }
 .avator-row{
   display: flex;
@@ -15,17 +15,17 @@
   align-items: center;
 }
 .avator-name{
-  font-size: 36rpx;
+  font-size: 36px;
   color: #FE9B14;
 }
 .avator-image{
-  width: 122rpx;
-  height: 122rpx;
+  width: 122px;
+  height: 122px;
   display: block;
 }
 
 .my-menu-row{
-  padding: 31rpx 27rpx;
+  padding: 31px 27px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,37 +33,37 @@
 }
 
 .my-menu-icons{
-  width: 48rpx;
-  height: 48rpx;
-  margin-right: 21rpx;
+  width: 48px;
+  height: 48px;
+  margin-right: 21px;
 }
 
 .my-menu-content{
   color: #333333;
-  font-size: 32rpx;
+  font-size: 32px;
 }
 
 .my-menu-right-arrow-icons{
-  width: 28rpx;
-  height: 29rpx;
+  width: 28px;
+  height: 29px;
   display: block;
 }
 
 .line{
   width: 87%;
   background-color: #ECEBEB;
-  height: 2rpx;
+  height: 2px;
   float: right;
 }
 
 .my-order-small-status{
   color: #999999;
-  font-size: 26rpx;
-  margin-left: 20rpx;
+  font-size: 26px;
+  margin-left: 20px;
 }
 
 .my-family-section{
-  padding: 40rpx 30rpx;
+  padding: 40px 30px;
   background-color: white;
   margin-top: 20px;
 }
@@ -75,12 +75,12 @@
   &:not(:first-child) {
     margin-left: 30px;
   }
-  width: 120rpx;
-  height: 120rpx;
+  width: 120px;
+  height: 120px;
 }
 
 .order-details-sub-titles{
-  padding: 30rpx;
+  padding: 30px;
   font-size: 28px;
   color: #888888;
 }
@@ -145,7 +145,33 @@
   border: none;
 }
 .my-image-share-button{
-  margin: 0;
+  margin: 0 0 0 30px;
   width: auto;
   display: block;
+}
+
+.start-bx-title-row{
+  margin-top: 20px;
+  padding: 0 103px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #E5E5E5;
+  background-color: white;
+}
+
+.start-bx-title-col{
+  text-align: center;
+  padding: 27px 0;
+  box-sizing: border-box;
+  width: 170px;
+  font-size: 28px;
+  color: #353535;
+}
+
+.start-bx-title-checked {
+  border-bottom: 6px solid #FE9B14;
+}
+
+.null-words{
+  text-align: center;
 }

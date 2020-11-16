@@ -61,7 +61,7 @@ export default class StartBxOrder extends Taro.Component {
         return (
             <View className="bx-page">
                 <View className="header-banner">
-                    <Image src={require('../../assets/images/twice-ceshi.jpg')} className="banner-image" />
+                    <Image mode="widthFix" src={require('../../assets/images/banner1.jpeg')} className="banner-image" />
                 </View>
 
                 <View className="start-bx-content">

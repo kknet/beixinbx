@@ -7,6 +7,10 @@ export function requestGetMyAllInsurance(data, options={}) {
   return httpInstance.post('/app/insurance/getMyOrder', data, options)
 }
 
+export function requestGetShareOrder(data, options={}) {
+  return httpInstance.post('/app/insurance/getSharedOrder', data, options)
+}
+
 export function requestGetSharedList(data, options={}) {
   return httpInstance.post('/app/insurance/getSharedList', data, options)
 }

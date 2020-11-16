@@ -18,6 +18,7 @@ export default class Index extends Taro.Component {
     super(...arguments)
 
     this.state = {
+      autoHeight: '74%',
       isShowLogin: false,
         homeMenuIndex: {
             line1: [
@@ -41,6 +42,7 @@ export default class Index extends Taro.Component {
   async componentDidMount() {
     // await this.getOpenId()
     // this.getUserInfo()
+    this.autoSetHeight()
     let token = Taro.getStorageSync('token')
     let authorize = Taro.getStorageSync('authorize')
     // 第一次进来没有授权的时候
@@ -51,6 +53,19 @@ export default class Index extends Taro.Component {
     } else {
       this.registerShareRecord()
     }
+  }
+
+  autoSetHeight() {
+    Taro.getSystemInfo({
+      success: (res) => {
+        if(res.screenHeight > 800) {
+          this.setState({
+            autoHeight: '77%'
+          })
+        }
+        console.log('获取信息', res)
+      }
+    })
   }
 
   // 注册好友关系
@@ -66,7 +81,15 @@ export default class Index extends Taro.Component {
         sharedUserId: currentUserId
       }
 
+      // 同一个人
+      if(userId == currentUserId) {
+        return
+      }
+
       service.requestAddShareRecord(shareObj, {}).then((res) => {
+        if(res.data.code === 80001) {
+          return
+        }
         Taro.showToast({
           title: '绑定关系成功',
           icon: 'success',
@@ -84,7 +107,6 @@ export default class Index extends Taro.Component {
     return new Promise((reslove, reject) => {
       Taro.login({
         success: (res) => {
-          console.log('登录成功', res)
           reslove(res)
         }
       })
@@ -93,9 +115,9 @@ export default class Index extends Taro.Component {
 
   onShareAppMessage () {
     return {
-      title: 'Taro UI',
-      path: '/pages/index/index',
-      imageUrl: 'http://storage.360buyimg.com/mtd/home/share1535013100318.jpg'
+      title: '朋友，这里可以做保单托管，以后你的保单就有人服务了。',
+      path: '/pages/home/home',
+      imageUrl: `${require('./img/share.png')}`
     }
   }
 
@@ -199,7 +221,7 @@ export default class Index extends Taro.Component {
   }
 
   render () {
-    const { homeMenuIndex, isShowLogin } = this.state
+    const { homeMenuIndex, isShowLogin, autoHeight } = this.state
     const { line } = homeMenuIndex
 
     return (
@@ -242,7 +264,7 @@ export default class Index extends Taro.Component {
                 )
             })}
         </View>
-        <View className="bx-home-content">
+        <View className="bx-home-content" style={{height: autoHeight}}>
             <View className="start-bx-button" onClick={this.goToDetailOrder}>
                 <Image className="start-bx-button-image" src={require('./img/start_button.png')} />
                 <View className="start-bx-button-text">

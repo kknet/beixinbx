@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
-import { View, Image, RichText } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
+import WxParse from '../components/wxParse/wxParse'
 import * as service from './services'
 import './detail.scss'
 
@@ -37,11 +38,14 @@ export default class ArticleDetail extends Taro.Component {
       }
       this.setState({
         articleInfo: res.data.data
+      }, () => {
+        WxParse.wxParse('article', 'html', res.data.data.content, this.$scope, 5)
       })
     })
   }
 
 
+  // <Text style={{marginLeft: '25rpx'}}>{articleInfo.summary}</Text>
   render () {
     const {articleInfo} = this.state
     return (
@@ -53,10 +57,10 @@ export default class ArticleDetail extends Taro.Component {
           </View>
           <View className="article-other-info">
             <Text className="article-other-words">{articleInfo.times}</Text>
-            <Text style={{marginLeft: '25rpx'}}>{articleInfo.summary}</Text>
           </View>
           <View className="content-nodes">
-            <RichText nodes={articleInfo.content} />
+            <import src='../components/wxParse/wxParse.wxml' />
+            <template is='wxParse' data='{{wxParseData:article.nodes}}'/>
           </View>
         </View>
       </View>

@@ -11,8 +11,13 @@ export default class myIndex extends Taro.Component {
     super(...arguments)
 
     this.state = {
-      userInfo: Taro.getStorageSync('userInfo')
+      userInfo: Taro.getStorageSync('userInfo'),
+      autoHeight: '97%'
     }
+  }
+
+  componentDidMount() {
+    this.autoSetHeight()
   }
 
   onShareAppMessage () {
@@ -22,13 +27,26 @@ export default class myIndex extends Taro.Component {
       imageUrl: 'http://storage.360buyimg.com/mtd/home/share1535013100318.jpg'
     }
   }
+
+  autoSetHeight() {
+    Taro.getSystemInfo({
+      success: (res) => {
+        if(res.screenHeight > 800) {
+          this.setState({
+            autoHeight: '98%'
+          })
+        }
+        console.log('获取信息', res)
+      }
+    })
+  }
     
 
   render () {
-    const {userInfo} = this.state
+    const {userInfo, autoHeight} = this.state
     return (
       <View className='bx-page'>
-        <View className="my-container">
+        <View className="my-container" style={{margin: '20rpx 0 20rpx 0', height: autoHeight}}>
             <View className="avator-section">
                 <View className="avator-row">
                     <OpenData className="avator-icons avator-image" type='userAvatarUrl' />
