@@ -80,6 +80,15 @@ export default class Index extends Taro.Component {
     }
   }
 
+  goToShareArticleInfo() {
+    const articleId = this.$router.params.articleId
+    if(articleId) {
+      Taro.navigateTo({
+        url: `/pages/article/detail?id=${articleId}`
+      })
+    }
+  }
+
   // 注册好友关系
   registerShareRecord() {
     const orderId = this.$router.params.orderId
@@ -222,6 +231,7 @@ export default class Index extends Taro.Component {
 
       this.registerShareRecord()
       this.shareBxOrder()
+      this.goToShareArticleInfo()
     }, (err) => {
       Taro.showToast({
         title: `异常${err}`,
@@ -266,6 +276,7 @@ export default class Index extends Taro.Component {
       // 判断是否是分享进来的,若是进到对应的url
       this.registerShareRecord()
       this.shareBxOrder()
+      this.goToShareArticleInfo()
     }, (err) => {
       Taro.showToast({
         title: `异常${err}`,

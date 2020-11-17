@@ -8,9 +8,23 @@
   display: flex;
   align-items: center;
   height: 100%;
+  background-color: white;
 }
 .bx-page{
 
+}
+.start-bx-button-text{
+  font-size: 36px;
+  color: #333;
+  margin-top: 22px;
+  height: 18px;
+}
+
+.start-bx-button-image{
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  display: block;
 }
 .line{
   width: 100%;
@@ -21,7 +35,6 @@
 .my-contact-button {
   padding: 0;
   background: transparent;
-  width: 100%;
   line-height: 0;
 }
 .my-contact-button:after, .my-image-share-button:after{

@@ -48,6 +48,14 @@ export default class ArticleDetail extends Taro.Component {
     })
   }
 
+  onShareAppMessage () {
+    return {
+      title: '朋友，这里可以做保单托管，以后你的保单就有人服务了。',
+      path: `/pages/home/home?articleId=${this.state.articleId}`,
+      imageUrl: `${require('../../assets/images/share.png')}`
+    }
+  }
+
 
   // <Text style={{marginLeft: '25rpx'}}>{articleInfo.summary}</Text>
   render () {

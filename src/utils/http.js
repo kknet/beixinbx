@@ -61,12 +61,22 @@ function refreshStorageToken() {
 
 function reSetToken(preUrl, preMethods, preData, preHeaders) {
   let userInfo = Taro.getStorageSync('userInfo')
-  const loginData = Object.assign({}, userInfo)
+  // const loginData = Object.assign({}, userInfo)
   return new Promise((reslove, reject) => {
     Taro.login({
       success: (res) => {
-        loginData.code = res.code
-        httpInstance.post('/app/wechat/loginOrRegist', loginData, {}).then((result) => {
+        // loginData.code = res.code
+        let submitData = {}
+        submitData.avatar = userInfo.avatar
+        submitData.city = userInfo.city
+        submitData.code = res.code
+        submitData.country = userInfo.country
+        submitData.nickname = userInfo.nickname
+        submitData.openId = Taro.getStorageSync('openId')
+        submitData.province = userInfo.province
+        submitData.unionId = userInfo.unionId
+        submitData.wechat = userInfo.wechat
+        httpInstance.post('/app/wechat/loginOrRegist', submitData, {}).then((result) => {
           Taro.setStorageSync('token', result.data.data.token)
           reslove()
         })

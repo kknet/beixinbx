@@ -53,13 +53,12 @@ class App extends Component {
 
   componentWillMount () {
       Taro.goToTarget = (e) => {
-          console.log('点击', e , this)
           const routeUrl = e.currentTarget.dataset.url
           Taro.navigateTo({
               url: `${routeUrl}`
           })
       }
-    
+
       Taro.loadingText = '努力加载中...'
   }
 

@@ -177,3 +177,15 @@
 .null-words{
   text-align: center;
 }
+.no-data-image{
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 0 auto;
+}
+.no-data-block{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

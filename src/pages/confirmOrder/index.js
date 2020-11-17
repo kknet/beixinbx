@@ -101,14 +101,16 @@ export default class ConfirmOrder extends Taro.Component {
     }
 
     goToPay = (event) => {
+      let currentUserId = Taro.getStorageSync('userId').toString()
       let postParams = {
         amount: parseFloat(this.state.salePrice * this.state.buyCount),
         number: this.state.buyCount,
         schemeId: this.state.currentType,
-        userId: Taro.getStorageSync('userId').toString()
+        userId: currentUserId
       }
 
-      if(this.state.shareId !== 0) {
+      // 当前shareId和当前用户id不是同一个
+      if(this.state.shareId !== 0 && this.state.shareId !== currentUserId) {
         postParams.shareId = this.state.shareId
       }
       console.log('创建订单参数', postParams)

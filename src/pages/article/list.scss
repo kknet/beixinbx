@@ -20,10 +20,18 @@
   color: #222222;
   font-weight: 400;
 }
+.article-time{
+  font-size: 26px;
+  color: #999999;
+}
 .article-desc{
   margin-top: 7px;
   font-size: 26px;
   color: #999999;
+  width: 500px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-wrap: nowrap;
 }
 .current-red{
   position: absolute;

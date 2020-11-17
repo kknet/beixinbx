@@ -63,7 +63,7 @@ export default class MyOrder extends Taro.Component {
               v.icons = homeUnline
             }
           }
-        }) 
+        })
       }
       this.setState({
         insuranceList: res.data.data
@@ -258,7 +258,14 @@ export default class MyOrder extends Taro.Component {
                 }
 
             </View>
-            {insuranceList.length === 0?<View className="null-words">暂无数据</View>: ''}
+            {insuranceList.length === 0?
+              <View className='no-data-block'>
+                <View>
+                  <Image className='no-data-image' src={require('../../../assets/images/no-data.png')} />
+                  <View className="null-words">暂无数据</View>
+                </View>
+              </View>
+              : ''}
         </ScrollView>
       </View>
     )

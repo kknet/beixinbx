@@ -38,6 +38,11 @@ export default class ArticleList extends Taro.Component {
     })
     service.requestGetArticleList(queryData, {}).then((res) => {
       Taro.hideLoading()
+      res.data.data.list.forEach((item) => {
+        if(item.createTime !== null) {
+          item.times = item.createTime.split(' ')[0]
+        }
+      })
       this.setState({
         articleList: res.data.data.list
       })
@@ -64,7 +69,8 @@ export default class ArticleList extends Taro.Component {
                   <Image src={item.imageUrl} className='article-image' />
                   <View className='article-list-col'>
                     <View className='article-title'>{item.title}</View>
-                    <View className='article-desc'>{item.content?item.content: ''}</View>
+                    <View className='article-time'>{item.times}</View>
+                    <View className='article-desc'>{item.content?item.content: ''}sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf</View>
                   </View>
                 </View>
                 <View className="list-line"></View>

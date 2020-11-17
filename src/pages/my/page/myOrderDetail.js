@@ -68,7 +68,7 @@ export default class MyOrder extends Taro.Component {
     }
     service.requestGetMyInsuranceList(queryParams, {}).then((res) => {
       Taro.hideLoading()
-      res.data.data.forEach((v) => {
+      res.data.data.list.forEach((v) => {
         if(v.status == 0) {
           v.statusText = '已失效'
         } else {
@@ -80,9 +80,14 @@ export default class MyOrder extends Taro.Component {
           v.statusText = '处理中'
         }
       })
-      let buyCount = parseInt(this.state.buyCount, 10) - res.data.data.length
+      let buyCount = 0
+      if(this.state.schemeId == 1) {
+        buyCount = parseInt(this.state.buyCount, 10) - res.data.data.total
+      } else {
+        buyCount = res.data.data.total
+      }
       this.setState({
-        insuranceList: res.data.data,
+        insuranceList: res.data.data.list,
         buyCount: buyCount
       })
     })
@@ -95,8 +100,13 @@ export default class MyOrder extends Taro.Component {
     if(state == 0) {
       routeUrl = '/pages/startBxOrder/finishBd?type=wait'
     }
-    Taro.navigateTo({
-      url: `${routeUrl}`
+    this.setState({
+      currentPage: 1,
+      currentPageSize: 20,
+    }, () => {
+      Taro.navigateTo({
+        url: `${routeUrl}`
+      })
     })
   }
 
@@ -116,7 +126,7 @@ export default class MyOrder extends Taro.Component {
       mask: true
     })
     this.setState({
-      pageSize: this.state.currentPageSize + 5
+      currentPage: this.state.currentPage + 1
     }, () => {
       let queryParams = {
         orderId: this.state.orderId,
@@ -126,7 +136,7 @@ export default class MyOrder extends Taro.Component {
       let historyArr = this.state.insuranceList
       service.requestGetMyInsuranceList(queryParams, {}).then((res) => {
         Taro.hideLoading()
-        res.data.data.forEach((v) => {
+        res.data.data.list.forEach((v) => {
           if(v.status == 0) {
             v.statusText = '已失效'
           } else {
@@ -139,13 +149,25 @@ export default class MyOrder extends Taro.Component {
           }
           historyArr.push(v)
         })
-        
+
         this.setState({
           insuranceList: historyArr
         })
       })
     })
 
+  }
+
+  goToAddNewOrder(e) {
+    const url = e.currentTarget.dataset.url
+    this.setState({
+      currentPage: 1,
+      currentPageSize: 20,
+    }, () => {
+      Taro.navigateTo({
+        url: `${url}`
+      })
+    })
   }
 
   render () {
@@ -160,12 +182,20 @@ export default class MyOrder extends Taro.Component {
                 {shareList.map((item) => {
                   return <Image src={item.avatar} className="family-avator-col" />
                 })}
-              <Button openType="share" className="my-image-share-button">
-                <Image
-                  src={require('../image/add-family.png')}
-                  className="family-avator-col"
-                />
-              </Button>
+              {currentTab == 1?
+                <Button
+                  style={shareList.length === 0?{margin: 0}: ''}
+                  openType="share"
+                  className="my-image-share-button"
+                >
+                  <Image
+                    src={require('../image/add-family.png')}
+                    className="family-avator-col"
+                  />
+                </Button>
+                :
+                ''
+              }
             </View>
         </View>
 
@@ -236,7 +266,7 @@ export default class MyOrder extends Taro.Component {
               '':
               <View
                 className="add-new-order"
-                onClick={Taro.goToTarget}
+                onClick={(e) => {this.goToAddNewOrder(e)}}
                 data-url={`/pages/startBxOrder/addBxBd?schemeId=${schemeId}&orderId=${orderId}&buyCount=${buyCount}`}
               >
                 <Image src={require('../image/add-new-order.png')} className="add-new-order-button-image" />
