@@ -57,9 +57,6 @@
   width: 120px;
   height: 120px;
 }
-.add-pic-icons:not(:first-child) {
-  margin-left: 30px;
-}
 
 .confirm-bottom-row {
   background: #FFFFFF;
@@ -87,4 +84,13 @@
 
 .example-image{
   width: 100%;
+}
+
+.add-pic-icons-button{
+  margin-left: 30px;
+}
+.confirm-order-modal {
+  .at-modal__container{
+    width: 690px!important;
+  }
 }

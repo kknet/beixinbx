@@ -221,9 +221,11 @@ export default class MyOrder extends Taro.Component {
     const {insuranceList, currentTab} = this.state
     return (
       <View className='bx-page'>
-        <View className="start-bx-title-row">
-          <View onClick={this.changeTabs} data-tabs="1" className={currentTab === 1?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>我的保单</View>
-          <View onClick={this.changeTabs} data-tabs="2" className={currentTab === 2?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>分享的保单</View>
+        <View>
+          <View className="start-bx-title-row">
+            <View onClick={this.changeTabs} data-tabs="1" className={currentTab === 1?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>我的保单</View>
+            <View onClick={this.changeTabs} data-tabs="2" className={currentTab === 2?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>分享的保单</View>
+          </View>
         </View>
         <ScrollView scrollY={true} className="my-container" onScrollToLower={() => {this.loadMore()}}>
             <View className="my-menu-section">
@@ -231,10 +233,10 @@ export default class MyOrder extends Taro.Component {
                   insuranceList.map((item, index) => {
                     let buyCount = parseInt(item.total, 10)
                     return (
-                      <View>
+                      <View key={`insuranceList${index}`}>
                         <View
                           onClick={Taro.goToTarget}
-                          data-url={`/pages/my/page/myOrderDetail?orderId=${item.orderId}&schemeId=${item.schemeId}&buyCount=${buyCount}&clickTab=${currentTab}`}
+                          data-url={`/pages/my/page/myOrderDetail?orderId=${item.orderId}&schemeId=${item.schemeId}&buyCount=${buyCount}&clickTab=${currentTab}&total=${item.total}&current=${item.current}`}
                           className="my-menu-row"
                           key={index}
                         >

@@ -26,6 +26,7 @@ export default class AddBxBd extends Taro.Component {
             value: '',
             orderId: '',
             schemeId: '',
+            total: 0,
             orderObj: {
               insurant: '',
               policyImgs: [],
@@ -37,14 +38,16 @@ export default class AddBxBd extends Taro.Component {
     }
 
   componentDidMount() {
-    const {orderId, schemeId, buyCount} = this.$router.params
+    const {orderId, schemeId, buyCount, total, current} = this.$router.params
     if(orderId) {
       this.setState({
         orderId: orderId,
         schemeId: schemeId,
-        buyCount: buyCount
+        buyCount: buyCount,
+        total: total,
+        current: current
       }, () => {
-        console.log('保单参数', orderId, schemeId, buyCount)
+        console.log('保单参数', orderId, schemeId, buyCount, total)
       })
     }
   }
@@ -201,7 +204,8 @@ export default class AddBxBd extends Taro.Component {
       // buyCount 减1
       if(this.state.schemeId == 1) {
         this.setState({
-          buyCount: parseInt(buyCount, 10) - 1
+          buyCount: parseInt(buyCount, 10) - 1,
+          current: parseInt(this.state.current, 10) + 1
         }, () => {
 
         })
@@ -241,7 +245,7 @@ export default class AddBxBd extends Taro.Component {
 
 
     render () {
-        const { current, buyCount, schemeId, isShowExample } = this.state
+        const { current, buyCount, schemeId, isShowExample, total } = this.state
         const {insurant, policyImgs, bankCards, otherImg} = this.state.orderObj
 
         return (
@@ -251,7 +255,7 @@ export default class AddBxBd extends Taro.Component {
                     <Text>已填保单数</Text>
                   </View>
                   <View>
-                    {schemeId == 1?<Text>{current}/{buyCount}</Text>: <Text>{buyCount}</Text>}
+                    {schemeId == 1?<Text>{current}/{total}</Text>: <Text>{buyCount}</Text>}
                   </View>
                 </View>
 
@@ -287,7 +291,13 @@ export default class AddBxBd extends Taro.Component {
                                 {policyImgs && policyImgs.map((item, index) => {
                                   return (
                                     <View key={item} style={{position: 'relative'}}>
-                                      <Image src={item} key={item} className="add-pic-icons" alt="保单图片" />
+                                      <Image
+                                        style={index === 0?'': {marginLeft: '30rpx'}}
+                                        src={item}
+                                        key={item}
+                                        className="add-pic-icons"
+                                        alt="保单图片"
+                                      />
                                       <Image
                                         src={require('./image/close.png')}
                                         onClick={() => this.delUploadImage(index, 'policyImgs')}
@@ -297,7 +307,7 @@ export default class AddBxBd extends Taro.Component {
                                     </View>
                                   )
                                 })}
-                                {policyImgs.length === 2?'': <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('policy')} className="add-pic-icons" />}
+                                {policyImgs.length === 2?'': <Image style={policyImgs.length > 0?{marginLeft: '30rpx'}: ''} src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('policy')} className="add-pic-icons" />}
                             </View>
                         </View>
                     </View>
@@ -311,7 +321,7 @@ export default class AddBxBd extends Taro.Component {
                             </View>
 
                             <View>
-                                <Text style={{fontSize: '26rpx', color: '#999999'}}>0/2</Text>
+                                <Text style={{fontSize: '26rpx', color: '#999999'}}>{bankCards.length}/2</Text>
                             </View>
                         </View>
 
@@ -320,7 +330,13 @@ export default class AddBxBd extends Taro.Component {
                               {bankCards && bankCards.map((item, index) => {
                                 return (
                                   <View key={item} style={{position: 'relative'}}>
-                                    <Image src={item} key={item} className="add-pic-icons" alt="银行卡" />
+                                    <Image
+                                      style={index === 0?'': {marginLeft: '30rpx'}}
+                                      src={item}
+                                      key={item}
+                                      className="add-pic-icons"
+                                      alt="银行卡"
+                                    />
                                     <Image
                                       src={require('./image/close.png')}
                                       onClick={() => this.delUploadImage(index, 'bankCards')}
@@ -330,7 +346,7 @@ export default class AddBxBd extends Taro.Component {
                                   </View>
                                 )
                               })}
-                              {bankCards.length === 2?'': <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('bankCard')} className="add-pic-icons" />}
+                              {bankCards.length === 2?'': <Image style={bankCards.length > 0?{marginLeft: '30rpx'}: ''} src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('bankCard')} className="add-pic-icons" />}
                             </View>
                         </View>
                     </View>
@@ -344,7 +360,7 @@ export default class AddBxBd extends Taro.Component {
                             </View>
 
                             <View>
-                                <Text style={{fontSize: '26rpx', color: '#999999'}}>0/2</Text>
+                                <Text style={{fontSize: '26rpx', color: '#999999'}}>{otherImg.length}/2</Text>
                             </View>
                         </View>
 
@@ -353,7 +369,13 @@ export default class AddBxBd extends Taro.Component {
                               {otherImg && otherImg.map((item, index) => {
                                 return (
                                   <View key={item} style={{position: 'relative'}}>
-                                    <Image src={item} key={item} className="add-pic-icons" alt="其他图片" />
+                                    <Image
+                                      style={index === 0?'': {marginLeft: '30rpx'}}
+                                      src={item}
+                                      key={item}
+                                      className="add-pic-icons"
+                                      alt="其他图片"
+                                    />
                                     <Image
                                       src={require('./image/close.png')}
                                       onClick={() => this.delUploadImage(index, 'otherImg')}
@@ -363,7 +385,9 @@ export default class AddBxBd extends Taro.Component {
                                   </View>
                                 )
                               })}
-                              {otherImg.length === 2?'': <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('otherImg')} className="add-pic-icons" />}
+                              {otherImg.length === 2?'':
+                                <Image style={otherImg.length > 0?{marginLeft: '30rpx'}: ''} src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('otherImg')} className="add-pic-icons" />
+                              }
                             </View>
                         </View>
                     </View>
@@ -386,7 +410,7 @@ export default class AddBxBd extends Taro.Component {
                 </View>
 
               <View className="confirm-bottom-row">
-                {buyCount > 1 || schemeId == 2?
+                {current != total-1 || schemeId == 2?
                   <View style={{right: '262rpx'}} className="float-right-pay-button" data-type="next" onClick={this.createNewOrder}>
                     下一份
                   </View>
@@ -398,7 +422,7 @@ export default class AddBxBd extends Taro.Component {
                 </View>
               </View>
 
-              <AtModal isOpened={isShowExample}>
+              <AtModal isOpened={isShowExample} className="confirm-order-modal">
                 <AtModalHeader>保单示例</AtModalHeader>
                 <AtModalContent>
                   <Image mode="widthFix" src={require('./image/example.jpeg')} className="example-image" />

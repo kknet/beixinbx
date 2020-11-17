@@ -10,8 +10,8 @@
 }
 
 .article-image{
-  width: 120px;
-  height: 120px;
+  width: 145px;
+  height: 145px;
   flex-shrink: 0;
   margin-right: 20px;
 }
@@ -29,9 +29,7 @@
   font-size: 26px;
   color: #999999;
   width: 500px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex-wrap: nowrap;
+  word-wrap:break-word;
 }
 .current-red{
   position: absolute;

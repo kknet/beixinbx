@@ -118,7 +118,7 @@ export default class ConfirmOrder extends Taro.Component {
         let orderInfo = res.data.data
         startPayMethods(orderInfo.id, postParams.amount).then((result) => {
           Taro.navigateTo({
-            url: `/pages/startBxOrder/addBxBd?orderId=${result.orderId}&schemeId=${this.state.currentType}&buyCount=${this.state.buyCount}`
+            url: `/pages/startBxOrder/addBxBd?orderId=${result.orderId}&schemeId=${this.state.currentType}&buyCount=${this.state.currentType == 1?this.state.buyCount: this.state.buyCount-1}&total=${this.state.buyCount}&current=0`
           })
         })
       })
@@ -162,15 +162,17 @@ export default class ConfirmOrder extends Taro.Component {
                     />
 
                     <View className="buy-count-row">
-                        <Text style={{marginRight: '30rpx'}}>本次购买份数</Text>
+                      {schemeId == 2 ? '':<Text style={{marginRight: '30rpx'}}>本次购买份数</Text>}
+                      {schemeId == 2 ? '' :
                         <AtInputNumber
-                            disabled={schemeId == 2 || shareId != 0?true: false}
-                            min={1}
-                            max={99}
-                            step={1}
-                            value={this.state.buyCount}
-                            onChange={this.changeBuyCount}
+                          disabled={schemeId == 2 || shareId != 0?true: false}
+                          min={1}
+                          max={99}
+                          step={1}
+                          value={this.state.buyCount}
+                          onChange={this.changeBuyCount}
                         />
+                      }
                     </View>
                 </View>
 

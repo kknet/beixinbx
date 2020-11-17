@@ -19,7 +19,9 @@ export default class MyOrder extends Taro.Component {
       shareList: [],
       currentPage: 1,
       currentPageSize: 20,
-      currentTab: 1
+      currentTab: 1,
+      total: 0,
+      current: 0
     }
   }
 
@@ -29,13 +31,15 @@ export default class MyOrder extends Taro.Component {
 
   // 对应 onShow
   componentDidShow () {
-    const {orderId, schemeId, buyCount, currentTab} = this.$router.params
+    const {orderId, schemeId, buyCount, clickTab, total, current} = this.$router.params
     if(orderId) {
       this.setState({
         orderId: orderId,
         schemeId: schemeId,
         buyCount: buyCount,
-        currentTab: currentTab
+        currentTab: clickTab,
+        total: total,
+        current: current
       }, () => {
         this.getInsuranceDetailById()
         this.getSharePersonList()
@@ -171,7 +175,7 @@ export default class MyOrder extends Taro.Component {
   }
 
   render () {
-    const {insuranceList, schemeId, orderId, shareList, buyCount, currentTab} = this.state
+    const {insuranceList, schemeId, orderId, shareList, buyCount, currentTab, total, current} = this.state
     return (
       <View className='bx-page'>
         <View className="my-family-section">
@@ -267,7 +271,7 @@ export default class MyOrder extends Taro.Component {
               <View
                 className="add-new-order"
                 onClick={(e) => {this.goToAddNewOrder(e)}}
-                data-url={`/pages/startBxOrder/addBxBd?schemeId=${schemeId}&orderId=${orderId}&buyCount=${buyCount}`}
+                data-url={`/pages/startBxOrder/addBxBd?schemeId=${schemeId}&orderId=${orderId}&buyCount=${buyCount}&total=${total}&current=${current}`}
               >
                 <Image src={require('../image/add-new-order.png')} className="add-new-order-button-image" />
                 <View>
