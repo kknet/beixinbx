@@ -1,6 +1,6 @@
 .bx-person-input{
   background-color: white;
-  font-style: 34px;
+  font-size: 34px;
   display: flex;
   align-items: center;
   padding: 20px 30px;
@@ -32,12 +32,33 @@
   display: flex;
   align-items: center;
 }
+
+.must-star{
+  position: absolute;
+  top: 4px;
+  right: -18px;
+  color: red;
+  font-size: 28px;
+}
+.bx-order-image-col{
+  display: flex;
+}
+.close-icon{
+  position: absolute;
+  right: -21px;
+  top: -34px;
+  width: 49px;
+  height: 50px;
+}
 .bx-order-image-col:not(:first-child){
   margin-left: 30px;
 }
 .add-pic-icons{
   width: 120px;
   height: 120px;
+}
+.add-pic-icons:not(:first-child) {
+  margin-left: 30px;
 }
 
 .confirm-bottom-row {
@@ -62,4 +83,8 @@
   color: white;
   font-size: 36px;
   background-color: #FE9B14;
+}
+
+.example-image{
+  width: 100%;
 }

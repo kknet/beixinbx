@@ -19,6 +19,7 @@ export default class ConfirmOrder extends Taro.Component {
         super(...arguments)
 
         this.state = {
+          shareId: 0,
           totalPrice: 0,  // 乘以数量的总价格
           current: 0,
           buyCount: 1,
@@ -29,56 +30,69 @@ export default class ConfirmOrder extends Taro.Component {
         }
     }
 
-    componentDidMount (options) {
-        const type = this.$router.params.type
-        this.requestGetItemPrice()
-        if(type) {
-            if(type == '1') {
-                // 微信环境下
-                if(wx) {
-                    wx.setNavigationBarTitle({
-                        title: '单份托管'
-                    })
-                }
-            }
-
-            if(type == '2') {
-                // 微信环境下
-                if(wx) {
-                    wx.setNavigationBarTitle({
-                        title: '家庭托管'
-                    })
-                }
-            }
+    componentDidMount () {
+      const type = this.$router.params.type
+      // 分享点进来的
+      const shareId = this.$router.params.shareId
+      const buyCount = parseInt(this.$router.params.buyCount, 10)
+      if(shareId) {
+        Taro.hideShareMenu()
+        this.setState({
+          shareId: shareId,
+          buyCount: buyCount
+        })
+      }
+      this.requestGetItemPrice()
+      if(type) {
+        if(type == '1') {
+          // 微信环境下
+          if(wx) {
+            wx.setNavigationBarTitle({
+              title: '单份托管'
+            })
+          }
         }
+
+        if(type == '2') {
+          // 微信环境下
+          if(wx) {
+            wx.setNavigationBarTitle({
+              title: '家庭托管'
+            })
+          }
+        }
+      }
     }
 
   requestGetItemPrice() {
     Taro.showLoading({
-      title: '加载中'
+      title: '加载中',
+      mask: true
     })
     service.requestGetSchemeList({}, {}).then((res) => {
-      console.log('请求数据')
       Taro.hideLoading()
       const type = parseInt(this.$router.params.type, 10)
       const itemList = res.data.data
-      console.log('项目列表', res.data)
+      console.log('查询数据', type, itemList)
       this.setState({
         totalPrice: itemList[type-1].price,
         preSalePrice: itemList[type-1].originalPrice,
         salePrice: itemList[type-1].price,
-        currentType: parseInt(this.$router.params.type, 10)
+        currentType: parseInt(this.$router.params.type, 10),
+        schemeId: parseInt(this.$router.params.type, 10)
       })
     })
   }
 
-    onShareAppMessage () {
-        return {
-            title: 'Taro UI',
-            path: '/pages/index/index',
-            imageUrl: 'http://storage.360buyimg.com/mtd/home/share1535013100318.jpg'
-        }
+  onShareAppMessage () {
+    const shareId = Taro.getStorageSync('userId').toString()
+    const buyCount = this.state.buyCount
+    return {
+      title: '朋友，这里可以做保单托管，以后你的保单就有人服务了。',
+      path: `/pages/home/home?schemeId=${this.state.schemeId}&shareId=${shareId}&buyCount=${buyCount}`,
+      imageUrl: `${require('../../assets/images/share.png')}`
     }
+  }
 
     hideModal = (e) => {
       this.setState({
@@ -93,6 +107,11 @@ export default class ConfirmOrder extends Taro.Component {
         schemeId: this.state.currentType,
         userId: Taro.getStorageSync('userId').toString()
       }
+
+      if(this.state.shareId !== 0) {
+        postParams.shareId = this.state.shareId
+      }
+      console.log('创建订单参数', postParams)
       service.createBxOrder(postParams, {}).then((res) => {
         let orderInfo = res.data.data
         startPayMethods(orderInfo.id, postParams.amount).then((result) => {
@@ -125,7 +144,9 @@ export default class ConfirmOrder extends Taro.Component {
           currentType,
           preSalePrice,
           salePrice,
-          totalPrice
+          totalPrice,
+          schemeId,
+          shareId
         } = this.state
 
         return (
@@ -141,6 +162,7 @@ export default class ConfirmOrder extends Taro.Component {
                     <View className="buy-count-row">
                         <Text style={{marginRight: '30rpx'}}>本次购买份数</Text>
                         <AtInputNumber
+                            disabled={schemeId == 2 || shareId != 0?true: false}
                             min={1}
                             max={99}
                             step={1}
@@ -169,15 +191,36 @@ export default class ConfirmOrder extends Taro.Component {
                 <AtModal isOpened={isShowServeInfo} className="confirm-order-modal">
                     <AtModalContent>
                         <Image src={require('./image/logo.png')} className="logo-image" />
-                        <View style={{margin: '14rpx 0 18rpx 0', textAlign: 'center'}}>
-                            <Text style={{textIndent: '2em', fontSize: '36rpx', color: '#000'}}>消费者权益保障服务</Text>
-                        </View>
                         <View>
-                            <Text style={{textIndent: '2em', fontSize: '30rpx', color: '#888'}}>·15天无理由退 ·理赔无忧 ·客服协助 ·风险提示</Text>
-                        </View>
+                          <Text>
+                            感谢您选择我公司为您提供保险服务，为了保护您的合法权益，现将有关事项告知如下，请您仔细阅读。在您阅读过程中如果有任何疑问，可向我公司客服进行咨询。如您不同意本告知书中的任何条款，您应立即停止我公司的服务：\n
 
-                        <View style={{margin: '37rpx 0 66rpx 0'}}>
-                            <Text style={{textIndent: '2em', fontSize: '30rpx', color: '#111'}}>你已进入蚂蚁保保险代理有限公司投保流程，请仔细阅读保险条款、投保须知、客户告知书等内容并关注承保保险公司信息。为保障你的权益，我们将会安全记录你的操作。</Text>
+                            以下是我公司给您提供的服务：\n
+                            1. 保单整理和诊断：安排专人为您整理此前已购的全部保单，并提供专业、中立的诊断分析意见及风险评估服务；\n
+                            2. 保单变更服务：协助您办理保单中地址、银行账户、职业、投保人、受益人等合同事项的变更；\n
+                            3．医疗绿通服务：基于您的保险附加功能，帮你筛选及跟进可以行使的保险绿通服务；\n
+                            4. 协助理赔服务：在您需要进行保单项下的理赔时，协助您向保险公司递交理赔资料，并协助办理理赔申请；\n
+                            注：上述所有服务项目，我公司会根据客户的需求、选择以及服务进程的不同，提供一项或多项的服务项目。\n
+
+                            您的权利和义务\n
+                            1. 您应本着最大诚信原则，如实、准确向我公司提供所有与委托事项有关的信息和资料，履行如实告知义务。\n
+                            2. 购买保险产品时，不允许他人代签，也不授权或诱使、暗示我公司工作人员代替您签章。因非亲笔签名造成的后果，须由您自行承担。\n
+                            3. 出现下列任一情况的，您应当在 24 小时内通知我公司：\n
+                            （1）保险标的的风险性质及情况发生改变的；\n
+                            （2）发生任何可能引起保险理赔的事件或情况的；\n
+                            （3）发生保险事故的。\n
+                            4.如保险公司要求出具您的《授权委托书》及相关证明文件，您应予配合提供。\n
+                            5.我公司为您制定的任何文件和方案，均享有知识产权。未经许可，不允许复制、传播。\n
+
+                            我公司的权利和义务\n
+                            1.本着客户至上的服务宗旨，在法律范围内维护您的合法权益，并始终把您的利益放在第一位。\n
+                            2.利用专业知识和技术，根据您的需求及您选择的服务套餐内容，为您提供客观、中立的保险售后及跟进服务。\n
+                            3.承诺不会将获取的信息用于非法用途。\n
+
+                            保密条款\n
+                            对于在履行本协议过程中获得的对方的任何保密信息，我公司和您均应承担保密义务，除非为本协议约定之目的或履行法律法规规定的披露义务。\n
+
+                          </Text>
                         </View>
                     </AtModalContent>
                     <AtModalAction>

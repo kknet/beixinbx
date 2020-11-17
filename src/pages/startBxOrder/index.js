@@ -27,7 +27,8 @@ export default class StartBxOrder extends Taro.Component {
 
     requestGetItemPrice() {
       Taro.showLoading({
-        title: '加载中'
+        title: Taro.loadingText,
+        mask: true
       })
       service.requestGetSchemeList({}, {}).then((res) => {
         Taro.hideLoading()

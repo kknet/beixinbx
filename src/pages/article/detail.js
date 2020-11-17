@@ -31,8 +31,12 @@ export default class ArticleDetail extends Taro.Component {
     let queryData = {
       id: this.state.articleId
     }
+    Taro.showLoading({
+      title: Taro.loadingText,
+      mask: true
+    })
     service.requestGetArticleInfoById(queryData, {}).then((res) => {
-      console.log('查询文章详情', res.data)
+      Taro.hideLoading()
       if(res.data.data.createTime !== null) {
         res.data.data.times = res.data.data.createTime.split(' ')[0]
       }

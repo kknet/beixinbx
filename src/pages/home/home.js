@@ -27,7 +27,7 @@ export default class Index extends Taro.Component {
                     icons: Icon1
                 },
                 {
-                    label: '申请理赔',
+                    label: '保险理赔',
                     icons: Icon2
                 },
                 {
@@ -51,7 +51,7 @@ export default class Index extends Taro.Component {
         isShowLogin: true
       })
     } else {
-      this.registerShareRecord()
+      this.refreshUserInfo()
     }
   }
 
@@ -66,6 +66,18 @@ export default class Index extends Taro.Component {
         console.log('获取信息', res)
       }
     })
+  }
+
+  // 分销商分享 客户点击进入
+  shareBxOrder() {
+    const shareId = this.$router.params.shareId
+    const schemeId = this.$router.params.schemeId
+    const buyCount = parseInt(this.$router.params.buyCount, 10)
+    if(shareId) {
+      Taro.navigateTo({
+        url: `/pages/confirmOrder/index?type=${schemeId}&schemeId=${this.state.schemeId}&shareId=${shareId}&buyCount=${buyCount}`
+      })
+    }
   }
 
   // 注册好友关系
@@ -117,7 +129,7 @@ export default class Index extends Taro.Component {
     return {
       title: '朋友，这里可以做保单托管，以后你的保单就有人服务了。',
       path: '/pages/home/home',
-      imageUrl: `${require('./img/share.png')}`
+      imageUrl: `${require('../../assets/images/share.png')}`
     }
   }
 
@@ -137,13 +149,12 @@ export default class Index extends Taro.Component {
   }
 
   goToPage = e => {
-    console.log('点击', e)
     let row = e.currentTarget.dataset.item
     let url = ''
     if(row.label === '保单保全') {
       url = '/pages/article/list?type=1'
     }
-    if(row.label === '申请理赔') {
+    if(row.label === '保险理赔') {
       url = '/pages/article/list?type=2'
     }
     if(row.label === '医疗绿道') {
@@ -162,7 +173,6 @@ export default class Index extends Taro.Component {
         success: (res) => {
           queryData.code = res.code
           service.requestGetOpenId(queryData, {}).then((result) => {
-            console.log('获取open', result)
             Taro.setStorage({
               key:"openId",
               data:result.data.data.openid
@@ -175,6 +185,48 @@ export default class Index extends Taro.Component {
             reslove(queryData)
           })
         }
+      })
+    })
+  }
+
+  async refreshUserInfo() {
+    let submitData = {}
+    const res2 = await this.getOpenId()
+    let userInfo = Taro.getStorageSync('userInfo')
+    const loginData = Object.assign({}, userInfo)
+    loginData.openId = res2.openId
+    loginData.code = res2.code
+
+    submitData.avatar = userInfo.avatar
+    submitData.city = userInfo.city
+    submitData.code = res2.code
+    submitData.country = userInfo.country
+    submitData.nickname = userInfo.nickname
+    submitData.openId = res2.openId
+    submitData.province = userInfo.province
+    submitData.unionId = userInfo.unionId
+    submitData.wechat = userInfo.wechat
+
+    Taro.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    service.LoginGetToken(submitData, {}).then((res) => {
+      Taro.hideLoading()
+      this.setState({
+        isShowLogin: false
+      })
+      Taro.setStorageSync('token', res.data.data.token)
+      Taro.setStorageSync('userId', res.data.data.userInfo.id)
+      Taro.setStorageSync('userInfo', res.data.data.userInfo)
+
+      this.registerShareRecord()
+      this.shareBxOrder()
+    }, (err) => {
+      Taro.showToast({
+        title: `异常${err}`,
+        icon: 'none',
+        duration: 2000
       })
     })
   }
@@ -198,9 +250,9 @@ export default class Index extends Taro.Component {
 
     // 记录已经授权过
     Taro.setStorageSync('authorize', true)
-    Taro.setStorageSync('userInfo', submitData)
     Taro.showLoading({
-      title: '加载中'
+      title: Taro.loadingText,
+      mask: true
     })
     service.LoginGetToken(submitData, {}).then((res) => {
       Taro.hideLoading()
@@ -209,8 +261,11 @@ export default class Index extends Taro.Component {
       })
       Taro.setStorageSync('token', res.data.data.token)
       Taro.setStorageSync('userId', res.data.data.userInfo.id)
+      Taro.setStorageSync('userInfo', res.data.data.userInfo)
 
+      // 判断是否是分享进来的,若是进到对应的url
       this.registerShareRecord()
+      this.shareBxOrder()
     }, (err) => {
       Taro.showToast({
         title: `异常${err}`,

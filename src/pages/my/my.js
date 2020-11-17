@@ -22,9 +22,9 @@ export default class myIndex extends Taro.Component {
 
   onShareAppMessage () {
     return {
-      title: '贝鑫保险',
-      path: '/pages/home/index',
-      imageUrl: 'http://storage.360buyimg.com/mtd/home/share1535013100318.jpg'
+      title: '朋友，这里可以做保单托管，以后你的保单就有人服务了。',
+      path: '/pages/home/home',
+      imageUrl: `${require('../../assets/images/share.png')}`
     }
   }
 
@@ -92,16 +92,20 @@ export default class myIndex extends Taro.Component {
 
                 <View className="line"></View>
 
+              {userInfo.role != 0?
                 <View className="my-menu-row" data-url="/pages/my/page/myCustom" onClick={Taro.goToTarget}>
-                    <View style={{display: 'flex', alignItems: 'center'}}>
-                        <Image src={require('./image/kh.png')} className="my-menu-icons" />
-                        <Text className="my-menu-content">我的客户</Text>
-                    </View>
+                  <View style={{display: 'flex', alignItems: 'center'}}>
+                    <Image src={require('./image/kh.png')} className="my-menu-icons" />
+                    <Text className="my-menu-content">我的客户</Text>
+                  </View>
 
-                    <Image src={require('./image/right-arrow.png')} className="my-menu-right-arrow-icons" />
+                  <Image src={require('./image/right-arrow.png')} className="my-menu-right-arrow-icons" />
                 </View>
+                : ''}
 
+              {userInfo.role != 0?
                 <View className="line"></View>
+                : ''}
 
                 <Button openType="share" className="my-contact-button">
                   <View className="my-menu-row">

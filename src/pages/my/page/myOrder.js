@@ -18,7 +18,8 @@ export default class MyOrder extends Taro.Component {
     this.state = {
       insuranceList: [],
       currentPage: 1,
-      currentTab: 1
+      currentTab: 1,
+      currentPageSize: 5
     }
   }
 
@@ -36,11 +37,12 @@ export default class MyOrder extends Taro.Component {
   requestGetAllInsurance() {
     Taro.showLoading({
       title: Taro.loadingText,
+      mask: true
     })
     const queryData = {
       userId: Taro.getStorageSync('userId').toString(),
       page: this.state.currentPage,
-      pageSize: 20
+      pageSize: this.state.currentPageSize
     }
 
     service.requestGetMyAllInsurance(queryData, {}).then((res) => {
@@ -72,11 +74,12 @@ export default class MyOrder extends Taro.Component {
   requestGetShareList() {
     Taro.showLoading({
       title: Taro.loadingText,
+      mask: true
     })
     const queryData = {
       userId: Taro.getStorageSync('userId').toString(),
       page: this.state.currentPage,
-      pageSize: 20
+      pageSize: this.state.currentPageSize
     }
     service.requestGetShareOrder(queryData, {}).then((res) => {
       Taro.hideLoading()
@@ -107,13 +110,109 @@ export default class MyOrder extends Taro.Component {
   changeTabs = (e) => {
     const tabsIndex = parseInt(e.currentTarget.dataset.tabs, 10)
     this.setState({
-      currentTab: tabsIndex
+      currentTab: tabsIndex,
+      currentPage: 1,
+      currentPageSize: 5
     }, () => {
       if(tabsIndex === 1) {
         this.requestGetAllInsurance()
       } else {
         this.requestGetShareList()
       }
+    })
+  }
+
+  loadMore() {
+    let page = this.state.currentPage + 1
+    this.setState({
+      currentPage: page
+    },() => {
+      let tabsIndex = this.state.currentTab
+      if(tabsIndex === 1) {
+        this.loadMoreMyInsurance()
+      } else {
+        this.loadMoreShareInsurance()
+      }
+    })
+  }
+
+  loadMoreMyInsurance() {
+    Taro.showLoading({
+      title: Taro.loadingText,
+      mask: true
+    })
+    const queryData = {
+      userId: Taro.getStorageSync('userId').toString(),
+      page: this.state.currentPage,
+      pageSize: this.state.currentPageSize
+    }
+    service.requestGetMyAllInsurance(queryData, {}).then((res) => {
+      Taro.hideLoading()
+      let historyArr = this.state.insuranceList
+      // 遍历生成当前图标
+      if(res.data.data !== null) {
+        res.data.data.forEach((v) => {
+          if(v.status == 1) {
+            if(v.schemeId == 1) {
+              v.icons = personOnline
+            } else {
+              v.icons = homeOnline
+            }
+          } else {
+            if(v.schemeId == 1) {
+              v.icons = personUnline
+            } else {
+              v.icons = homeUnline
+            }
+          }
+
+          historyArr.push(v)
+        })
+      }
+
+      this.setState({
+        insuranceList: historyArr
+      })
+    })
+  }
+
+  loadMoreShareInsurance() {
+    Taro.showLoading({
+      title: Taro.loadingText,
+      mask: true
+    })
+    const queryData = {
+      userId: Taro.getStorageSync('userId').toString(),
+      page: this.state.currentPage,
+      pageSize: this.state.currentPageSize
+    }
+    service.requestGetSharedList(queryData, {}).then((res) => {
+      Taro.hideLoading()
+      let historyArr = this.state.insuranceList
+      // 遍历生成当前图标
+      if(res.data.data !== null) {
+        res.data.data.forEach((v) => {
+          if(v.status == 1) {
+            if(v.schemeId == 1) {
+              v.icons = personOnline
+            } else {
+              v.icons = homeOnline
+            }
+          } else {
+            if(v.schemeId == 1) {
+              v.icons = personUnline
+            } else {
+              v.icons = homeUnline
+            }
+          }
+
+          historyArr.push(v)
+        })
+      }
+
+      this.setState({
+        insuranceList: historyArr
+      })
     })
   }
 
@@ -126,11 +225,11 @@ export default class MyOrder extends Taro.Component {
           <View onClick={this.changeTabs} data-tabs="1" className={currentTab === 1?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>我的保单</View>
           <View onClick={this.changeTabs} data-tabs="2" className={currentTab === 2?'start-bx-title-col start-bx-title-checked': 'start-bx-title-col'}>分享的保单</View>
         </View>
-        <View className="my-container">
+        <ScrollView scrollY={true} className="my-container" onScrollToLower={() => {this.loadMore()}}>
             <View className="my-menu-section">
                 {
                   insuranceList.map((item, index) => {
-                    let buyCount = parseInt(item.current, 10) - parseInt(item.total, 10)
+                    let buyCount = parseInt(item.total, 10)
                     return (
                       <View>
                         <View
@@ -160,7 +259,7 @@ export default class MyOrder extends Taro.Component {
 
             </View>
             {insuranceList.length === 0?<View className="null-words">暂无数据</View>: ''}
-        </View>
+        </ScrollView>
       </View>
     )
   }

@@ -3,6 +3,7 @@
   margin: 0 0 20px 0;
   background-color: white;
   height: 100%;
+  box-sizing: border-box;
 }
 .avator-section{
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
@@ -93,7 +94,8 @@
 .order-detail-info-section{
   padding: 30px 32px 0 32px;
   background-color: white;
-  overflow: auto;
+  height: 66%;
+  box-sizing: border-box;
 }
 
 .order-detail-info-row{
@@ -103,7 +105,7 @@
 .float-right-button{
   position: absolute;
   right:4px;
-  top:-14px;
+  top:5px;
 
   width: 156px;
   height: 56px;

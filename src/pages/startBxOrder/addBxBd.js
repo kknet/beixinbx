@@ -3,7 +3,8 @@
  */
 // 添加保单
 import Taro from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, Image, Button } from '@tarojs/components'
+import { AtIcon, AtModal, AtModalHeader, AtModalContent } from 'taro-ui'
 import httpService from '../../utils/http'
 import * as service from './services'
 import {startPayMethods} from '../../utils/payMethods'
@@ -19,6 +20,7 @@ export default class AddBxBd extends Taro.Component {
         super(...arguments)
 
         this.state = {
+            isShowExample: false,
             buyCount: 0,
             current: 0,
             value: '',
@@ -46,16 +48,6 @@ export default class AddBxBd extends Taro.Component {
       })
     }
   }
-
-    onShareAppMessage () {
-        return {
-            title: 'Taro UI',
-            path: '/pages/index/index',
-            imageUrl: 'http://storage.360buyimg.com/mtd/home/share1535013100318.jpg'
-        }
-    }
-
-    handleChange() {}
 
   InputHandler = (event) => {
     let value = event.detail.value
@@ -91,33 +83,58 @@ export default class AddBxBd extends Taro.Component {
 
   // 上传图片
   chooseImage(type) {
+    let uploadCount = 2
+    if(type === 'policy') {
+      uploadCount = 2 - this.state.orderObj.policyImgs.length
+    } else if(type === 'bankCard') {
+      uploadCount = 2 - this.state.orderObj.bankCards.length
+    } else if(type === 'otherImg') {
+      uploadCount = 2 - this.state.orderObj.otherImg.length
+    }
+
     Taro.chooseImage({
-      count: 1,
+      count: uploadCount,
       sourceType: ["album", "camera"],
       success: async (res) => {
         Taro.showLoading({
-          title: Taro.loadingText
+          title: Taro.loadingText,
+          mask: true
         })
+
         const {policyImgs, bankCards, otherImg} = this.state.orderObj
-        const tempFilePaths = res.tempFilePaths
-        let imgFile = await this.sendFile(tempFilePaths)
-        Taro.hideLoading()
-        let orderObj = this.state.orderObj
-       
-        if(type === 'policy') {
-          policyImgs.push(imgFile)
-          orderObj.policyImgs = policyImgs
-        } else if(type === 'bankCard') {
-          bankCards.push(imgFile)
-          orderObj.bankCards = bankCards
-        } else if(type === 'otherImg') {
-          otherImg.push(imgFile)
-          orderObj.otherImg = bankCards
-        }
-        this.setState({
-          orderObj: orderObj
+
+        res.tempFilePaths.forEach(async (item) => {
+          const tempFilePaths = [item]
+          let imgFile = await this.sendFile(tempFilePaths)
+          let orderObj = this.state.orderObj
+
+          if(type === 'policy') {
+            policyImgs.push(imgFile)
+            orderObj.policyImgs = policyImgs
+          } else if(type === 'bankCard') {
+            bankCards.push(imgFile)
+            orderObj.bankCards = bankCards
+          } else if(type === 'otherImg') {
+            otherImg.push(imgFile)
+            orderObj.otherImg = otherImg
+          }
+          this.setState({
+            orderObj: orderObj
+          })
         })
+        Taro.hideLoading()
       }
+    })
+  }
+
+  delUploadImage (index, type) {
+    let targetArr = this.state.orderObj[type].slice()
+    let orderObj = Object.assign({}, this.state.orderObj)
+    targetArr.splice(index, 1)
+    orderObj[type] = targetArr
+    console.log('删除数据', orderObj)
+    this.setState({
+      orderObj: orderObj
     })
   }
 
@@ -144,14 +161,14 @@ export default class AddBxBd extends Taro.Component {
       })
       return false;
     }
-    if(bankCards.length === 0) {
-      Taro.showToast({
-        title: '请上传银行卡',
-        icon: 'none',
-        duration: 2000
-      })
-      return false;
-    }
+    // if(bankCards.length === 0) {
+    //   Taro.showToast({
+    //     title: '请上传银行卡',
+    //     icon: 'none',
+    //     duration: 2000
+    //   })
+    //   return false;
+    // }
     if(policyImgs.length === 0) {
       Taro.showToast({
         title: '请上传保单',
@@ -164,9 +181,9 @@ export default class AddBxBd extends Taro.Component {
     const orderForm = {
       imageVO: [
         {
-          bankCardImg: policyImgs.join(';'),
-          otherImg: bankCards.join(';'),
-          policyImg: otherImg.join(';')
+          bankCardImg: bankCards.join(';'),
+          otherImg: otherImg.join(';'),
+          policyImg: policyImgs.join(';')
         }
       ],
       insurant: insurant,
@@ -205,15 +222,31 @@ export default class AddBxBd extends Taro.Component {
     })
   }
 
+  closeExampleModal() {
+    this.setState({
+      isShowExample: false
+    })
+  }
+
+  showExample() {
+    console.log('点击事件')
+    this.setState({
+      isShowExample: true
+    })
+  }
+
 
     render () {
-        const { current, buyCount, schemeId } = this.state
+        const { current, buyCount, schemeId, isShowExample } = this.state
         const {insurant, policyImgs, bankCards, otherImg} = this.state.orderObj
 
         return (
             <View className="bx-page">
                 <View className="bx-person-input">
-                    <View>被保人</View>
+                    <View style={{position: 'relative'}}>
+                      <View className="must-star">*</View>
+                      <Text>被保人</Text>
+                    </View>
                     <Input onInput={this.InputHandler} value={insurant} className="bx-person-input-control" type='text' placeholder='请输入保单中的被保人' />
                 </View>
 
@@ -226,7 +259,8 @@ export default class AddBxBd extends Taro.Component {
 
                     <View className="bx-order-image-section">
                         <View className="bx-order-image-row-title">
-                            <View>
+                            <View style={{position: 'relative'}}>
+                                <View className="must-star">*</View>
                                 <Text style={{color: '#222222', fontSize: '34rpx'}}>保单页</Text>
                             </View>
 
@@ -237,12 +271,20 @@ export default class AddBxBd extends Taro.Component {
 
                         <View className="bx-order-image-row">
                             <View className="bx-order-image-col">
-                                {policyImgs.map((item, index) => {
+                                {policyImgs && policyImgs.map((item, index) => {
                                   return (
-                                    <Image src={item} key={index} className="add-pic-icons" alt="保单图片" />
+                                    <View key={item} style={{position: 'relative'}}>
+                                      <Image 
+                                        src={require('./image/close.png')}
+                                        onClick={() => this.delUploadImage(index, 'policyImgs')}
+                                        value='close-circle'
+                                        className="close-icon"
+                                      />
+                                      <Image src={item} key={item} className="add-pic-icons" alt="保单图片" />
+                                    </View>
                                   )
                                 })}
-                                <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('policy')} className="add-pic-icons" />
+                                {policyImgs.length === 2?'': <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('policy')} className="add-pic-icons" />}
                             </View>
                         </View>
                     </View>
@@ -262,12 +304,20 @@ export default class AddBxBd extends Taro.Component {
 
                         <View className="bx-order-image-row">
                             <View className="bx-order-image-col">
-                              {bankCards.map((item, index) => {
+                              {bankCards && bankCards.map((item, index) => {
                                 return (
-                                  <Image src={item} key={index} className="add-pic-icons" alt="银行卡图片" />
+                                  <View key={item} style={{position: 'relative'}}>
+                                    <Image
+                                      src={require('./image/close.png')}
+                                      onClick={() => this.delUploadImage(index, 'bankCards')}
+                                      value='close-circle'
+                                      className="close-icon"
+                                    />
+                                    <Image src={item} key={item} className="add-pic-icons" alt="银行卡" />
+                                  </View>
                                 )
                               })}
-                                <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('bankCard')} className="add-pic-icons" />
+                              {bankCards.length === 2?'': <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('bankCard')} className="add-pic-icons" />}
                             </View>
                         </View>
                     </View>
@@ -287,12 +337,20 @@ export default class AddBxBd extends Taro.Component {
 
                         <View className="bx-order-image-row">
                             <View className="bx-order-image-col">
-                              {otherImg.map((item, index) => {
+                              {otherImg && otherImg.map((item, index) => {
                                 return (
-                                  <Image src={item} key={index} className="add-pic-icons" alt="其他图片" />
+                                  <View key={item} style={{position: 'relative'}}>
+                                    <Image
+                                      src={require('./image/close.png')}
+                                      onClick={() => this.delUploadImage(index, 'otherImg')}
+                                      value='close-circle'
+                                      className="close-icon"
+                                    />
+                                    <Image src={item} key={item} className="add-pic-icons" alt="其他图片" />
+                                  </View>
                                 )
                               })}
-                                <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('otherImg')} className="add-pic-icons" />
+                              {otherImg.length === 2?'': <Image src={require('./image/addNewPic.png')} onClick={() => this.chooseImage('otherImg')} className="add-pic-icons" />}
                             </View>
                         </View>
                     </View>
@@ -303,7 +361,14 @@ export default class AddBxBd extends Taro.Component {
                         <Text>
                             可上传保单页，投保单页，现价单和批单页。所上传图片均需同一张保单号下的保单信息，请确保图片清晰和保单内容完整。
                         </Text>
-                        <Text style={{textDecoration: 'underline', color: '#576b95'}}>查看实例</Text>
+                        <View
+                          onClick={() => {this.showExample()}}
+                          style={{display: 'inline-block'}}
+                        >
+                          <Text
+                            style={{textDecoration: 'underline', color: '#576b95'}}
+                          >查看实例</Text>
+                        </View>
                     </View>
                 </View>
 
@@ -319,6 +384,16 @@ export default class AddBxBd extends Taro.Component {
                   保存保单
                 </View>
               </View>
+
+              <AtModal isOpened={isShowExample}>
+                <AtModalHeader>保单示例</AtModalHeader>
+                <AtModalContent>
+                  <Image mode="widthFix" src={require('./image/example.jpeg')} className="example-image" />
+                </AtModalContent>
+                <AtModalAction>
+                  <Button onClick={() => {this.closeExampleModal()}}>确定</Button>
+                </AtModalAction>
+              </AtModal>
             </View>
         )
     }

@@ -32,8 +32,12 @@ export default class ArticleList extends Taro.Component {
       pageSize: 10,
       type: this.state.type
     }
+    Taro.showLoading({
+      title: Taro.loadingText,
+      mask: true
+    })
     service.requestGetArticleList(queryData, {}).then((res) => {
-      console.log('文章列表', res.data)
+      Taro.hideLoading()
       this.setState({
         articleList: res.data.data.list
       })

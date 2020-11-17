@@ -2,165 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdcfea5d-d20b-4fa2-a83f-2a0e27a8a838" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/images/banner.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/images/banner1.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/00.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/01.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/02.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/03.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/04.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/05.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/06.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/07.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/08.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/09.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/10.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/100.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/101.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/102.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/103.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/104.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/105.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/106.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/107.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/108.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/109.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/11.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/110.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/111.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/112.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/113.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/114.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/115.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/116.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/117.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/118.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/119.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/12.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/120.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/121.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/122.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/123.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/124.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/125.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/126.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/127.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/128.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/129.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/13.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/130.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/131.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/132.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/133.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/134.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/14.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/15.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/16.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/17.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/18.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/19.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/20.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/21.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/22.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/23.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/24.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/25.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/26.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/27.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/28.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/29.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/30.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/31.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/32.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/33.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/34.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/35.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/36.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/37.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/38.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/39.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/40.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/41.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/42.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/43.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/44.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/45.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/46.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/47.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/48.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/49.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/50.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/51.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/52.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/53.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/54.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/55.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/56.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/57.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/58.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/59.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/60.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/61.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/62.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/63.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/64.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/65.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/66.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/67.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/68.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/69.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/70.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/71.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/72.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/73.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/74.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/75.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/76.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/77.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/78.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/79.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/80.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/81.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/82.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/83.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/84.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/85.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/86.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/87.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/88.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/89.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/90.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/91.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/92.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/93.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/94.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/95.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/96.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/97.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/98.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/emojis/99.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/home/img/scan.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/html2json.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/htmlparser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/showdown.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/wxDiscode.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/wxParse.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/wxParse.wxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/components/wxParse/wxParse.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/images/share.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/image/close.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/image/example.jpeg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/home/img/share.png" afterPath="$PROJECT_DIR$/src/pages/home/img/share.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/index.js" afterPath="$PROJECT_DIR$/config/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.scss" afterPath="$PROJECT_DIR$/src/app.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/article/detail.js" afterPath="$PROJECT_DIR$/src/pages/article/detail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/article/detail.scss" afterPath="$PROJECT_DIR$/src/pages/article/detail.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/home/bxbx-home.css" afterPath="$PROJECT_DIR$/src/pages/home/bxbx-home.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/article/list.js" afterPath="$PROJECT_DIR$/src/pages/article/list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/confirmOrder/index.js" afterPath="$PROJECT_DIR$/src/pages/confirmOrder/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/home/home.js" afterPath="$PROJECT_DIR$/src/pages/home/home.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/kf/index.js" afterPath="$PROJECT_DIR$/src/pages/kf/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/kf/kf.scss" afterPath="$PROJECT_DIR$/src/pages/kf/kf.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/my/my.js" afterPath="$PROJECT_DIR$/src/pages/my/my.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/my/my.scss" afterPath="$PROJECT_DIR$/src/pages/my/my.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/my/page/myOrder.js" afterPath="$PROJECT_DIR$/src/pages/my/page/myOrder.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js" afterPath="$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/my/services.js" afterPath="$PROJECT_DIR$/src/pages/my/services.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/index.js" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/startBxOrder/startBxOrder.scss" afterPath="$PROJECT_DIR$/src/pages/startBxOrder/startBxOrder.scss" />
     </list>
@@ -183,36 +41,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="home.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/home/home.js">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/confirmOrder/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="119" column="45" selection-start-line="119" selection-start-column="45" selection-end-line="119" selection-end-column="45" />
+            <state relative-caret-position="543">
+              <caret line="220" column="94" selection-start-line="220" selection-start-column="94" selection-end-line="220" selection-end-column="94" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="myOrderDetail.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="804">
-              <caret line="192" column="65" selection-start-line="192" selection-start-column="65" selection-end-line="192" selection-end-column="65" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addBxBd.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="92" column="2" selection-start-line="92" selection-start-column="2" selection-end-line="92" selection-end-column="2" />
-              <folding>
-                <element signature="e#54#85#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -220,8 +54,8 @@
       <file leaf-file-name="myOrder.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1276">
-              <caret line="137" column="158" selection-start-line="137" selection-start-column="158" selection-end-line="137" selection-end-column="158" />
+            <state relative-caret-position="166">
+              <caret line="227" column="60" selection-start-line="227" selection-start-column="60" selection-end-line="227" selection-end-column="101" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -229,60 +63,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="my.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/my/my.scss">
+      <file leaf-file-name="myOrderDetail.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
-              <folding />
+            <state relative-caret-position="268">
+              <caret line="45" column="2" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="2" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="logo.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/confirmOrder/image/logo.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="63" column="116" selection-start-line="63" selection-start-column="104" selection-end-line="63" selection-end-column="116" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#46#77#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addBxBd.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+            <state relative-caret-position="398">
+              <caret line="63" column="48" selection-start-line="63" selection-start-column="48" selection-end-line="63" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="startBxOrder.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/startBxOrder.scss">
+      <file leaf-file-name="my.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/my/my.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+            <state relative-caret-position="326">
+              <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scan.jpg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/image/scan.jpg">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
@@ -311,27 +120,28 @@
         <option value="$PROJECT_DIR$/src/pages/startBxOrder/services.js" />
         <option value="$PROJECT_DIR$/src/pages/confirmOrder/services.js" />
         <option value="$PROJECT_DIR$/src/app.js" />
-        <option value="$PROJECT_DIR$/src/pages/kf/index.js" />
-        <option value="$PROJECT_DIR$/src/pages/kf/kf.scss" />
         <option value="$PROJECT_DIR$/src/pages/startBxOrder/finishBd.scss" />
         <option value="$PROJECT_DIR$/src/pages/startBxOrder/finishBd.js" />
-        <option value="$PROJECT_DIR$/src/pages/article/list.js" />
-        <option value="$PROJECT_DIR$/src/pages/confirmOrder/index.js" />
         <option value="$PROJECT_DIR$/src/utils/http.js" />
-        <option value="$PROJECT_DIR$/src/pages/article/detail.js" />
         <option value="$PROJECT_DIR$/config/index.js" />
         <option value="$PROJECT_DIR$/src/pages/article/detail.scss" />
         <option value="$PROJECT_DIR$/src/app.scss" />
         <option value="$PROJECT_DIR$/src/pages/my/services.js" />
         <option value="$PROJECT_DIR$/src/pages/home/bxbx-home.css" />
-        <option value="$PROJECT_DIR$/src/pages/my/my.js" />
-        <option value="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" />
-        <option value="$PROJECT_DIR$/src/pages/my/page/myOrder.js" />
-        <option value="$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js" />
-        <option value="$PROJECT_DIR$/src/pages/home/home.js" />
-        <option value="$PROJECT_DIR$/src/pages/my/my.scss" />
         <option value="$PROJECT_DIR$/src/pages/startBxOrder/index.js" />
         <option value="$PROJECT_DIR$/src/pages/startBxOrder/startBxOrder.scss" />
+        <option value="$PROJECT_DIR$/src/pages/kf/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/kf/kf.scss" />
+        <option value="$PROJECT_DIR$/src/pages/my/my.js" />
+        <option value="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss" />
+        <option value="$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js" />
+        <option value="$PROJECT_DIR$/src/pages/home/home.js" />
+        <option value="$PROJECT_DIR$/src/pages/article/list.js" />
+        <option value="$PROJECT_DIR$/src/pages/article/detail.js" />
+        <option value="$PROJECT_DIR$/src/pages/my/page/myOrder.js" />
+        <option value="$PROJECT_DIR$/src/pages/confirmOrder/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js" />
+        <option value="$PROJECT_DIR$/src/pages/my/my.scss" />
       </list>
     </option>
   </component>
@@ -461,6 +271,14 @@
               <option name="myItemId" value="pages" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="startBxOrder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="image" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -477,10 +295,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -557,14 +371,15 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/startBxOrder/image" />
       <recent name="$PROJECT_DIR$/src/pages/components/ParserRichText" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/startBxOrder/image" />
       <recent name="$PROJECT_DIR$/src/assets/images" />
       <recent name="$PROJECT_DIR$/src/pages/home/img" />
       <recent name="$PROJECT_DIR$/src/pages/components" />
       <recent name="$PROJECT_DIR$/src/pages/kf" />
-      <recent name="$PROJECT_DIR$/src/pages/my/image" />
     </key>
   </component>
   <component name="RunManager">
@@ -629,18 +444,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605149044350</updated>
-      <workItem from="1605149045668" duration="50527000" />
+      <workItem from="1605149045668" duration="70405000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50527000" />
+    <option name="totallyTimeSpent" value="70405000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -701,16 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="15" column="37" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="37" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/confirmOrder/components/produceIcons.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
@@ -749,24 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/kf/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/kf/kf.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/finishBd.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
@@ -788,16 +575,6 @@
         <state relative-caret-position="377">
           <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/article/list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="59" column="24" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -825,31 +602,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/article/detail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="60" column="40" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/article/detail.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="574">
           <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -877,31 +634,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/confirmOrder/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="31" column="21" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="21" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#46#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/my/my.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-174">
-          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetailInfo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -922,24 +660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="192" column="65" selection-start-line="192" selection-start-column="65" selection-end-line="192" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/my/my.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/confirmOrder/image/logo.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -950,58 +670,142 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrder.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/startBxOrder.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1276">
-          <caret line="137" column="158" selection-start-line="137" selection-start-column="158" selection-end-line="137" selection-end-column="158" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="63" column="116" selection-start-line="63" selection-start-column="104" selection-end-line="63" selection-end-column="116" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#46#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        <state relative-caret-position="406">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/startBxOrder.scss">
+    <entry file="file://$PROJECT_DIR$/src/pages/kf/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/kf/kf.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/my/my.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="106" column="46" selection-start-line="106" selection-start-column="46" selection-end-line="106" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/services.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
-          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/image/example.jpeg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="88" column="14" selection-start-line="88" selection-start-column="14" selection-end-line="88" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="62" column="22" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/home/home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="257" column="6" selection-start-line="257" selection-start-column="6" selection-end-line="257" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/article/list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/article/detail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-116">
+          <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/addBxBd.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="92" column="2" selection-start-line="92" selection-start-column="2" selection-end-line="92" selection-end-column="2" />
+        <state relative-caret-position="7563">
+          <caret line="393" column="47" selection-start-line="393" selection-start-column="47" selection-end-line="393" selection-end-column="47" />
           <folding>
             <element signature="e#54#85#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/home/home.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/confirmOrder/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="119" column="45" selection-start-line="119" selection-start-column="45" selection-end-line="119" selection-end-column="45" />
+        <state relative-caret-position="543">
+          <caret line="220" column="94" selection-start-line="220" selection-start-column="94" selection-end-line="220" selection-end-column="94" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="227" column="60" selection-start-line="227" selection-start-column="60" selection-end-line="227" selection-end-column="101" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/my/my.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/startBxOrder/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="63" column="48" selection-start-line="63" selection-start-column="48" selection-end-line="63" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/my/page/myOrderDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="45" column="2" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

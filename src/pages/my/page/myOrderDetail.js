@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, Image, ScrollView } from '@tarojs/components'
 import * as service from '../services'
 import '../my.scss'
 
@@ -18,6 +18,7 @@ export default class MyOrder extends Taro.Component {
       insuranceList: [],
       shareList: [],
       currentPage: 1,
+      currentPageSize: 20,
       currentTab: 1
     }
   }
@@ -57,12 +58,13 @@ export default class MyOrder extends Taro.Component {
 
   getInsuranceDetailById() {
     Taro.showLoading({
-      title: Taro.loadingText
+      title: Taro.loadingText,
+      mask: true
     })
     let queryParams = {
       orderId: this.state.orderId,
       page: this.state.currentPage,
-      pageSize: 20
+      pageSize: this.state.currentPageSize
     }
     service.requestGetMyInsuranceList(queryParams, {}).then((res) => {
       Taro.hideLoading()
@@ -78,8 +80,10 @@ export default class MyOrder extends Taro.Component {
           v.statusText = '处理中'
         }
       })
+      let buyCount = parseInt(this.state.buyCount, 10) - res.data.data.length
       this.setState({
-        insuranceList: res.data.data
+        insuranceList: res.data.data,
+        buyCount: buyCount
       })
     })
   }
@@ -104,6 +108,44 @@ export default class MyOrder extends Taro.Component {
       path: `/pages/home/home?userId=${userId}&orderId=${orderId}&jump=true&url=/page/my/myOrderDetail&type=shareRegister`,
       imageUrl: `${require('../image/scan.jpg')}`
     }
+  }
+
+  loadMore() {
+    Taro.showLoading({
+      title: Taro.loadingText,
+      mask: true
+    })
+    this.setState({
+      pageSize: this.state.currentPageSize + 5
+    }, () => {
+      let queryParams = {
+        orderId: this.state.orderId,
+        page: this.state.currentPage,
+        pageSize: this.state.currentPageSize
+      }
+      let historyArr = this.state.insuranceList
+      service.requestGetMyInsuranceList(queryParams, {}).then((res) => {
+        Taro.hideLoading()
+        res.data.data.forEach((v) => {
+          if(v.status == 0) {
+            v.statusText = '已失效'
+          } else {
+            v.statusText = '保险中'
+          }
+
+          // 0未处理  1已处理
+          if(v.state == 0) {
+            v.statusText = '处理中'
+          }
+          historyArr.push(v)
+        })
+        
+        this.setState({
+          insuranceList: historyArr
+        })
+      })
+    })
+
   }
 
   render () {
@@ -131,7 +173,7 @@ export default class MyOrder extends Taro.Component {
             {schemeId == '1'?'单份保单': '家庭保单'}
         </View>
 
-        <View className="order-detail-info-section">
+        <ScrollView className="order-detail-info-section" scrollY={true} onScrollToLower={() => {this.loadMore()}}>
             {insuranceList.map((item, index) => {
               return (
                 <View>
@@ -203,7 +245,7 @@ export default class MyOrder extends Taro.Component {
                 </View>
               </View>
             }
-        </View>
+        </ScrollView>
       </View>
     )
   }

@@ -20,10 +20,11 @@ export default class KfIndex extends Taro.Component {
 
     return (
       <View className='bx-page'>
-        <Button openType="contact" className="my-contact-button">
-          <View className="kf-row">进入客服</View>
-        </Button>
-        <View className="line"></View>
+        <View className="button-container">
+          <Button openType="contact" className="my-contact-button">
+            <View className="kf-row">进入客服</View>
+          </Button>
+        </View>
       </View>
     )
   }
