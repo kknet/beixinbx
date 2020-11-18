@@ -38,3 +38,10 @@
   height: 2px;
   background-color: #ECEBEB;
 }
+.my-custom-name{
+  display: inline-block;
+  width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-wrap: nowrap;
+}

@@ -88,7 +88,7 @@ export default class ConfirmOrder extends Taro.Component {
     const shareId = Taro.getStorageSync('userId').toString()
     const buyCount = this.state.buyCount
     return {
-      title: '朋友，这里可以做保单托管，以后你的保单就有人服务了。',
+      title: '立即托管，以后您的保单有人服务了。',
       path: `/pages/home/home?schemeId=${this.state.schemeId}&shareId=${shareId}&buyCount=${buyCount}`,
       imageUrl: `${require('../../assets/images/share.png')}`
     }

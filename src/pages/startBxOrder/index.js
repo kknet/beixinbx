@@ -35,7 +35,6 @@ export default class StartBxOrder extends Taro.Component {
         this.setState({
           itemList: res.data.data
         })
-        console.log('项目列表', res.data)
       })
     }
     
@@ -49,7 +48,6 @@ export default class StartBxOrder extends Taro.Component {
     }
 
     changeTabs = (e) => {
-        console.log('切换tabsIndex', e)
         const tabsIndex = parseInt(e.currentTarget.dataset.tabs, 10)
         this.setState({
             current: tabsIndex

@@ -105,8 +105,9 @@ export default class AddBxBd extends Taro.Component {
         })
 
         const {policyImgs, bankCards, otherImg} = this.state.orderObj
+        let uploadCount = 0
 
-        res.tempFilePaths.forEach(async (item) => {
+        res.tempFilePaths.forEach(async (item, index) => {
           const tempFilePaths = [item]
           let imgFile = await this.sendFile(tempFilePaths)
           let orderObj = this.state.orderObj
@@ -121,11 +122,14 @@ export default class AddBxBd extends Taro.Component {
             otherImg.push(imgFile)
             orderObj.otherImg = otherImg
           }
+
           this.setState({
             orderObj: orderObj
           })
+          if(index === res.tempFilePaths.length-1) {
+            Taro.hideLoading()
+          }
         })
-        Taro.hideLoading()
       }
     })
   }
@@ -255,7 +259,7 @@ export default class AddBxBd extends Taro.Component {
                     <Text>已填保单数</Text>
                   </View>
                   <View>
-                    {schemeId == 1?<Text>{current}/{total}</Text>: <Text>{buyCount}</Text>}
+                    {schemeId == 1?<Text>{current}/{total}</Text>: <View style={{display: 'inline-block', marginLeft: '10rpx'}}>{buyCount}</View>}
                   </View>
                 </View>
 

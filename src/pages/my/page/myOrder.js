@@ -63,6 +63,14 @@ export default class MyOrder extends Taro.Component {
               v.icons = homeUnline
             }
           }
+
+          if(v.status == 0) {
+            v.statusName = '处理中'
+          } else if(v.status == 1) {
+            v.statusName = '保障中'
+          } else if(v.status == 2) {
+            v.statusName = '已失效'
+          }
         })
       }
       this.setState({
@@ -98,6 +106,14 @@ export default class MyOrder extends Taro.Component {
             } else {
               v.icons = homeUnline
             }
+          }
+
+          if(v.status == 0) {
+            v.statusName = '处理中'
+          } else if(v.status == 1) {
+            v.statusName = '保障中'
+          } else if(v.status == 2) {
+            v.statusName = '已失效'
           }
         })
       }
@@ -166,6 +182,14 @@ export default class MyOrder extends Taro.Component {
             }
           }
 
+          if(v.status == 0) {
+            v.statusName = '处理中'
+          } else if(v.status == 1) {
+            v.statusName = '保障中'
+          } else if(v.status == 2) {
+            v.statusName = '已失效'
+          }
+
           historyArr.push(v)
         })
       }
@@ -206,6 +230,14 @@ export default class MyOrder extends Taro.Component {
             }
           }
 
+          if(v.status == 0) {
+            v.statusName = '处理中'
+          } else if(v.status == 1) {
+            v.statusName = '保障中'
+          } else if(v.status == 2) {
+            v.statusName = '已失效'
+          }
+
           historyArr.push(v)
         })
       }
@@ -238,12 +270,11 @@ export default class MyOrder extends Taro.Component {
                           onClick={Taro.goToTarget}
                           data-url={`/pages/my/page/myOrderDetail?orderId=${item.orderId}&schemeId=${item.schemeId}&buyCount=${buyCount}&clickTab=${currentTab}&total=${item.total}&current=${item.current}`}
                           className="my-menu-row"
-                          key={index}
                         >
-                          <View style={{display: 'flex', alignItems: 'center'}}>
+                          <View class={item.status === 2?'useless-status': ''} style={{display: 'flex', alignItems: 'center'}}>
                             <Image src={item.icons} className="my-menu-icons" />
                             <Text className="my-menu-content">{item.schemeId == 1?'单份保单': '家庭保单'}</Text>
-                            <Text className="my-order-small-status">{item.status == 1?'保障中': '失效'}</Text>
+                            <Text className="my-order-small-status">{item.statusName}</Text>
                           </View>
 
                           <View>

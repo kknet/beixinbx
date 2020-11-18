@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import { View, Image, ScrollView } from '@tarojs/components'
 import * as service from '../services'
 import '../myCustom.scss'
 
@@ -34,7 +34,9 @@ export default class MyOrder extends Taro.Component {
               fields: 'pointsLastMonth'
           }
       ],
-      clientOrderList: []
+      clientOrderList: [],
+      page: 1,
+      pageSize: 10
     }
   }
 
@@ -60,12 +62,44 @@ export default class MyOrder extends Taro.Component {
 
   requestGetClientOrderList() {
     let queryData = {
-      userId: Taro.getStorageSync('userId').toString()
+      userId: Taro.getStorageSync('userId').toString(),
+      page: this.state.page,
+      pageSize: this.state.pageSize
     }
+    Taro.showLoading({
+      title: Taro.loadingText,
+      mask: true
+    })
     service.requestGetMyClientOrderList(queryData, {}).then((res) => {
-      console.log('获取客户订单', res.data)
+      Taro.hideLoading()
       this.setState({
         clientOrderList: res.data.data
+      })
+    })
+  }
+
+  loadMore() {
+    this.setState({
+      page: this.state.page+1
+    }, () => {
+      let queryData = {
+        userId: Taro.getStorageSync('userId').toString(),
+        page: this.state.page,
+        pageSize: this.state.pageSize
+      }
+      let history = this.state.clientOrderList
+      Taro.showLoading({
+        title: Taro.loadingText,
+        mask: true
+      })
+      service.requestGetMyClientOrderList(queryData, {}).then((res) => {
+        Taro.hideLoading()
+        res.data.data.forEach((item) => {
+          history.push(item)
+        })
+        this.setState({
+          clientOrderList: history
+        })
       })
     })
   }
@@ -83,7 +117,7 @@ export default class MyOrder extends Taro.Component {
               <View className="my-score-info">
                   {scoreData.map((item, index) => {
                      return (
-                         <View style={{display: 'flex'}}>
+                         <View key={`myScore${index}`} style={{display: 'flex'}}>
                              <View className="my-score-block">
                                  <View>
                                      <Text style={{color: '#666', fontSize: '26rpx'}}>{item.label}</Text>
@@ -100,14 +134,18 @@ export default class MyOrder extends Taro.Component {
               </View>
           </View>
 
-          <View className="my-score-info-list-section">
+          <ScrollView scrollY={true} onScrollToLower={() => {this.loadMore()}} className="my-score-info-list-section">
               {clientOrderList.map((item, index) => {
                 return (
-                  <View>
+                  <View key={`clientOrder${index}`}>
                     <View className="my-score-info-list-row">
                       <View style={{display: 'flex', alignItems: 'center'}}>
-                        <Text style={{fontSize: '32rpx', color: '#333333', marginRight: '20rpx'}}>{item.name}</Text>
-                        <Text className="small-tips">{item.schemeId == 1?'单份': '家庭'}保单 {item.count}份</Text>
+                        <View className="my-custom-name">
+                          <Text style={{fontSize: '32rpx', color: '#333333', marginRight: '20rpx'}}>{item.name}</Text>
+                        </View>
+                        <View style={{marginLeft: '20rpx'}}>
+                          <Text className="small-tips">{item.schemeId == 1?'单份': '家庭'}保单 {item.count}份</Text>
+                        </View>
                       </View>
 
                       <View>
@@ -124,7 +162,7 @@ export default class MyOrder extends Taro.Component {
                   </View>
                 )
               })}
-          </View>
+          </ScrollView>
 
 
       </View>

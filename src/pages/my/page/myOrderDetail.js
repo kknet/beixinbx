@@ -210,7 +210,7 @@ export default class MyOrder extends Taro.Component {
         <ScrollView className="order-detail-info-section" scrollY={true} onScrollToLower={() => {this.loadMore()}}>
             {insuranceList.map((item, index) => {
               return (
-                <View>
+                <View key={`order-detail-${index}`}>
                   <View
                     className="order-detail-info-row"
                     onClick={this.goToBxDetail}
