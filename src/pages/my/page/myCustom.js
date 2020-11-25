@@ -12,6 +12,7 @@ export default class MyOrder extends Taro.Component {
     super(...arguments)
 
     this.state = {
+      scoreDataObj: {},
       scoreData: [
           {
               label: '今日积分',
@@ -55,7 +56,8 @@ export default class MyOrder extends Taro.Component {
         v.data = res.data.data[v.fields]
       })
       this.setState({
-        scoreData: scoreData
+        scoreData: scoreData,
+        scoreDataObj: res.data.data
       })
     })
   }
@@ -106,13 +108,31 @@ export default class MyOrder extends Taro.Component {
     
 
   render () {
-      const { scoreData, clientOrderList } = this.state
+      const { scoreData, clientOrderList, scoreDataObj } = this.state
     return (
       <View className='bx-page'>
           <View className="my-score-section">
               <View>
                   <Text style={{color: '#333', fontSize: '34rpx'}}>我的积分</Text>
               </View>
+
+            <View className="my-score-info">
+              <View style={{display: 'flex', justifyContent: 'space-between', width: '92%', alignItems: 'center'}}>
+                <View className="my-score-block">
+                  <View>
+                    <Text decode={true} style={{color: '#666', fontSize: '38rpx'}}>总积分&nbsp;</Text>
+                    <Text style={{color: '#333', fontSize: '38rpx'}}>{scoreDataObj.total}</Text>
+                  </View>
+                </View>
+
+                <View className="my-score-block">
+                  <View>
+                    <Text decode={true} style={{color: '#666', fontSize: '26rpx'}}>额外积分&nbsp;</Text>
+                    <Text style={{color: '#333', fontSize: '26rpx'}}>{scoreDataObj.otherPoints}</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
 
               <View className="my-score-info">
                   {scoreData.map((item, index) => {
