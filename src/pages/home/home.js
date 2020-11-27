@@ -242,48 +242,50 @@ export default class Index extends Taro.Component {
   }
 
   getUserInfo = async (userInfo) => {
-    let submitData = {}
-    const res2 = await this.getOpenId()
-    const loginData = Object.assign({}, userInfo.target.userInfo)
-    loginData.openId = res2.openId
-    loginData.code = res2.code
+    if(userInfo.detail.userInfo) {
+      let submitData = {}
+      const res2 = await this.getOpenId()
+      const loginData = Object.assign({}, userInfo.target.userInfo)
+      loginData.openId = res2.openId
+      loginData.code = res2.code
 
-    Object.keys(loginData).forEach((item) => {
-      submitData[item.toLowerCase()] = loginData[item]
-    })
-    submitData.avatar = submitData.avatarurl
-    submitData.openId = submitData.openid
-    delete submitData.openid
-    delete submitData.avatarurl
-    delete submitData.gender
-    delete submitData.language
-
-    // 记录已经授权过
-    Taro.setStorageSync('authorize', true)
-    Taro.showLoading({
-      title: Taro.loadingText,
-      mask: true
-    })
-    service.LoginGetToken(submitData, {}).then((res) => {
-      Taro.hideLoading()
-      this.setState({
-        isShowLogin: false
+      Object.keys(loginData).forEach((item) => {
+        submitData[item.toLowerCase()] = loginData[item]
       })
-      Taro.setStorageSync('token', res.data.data.token)
-      Taro.setStorageSync('userId', res.data.data.userInfo.id)
-      Taro.setStorageSync('userInfo', res.data.data.userInfo)
+      submitData.avatar = submitData.avatarurl
+      submitData.openId = submitData.openid
+      delete submitData.openid
+      delete submitData.avatarurl
+      delete submitData.gender
+      delete submitData.language
 
-      // 判断是否是分享进来的,若是进到对应的url
-      this.registerShareRecord()
-      this.shareBxOrder()
-      this.goToShareArticleInfo()
-    }, (err) => {
-      Taro.showToast({
-        title: `异常${err}`,
-        icon: 'none',
-        duration: 2000
+      // 记录已经授权过
+      Taro.setStorageSync('authorize', true)
+      Taro.showLoading({
+        title: Taro.loadingText,
+        mask: true
       })
-    })
+      service.LoginGetToken(submitData, {}).then((res) => {
+        Taro.hideLoading()
+        this.setState({
+          isShowLogin: false
+        })
+        Taro.setStorageSync('token', res.data.data.token)
+        Taro.setStorageSync('userId', res.data.data.userInfo.id)
+        Taro.setStorageSync('userInfo', res.data.data.userInfo)
+
+        // 判断是否是分享进来的,若是进到对应的url
+        this.registerShareRecord()
+        this.shareBxOrder()
+        this.goToShareArticleInfo()
+      }, (err) => {
+        Taro.showToast({
+          title: `异常${err}`,
+          icon: 'none',
+          duration: 2000
+        })
+      })
+    }
   }
 
   render () {

@@ -98,11 +98,13 @@ export default class MyOrder extends Taro.Component {
   }
 
   goToBxDetail = (e) => {
-    let {routeUrl, state} = e.currentTarget.dataset
+    let {routeUrl, state, insuranceId} = e.currentTarget.dataset
 
     // 0 未处理  1 已处理
     if(state == 0) {
       routeUrl = '/pages/startBxOrder/finishBd?type=wait'
+    } else {
+      routeUrl = `/pages/my/page/myOrderDetailInfo?insuranceId=${insuranceId}`
     }
     this.setState({
       currentPage: 1,
@@ -214,6 +216,7 @@ export default class MyOrder extends Taro.Component {
                   <View
                     className="order-detail-info-row"
                     onClick={this.goToBxDetail}
+                    data-insuranceId={item.id}
                     data-url={`/pages/my/page/myOrderDetailInfo?insuranceId=${item.id}`}
                     data-state={item.state}
                   >
