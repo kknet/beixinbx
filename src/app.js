@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import Home from './pages/home/home'
+import Register from './pages/register/index'
 export const Context = Taro.createContext(0)
 
 import './app.scss'
@@ -7,6 +8,7 @@ import './app.scss'
 class App extends Component {
   config = {
     pages: [
+        'pages/register/index',  // 注册页面
         'pages/home/home',  // 首页
         'pages/kf/index',  // 客服
         'pages/article/list',  // 文章列表
@@ -71,7 +73,7 @@ class App extends Component {
   componentCatchError () {}
 
   render () {
-    return <Home />
+    return <Register />
   }
 }
 

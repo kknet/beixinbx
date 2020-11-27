@@ -29,7 +29,10 @@
   font-size: 26px;
   color: #999999;
   width: 500px;
-  word-wrap:break-word;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .current-red{
   position: absolute;

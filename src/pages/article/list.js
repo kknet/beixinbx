@@ -70,7 +70,7 @@ export default class ArticleList extends Taro.Component {
                   <View className='article-list-col'>
                     <View className='article-title'>{item.title}</View>
                     <View className='article-time'>{item.times}</View>
-                    <View className='article-desc'>{item.content?item.content: ''}sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf</View>
+                    <View className='article-desc'>{item.summary?item.summary: ''}</View>
                   </View>
                 </View>
                 <View className="list-line"></View>
