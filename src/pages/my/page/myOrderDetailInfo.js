@@ -146,15 +146,21 @@ export default class MyOrder extends Taro.Component {
             if(val.value.indexOf('.') !== -1) {
               let obj = val.value.split('.')[0]
               let objChild = val.value.split('.')[1]
-              console.log('对象', val.value,obj , objChild , res.data)
-              fields[k].children[key].filedsValue = res.data.data[obj][objChild]
+              console.log('对象', val.value,obj , objChild , res.data, res.data.data[obj])
+              if(res.data.data[obj] && res.data.data[obj][objChild]) {
+                if(res.data.data[obj][objChild] !== null) {
+                  fields[k].children[key].filedsValue = res.data.data[obj][objChild]
+                }
+              }
             } else {
-              fields[k].children[key].filedsValue = res.data.data[val.value]
+              if(res.data.data[val.value] !== null) {
+                fields[k].children[key].filedsValue = res.data.data[val.value]
+              }
             }
           }
         })
       })
-      console.log('字段', fields)
+
       this.setState({
         insuranceObj: res.data.data,
         fields: fields
@@ -168,14 +174,13 @@ export default class MyOrder extends Taro.Component {
       return (
       <View className='bx-page' style={{overflow: 'auto'}}>
         <View className="bx-header-info">
-            {insuranceObj.status}
             <Image src={BZOnline} className="bz-online-image" />
             <View>
-                <Text className="bx-info-small-words">{insuranceObj.name}</Text>
+                <Text className="bx-info-small-words">{insuranceObj.name?insuranceObj.name: ''}</Text>
             </View>
 
-            <View>
-                <Text>{insuranceObj.company}</Text>
+            <View style={{minHeight: '60rpx'}}>
+                <Text>{insuranceObj.company?insuranceObj.company: ''}</Text>
             </View>
 
             <View>
