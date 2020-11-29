@@ -252,7 +252,7 @@ let insuranceType = {
 function startPayMethods(orderId, totalFee) {
   return new Promise((resolve, reject) => {
     let payParams = {
-      body: '贝鑫保单',
+      body: '保管家',
       openid: Taro.getStorageSync('openId'),
       orderId: orderId.toString(),
       totalFee: totalFee,
