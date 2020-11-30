@@ -32,6 +32,7 @@ export default class MyOrder extends Taro.Component {
   // 对应 onShow
   componentDidShow () {
     const {orderId, schemeId, buyCount, clickTab, total, current} = this.$router.params
+    console.log(orderId, clickTab)
     if(orderId) {
       this.setState({
         orderId: orderId,

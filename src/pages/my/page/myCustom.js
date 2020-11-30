@@ -126,7 +126,7 @@ export default class MyOrder extends Taro.Component {
       })
     })
   }
-    
+
 
   render () {
       const { scoreData, clientOrderList, scoreDataObj } = this.state
@@ -180,10 +180,9 @@ export default class MyOrder extends Taro.Component {
                 return (
                   <View key={`clientOrder${index}`}>
                     <View
-                      onClick={this.goToBxDetail}
                       className="my-score-info-list-row"
-                      data-insuranceId={item.id}
-                      data-state={item.state}
+                      onClick={Taro.goToTarget}
+                      data-url={`/pages/my/page/myOrderDetail?orderId=${item.id}&schemeId=${item.schemeId}&buyCount=${1}&clickTab=${2}&total=${1}&current=${0}`}
                     >
                       <View style={{display: 'flex', alignItems: 'center'}}>
                         <View className="my-custom-name">
