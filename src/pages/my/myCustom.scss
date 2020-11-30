@@ -39,7 +39,8 @@
   background-color: #ECEBEB;
 }
 .my-custom-name{
-  display: inline-block;
+  white-space: nowrap;
+  display: inline;
   width: 220px;
   overflow: hidden;
   text-overflow: ellipsis;

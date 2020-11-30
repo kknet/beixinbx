@@ -20,7 +20,11 @@ export default class RegisterIndex extends Taro.Component {
   }
 
   async componentDidMount() {
-    
+    let authorize = Taro.getStorageSync('authorize')
+    // 已授权
+    if(authorize) {
+      this.goToHomePage()
+    }
   }
 
   autoSetHeight() {

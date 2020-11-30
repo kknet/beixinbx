@@ -74,36 +74,6 @@ let fields = [
                 filedsValue: ''
             }
         ]
-    },
-    {
-        title: '附加险',
-        children: [
-            {
-                filedsName: '附加险名称',
-                value: 'appendReturnVO.name',
-                filedsValue: ''
-            },
-            {
-                filedsName: '保额',
-                value: 'appendReturnVO.coverage',
-                filedsValue: ''
-            },
-            {
-                filedsName: '保障期限',
-                value: 'appendReturnVO.duration',
-                filedsValue: ''
-            }
-        ]
-    },
-    {
-        title: '受益人',
-        children: [
-            {
-                filedsName: '受益人',
-                value: 'benificiaryReturnVO.name',
-                filedsValue: ''
-            }
-        ]
     }
 ]
 
@@ -118,7 +88,9 @@ export default class MyOrder extends Taro.Component {
     this.state = {
       insuranceId: '',
       insuranceObj: {},
-      fields: fields
+      fields: fields,
+      appendReturn: [],  //  附加险
+      benificiary: []  //  受益人
     }
   }
 
@@ -161,6 +133,7 @@ export default class MyOrder extends Taro.Component {
         })
       })
 
+      console.log('insuranceObj', res.data.data)
       this.setState({
         insuranceObj: res.data.data,
         fields: fields
@@ -198,7 +171,7 @@ export default class MyOrder extends Taro.Component {
                       </View>}
                       {value.children.map((item, idx) => {
                           return (
-                              <View>
+                              <View key={`child-detail${idx}`}>
                                   <View className="basic-info-row">
                                       <View className="basic-info-title-name">
                                           <Text>{item.filedsName}</Text>
@@ -214,6 +187,81 @@ export default class MyOrder extends Taro.Component {
                       })}
                   </View>
               )
+          })}
+
+          {insuranceObj.appendReturnVO && insuranceObj.appendReturnVO.map((item, idx) => {
+            return (
+              <View className="basic-info-section">
+                <View className="basic-info-row">
+                  <Text style={{fontSize: '34rpx', color: '#666'}}>
+                    附加险
+                  </Text>
+                </View>
+                <View key={`appendReturn${idx}`}>
+                  <View className="basic-info-row">
+                    <View className="basic-info-title-name">
+                      <Text>附加险名称</Text>
+                    </View>
+                    <View className="basic-info-title-tips">
+                      <Text>{item.name}</Text>
+                    </View>
+                  </View>
+
+                  <View className="basic-info-row">
+                    <View className="basic-info-title-name">
+                      <Text>保障类型</Text>
+                    </View>
+                    <View className="basic-info-title-tips">
+                      <Text>{item.type}</Text>
+                    </View>
+                  </View>
+
+                  <View className="basic-info-row">
+                    <View className="basic-info-title-name">
+                      <Text>保额</Text>
+                    </View>
+                    <View className="basic-info-title-tips">
+                      <Text>{item.coverage}</Text>
+                    </View>
+                  </View>
+
+                  <View className="basic-info-row">
+                    <View className="basic-info-title-name">
+                      <Text>保障期限</Text>
+                    </View>
+                    <View className="basic-info-title-tips">
+                      <Text>{item.duration}</Text>
+                    </View>
+                  </View>
+
+                  <View className="basic-info-line"></View>
+                </View>
+              </View>
+            )
+          })}
+
+          {insuranceObj.benificiaryReturnVO && insuranceObj.benificiaryReturnVO.map((item, idx) => {
+            return (
+              <View className="basic-info-section">
+                <View className="basic-info-row">
+                  <Text style={{fontSize: '34rpx', color: '#666'}}>
+                    受益人
+                  </Text>
+                </View>
+                <View key={`appendReturn${idx}`}>
+                  <View className="basic-info-row">
+                    <View className="basic-info-title-name">
+                      <Text>受益人</Text>
+                    </View>
+                    <View className="basic-info-title-tips">
+                      <Text>{item.name}</Text>
+                    </View>
+                  </View>
+
+                  <View className="basic-info-line"></View>
+                </View>
+              </View>
+            )
           })}
       </View>
     )

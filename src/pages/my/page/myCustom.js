@@ -105,6 +105,27 @@ export default class MyOrder extends Taro.Component {
       })
     })
   }
+
+  goToBxDetail = (e) => {
+    let {state, insuranceid} = e.currentTarget.dataset
+    let routeUrl = ''
+    console.log(state, insuranceid)
+    return
+    // 0 未处理  1 已处理
+    if(state == 0) {
+      routeUrl = '/pages/startBxOrder/finishBd?type=wait'
+    } else {
+      routeUrl = `/pages/my/page/myOrderDetailInfo?insuranceId=${insuranceid}`
+    }
+    this.setState({
+      page: 1,
+      pageSize: 10
+    }, () => {
+      Taro.navigateTo({
+        url: `${routeUrl}`
+      })
+    })
+  }
     
 
   render () {
@@ -158,7 +179,12 @@ export default class MyOrder extends Taro.Component {
               {clientOrderList.map((item, index) => {
                 return (
                   <View key={`clientOrder${index}`}>
-                    <View className="my-score-info-list-row">
+                    <View
+                      onClick={this.goToBxDetail}
+                      className="my-score-info-list-row"
+                      data-insuranceId={item.id}
+                      data-state={item.state}
+                    >
                       <View style={{display: 'flex', alignItems: 'center'}}>
                         <View className="my-custom-name">
                           <Text style={{fontSize: '32rpx', color: '#333333', marginRight: '20rpx'}}>{item.name}</Text>
