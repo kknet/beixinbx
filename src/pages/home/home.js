@@ -63,7 +63,6 @@ export default class Index extends Taro.Component {
             autoHeight: '77%'
           })
         }
-        console.log('获取信息', res)
       }
     })
   }
@@ -91,10 +90,9 @@ export default class Index extends Taro.Component {
 
   // 注册好友关系
   registerShareRecord() {
-    const orderId = this.$router.params.orderId
-    const userId = this.$router.params.userId
+    const {orderId, userId, schemeId, buyCount, currentTab, total, current} = this.$router.params
     const currentUserId = Taro.getStorageSync('userId').toString()
-    const goUrl = this.$router.params.url
+
     if(orderId) {
       let shareObj = {
         orderId: orderId,
@@ -102,13 +100,20 @@ export default class Index extends Taro.Component {
         sharedUserId: currentUserId
       }
 
+      console.log(orderId, userId, schemeId, buyCount, currentTab, total, current)
       // 同一个人
       if(userId == currentUserId) {
+        Taro.navigateTo({
+          url: `/pages/my/page/myOrderDetail?orderId=${orderId}&schemeId=${schemeId}&buyCount=${buyCount}&clickTab=${currentTab}&total=${total}&current=${current}`
+        })
         return
       }
 
       service.requestAddShareRecord(shareObj, {}).then((res) => {
         if(res.data.code === 80001) {
+          Taro.navigateTo({
+            url: `/pages/my/page/myOrderDetail?orderId=${orderId}&schemeId=${schemeId}&buyCount=${buyCount}&clickTab=${currentTab}&total=${total}&current=${current}`
+          })
           return
         }
         Taro.showToast({
@@ -116,10 +121,9 @@ export default class Index extends Taro.Component {
           icon: 'success',
           duration: 2000
         })
-        // Taro.navigateTo({
-        //   // url: `/pages/panel/index?id=${id.toLowerCase()}`
-        //   url: '/pages/my/page/myOrderDetail'
-        // })
+        Taro.navigateTo({
+          url: `/pages/my/page/myOrderDetail?orderId=${orderId}&schemeId=${schemeId}&buyCount=${buyCount}&clickTab=${currentTab}&total=${total}&current=${current}`
+        })
       })
     }
   }

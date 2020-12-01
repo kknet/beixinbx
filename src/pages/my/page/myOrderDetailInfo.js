@@ -157,7 +157,7 @@ export default class MyOrder extends Taro.Component {
             </View>
 
             <View>
-                <Text className="bx-info-small-words">保单号：{insuranceObj.orderNo}</Text>
+                <Text className="bx-info-small-words">保单号：{insuranceObj.orderNo?insuranceObj.orderNo: ''}</Text>
             </View>
         </View>
 

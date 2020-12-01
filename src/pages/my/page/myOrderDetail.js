@@ -32,7 +32,6 @@ export default class MyOrder extends Taro.Component {
   // 对应 onShow
   componentDidShow () {
     const {orderId, schemeId, buyCount, clickTab, total, current} = this.$router.params
-    console.log(orderId, clickTab)
     if(orderId) {
       this.setState({
         orderId: orderId,
@@ -91,6 +90,7 @@ export default class MyOrder extends Taro.Component {
       } else {
         buyCount = res.data.data.total
       }
+      console.log('buycount', buyCount)
       this.setState({
         insuranceList: res.data.data.list,
         buyCount: buyCount
@@ -118,10 +118,10 @@ export default class MyOrder extends Taro.Component {
 
   onShareAppMessage () {
     const userId = Taro.getStorageSync('userId').toString()
-    const orderId = this.state.orderId
+    const {schemeId, orderId, buyCount, currentTab, total, current} = this.state
     return {
       title: '这是我已经托管的家庭保险资产，很重要，亲爱的你也需要知道。',
-      path: `/pages/home/home?userId=${userId}&orderId=${orderId}&jump=true&url=/page/my/myOrderDetail&type=shareRegister`,
+      path: `/pages/home/home?userId=${userId}&orderId=${orderId}&jump=true&type=shareRegister&schemeId=${schemeId}&buyCount=${buyCount}&currentTab=${2}&total=${total}&current=${current}`,
       imageUrl: `${require('../image/scan.jpg')}`
     }
   }
@@ -268,8 +268,9 @@ export default class MyOrder extends Taro.Component {
             {/*<View className="order-detail-line" style={{ margin: '24px 0 0 0'}}></View>*/}
 
 
-            {(buyCount == 0 && schemeId == 1) || currentTab === 2?
+            {currentTab == 2?
               '':
+              buyCount <= 0 && schemeId == 1? '' :
               <View
                 className="add-new-order"
                 onClick={(e) => {this.goToAddNewOrder(e)}}

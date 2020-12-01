@@ -182,7 +182,7 @@ export default class MyOrder extends Taro.Component {
                     <View
                       className="my-score-info-list-row"
                       onClick={Taro.goToTarget}
-                      data-url={`/pages/my/page/myOrderDetail?orderId=${item.id}&schemeId=${item.schemeId}&buyCount=${1}&clickTab=${2}&total=${1}&current=${0}`}
+                      data-url={`/pages/my/page/myOrderDetail?orderId=${item.id}&schemeId=${item.schemeId}&buyCount=${0}&clickTab=${2}&total=${1}&current=${0}`}
                     >
                       <View style={{display: 'flex', alignItems: 'center'}}>
                         <View className="my-custom-name">

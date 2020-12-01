@@ -199,7 +199,12 @@ export default class AddBxBd extends Taro.Component {
       userId: Taro.getStorageSync('userId').toString()
     }
 
+    Taro.showLoading({
+      title: Taro.loadingText,
+      mask: true
+    })
     service.createOrder(orderForm, {}).then((res) => {
+      Taro.hideLoading()
       Taro.showToast({
         title: '创建成功',
         icon: 'success',

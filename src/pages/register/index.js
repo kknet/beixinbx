@@ -63,6 +63,7 @@ export default class RegisterIndex extends Taro.Component {
   }
 
   getUserInfo = async (userInfo) => {
+    console.log('userinfo', userInfo)
     if(userInfo.detail.userInfo) {
       let submitData = {}
       const res2 = await this.getOpenId()
