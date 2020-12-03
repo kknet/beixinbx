@@ -8,7 +8,6 @@ import './app.scss'
 class App extends Component {
   config = {
     pages: [
-        'pages/register/index',  // 注册页面
         'pages/home/home',  // 首页
         'pages/kf/index',  // 客服
         'pages/article/list',  // 文章列表
@@ -21,7 +20,8 @@ class App extends Component {
         'pages/startBxOrder/index', // 填写保单信息页
         'pages/confirmOrder/index', // 确认订单页
         'pages/startBxOrder/addBxBd',  // 添加保单
-        'pages/startBxOrder/finishBd'  // 已完成等待
+        'pages/startBxOrder/finishBd',  // 已完成等待
+        'pages/register/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -73,7 +73,7 @@ class App extends Component {
   componentCatchError () {}
 
   render () {
-    return <Register />
+    return <Home />
   }
 }
 

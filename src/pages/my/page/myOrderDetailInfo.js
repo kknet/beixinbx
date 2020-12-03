@@ -263,6 +263,23 @@ export default class MyOrder extends Taro.Component {
               </View>
             )
           })}
+
+        <View className="basic-info-section">
+          <View className="basic-info-row">
+            <Text style={{fontSize: '34rpx', color: '#666'}}>
+              备注
+            </Text>
+          </View>
+          <View>
+            <View className="basic-info-row" style="flex-wrap: wrap;">
+              <View className="basic-info-title-tips">
+                <Text>{insuranceObj.remark}</Text>
+              </View>
+            </View>
+
+            <View className="basic-info-line"></View>
+          </View>
+        </View>
       </View>
     )
   }

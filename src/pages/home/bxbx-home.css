@@ -85,3 +85,10 @@
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+.login-start-button::after {
+    border:none;
+}
+.login-start-button{
+    background: transparent;
+}

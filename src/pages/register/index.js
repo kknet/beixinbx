@@ -17,6 +17,7 @@ export default class RegisterIndex extends Taro.Component {
       autoHeight: '74%',
       isShowLogin: false
     }
+    this.isCanClick = true
   }
 
   async componentDidMount() {
@@ -62,12 +63,14 @@ export default class RegisterIndex extends Taro.Component {
     })
   }
 
-  getUserInfo = async (userInfo) => {
+  getUserInfoForRegister = async (userInfo) => {
+    if(!this.isCanClick) return
+    this.isCanClick = false
     console.log('userinfo', userInfo)
     if(userInfo.detail.userInfo) {
       let submitData = {}
       const res2 = await this.getOpenId()
-      const loginData = Object.assign({}, userInfo.target.userInfo)
+      const loginData = Object.assign({}, userInfo.detail.userInfo)
       loginData.openId = res2.openId
       loginData.code = res2.code
 
@@ -88,7 +91,6 @@ export default class RegisterIndex extends Taro.Component {
         mask: true
       })
       service.LoginGetToken(submitData, {}).then((res) => {
-        Taro.hideLoading()
         this.setState({
           isShowLogin: false
         })
@@ -96,11 +98,15 @@ export default class RegisterIndex extends Taro.Component {
         Taro.setStorageSync('userId', res.data.data.userInfo.id)
         Taro.setStorageSync('userInfo', res.data.data.userInfo)
 
-        // 判断是否是分享进来的,若是进到对应的url
-        this.registerShareRecord()
-        this.shareBxOrder()
-        this.goToShareArticleInfo()
-        this.goToHomePage()
+        setTimeout(() => {
+          Taro.hideLoading()
+          this.isCanClick = true
+          // 判断是否是分享进来的,若是进到对应的url
+          this.registerShareRecord()
+          this.shareBxOrder()
+          this.goToShareArticleInfo()
+          this.goToHomePage()
+        }, 100)
       }, (err) => {
         Taro.showToast({
           title: `异常${err}`,
@@ -108,6 +114,8 @@ export default class RegisterIndex extends Taro.Component {
           duration: 2000
         })
       })
+    } else {
+      this.isCanClick = true
     }
   }
 
@@ -183,11 +191,10 @@ export default class RegisterIndex extends Taro.Component {
           className="login-button"
           size="mini"
           openType="getUserInfo"
-          onGetUserInfo={this.getUserInfo}
+          onGetUserInfo={this.getUserInfoForRegister}
         >
           开始托管
         </Button>
-        <OfficialAccount></OfficialAccount>
       </View>
     )
   }

@@ -37,6 +37,8 @@ export default class Index extends Taro.Component {
             ]
         }
     }
+
+    this.isCanClick = true
   }
 
   async componentDidMount() {
@@ -47,9 +49,12 @@ export default class Index extends Taro.Component {
     let authorize = Taro.getStorageSync('authorize')
     // 第一次进来没有授权的时候
     if(!authorize) {
-      this.setState({
-        isShowLogin: true
-      })
+      const {orderId} = this.$router.params
+      if(orderId) {
+        this.setState({
+          isShowLogin: true
+        })
+      }
     } else {
       this.refreshUserInfo()
     }
@@ -246,10 +251,12 @@ export default class Index extends Taro.Component {
   }
 
   getUserInfo = async (userInfo) => {
+    if(!this.isCanClick) return
+    this.isCanClick = false
     if(userInfo.detail.userInfo) {
       let submitData = {}
       const res2 = await this.getOpenId()
-      const loginData = Object.assign({}, userInfo.target.userInfo)
+      const loginData = Object.assign({}, userInfo.detail.userInfo)
       loginData.openId = res2.openId
       loginData.code = res2.code
 
@@ -279,9 +286,14 @@ export default class Index extends Taro.Component {
         Taro.setStorageSync('userInfo', res.data.data.userInfo)
 
         // 判断是否是分享进来的,若是进到对应的url
-        this.registerShareRecord()
-        this.shareBxOrder()
-        this.goToShareArticleInfo()
+        setTimeout(() => {
+          Taro.hideLoading()
+          this.isCanClick = true
+          // 判断是否是分享进来的,若是进到对应的url
+          this.registerShareRecord()
+          this.shareBxOrder()
+          this.goToShareArticleInfo()
+        }, 100)
       }, (err) => {
         Taro.showToast({
           title: `异常${err}`,
@@ -289,6 +301,66 @@ export default class Index extends Taro.Component {
           duration: 2000
         })
       })
+    } else {
+      this.isCanClick = true
+    }
+  }
+
+  getUserInfoByStartButton = async (userInfo) => {
+    if(Taro.getStorageSync('authorize')) {
+      //  去订单详情
+      this.goToDetailOrder()
+      return
+    }
+    if(!this.isCanClick) return
+    this.isCanClick = false
+    
+    if(userInfo.detail.userInfo) {
+      Taro.showLoading({
+        title: Taro.loadingText,
+        mask: true
+      })
+      let submitData = {}
+      const res2 = await this.getOpenId()
+      const loginData = Object.assign({}, userInfo.detail.userInfo)
+      loginData.openId = res2.openId
+      loginData.code = res2.code
+
+      Object.keys(loginData).forEach((item) => {
+        submitData[item.toLowerCase()] = loginData[item]
+      })
+      submitData.avatar = submitData.avatarurl
+      submitData.openId = submitData.openid
+      delete submitData.openid
+      delete submitData.avatarurl
+      delete submitData.gender
+      delete submitData.language
+
+      // 记录已经授权过
+      Taro.setStorageSync('authorize', true)
+      service.LoginGetToken(submitData, {}).then((res) => {
+        this.setState({
+          isShowLogin: false
+        })
+        Taro.setStorageSync('token', res.data.data.token)
+        Taro.setStorageSync('userId', res.data.data.userInfo.id)
+        Taro.setStorageSync('userInfo', res.data.data.userInfo)
+
+        setTimeout(() => {
+          Taro.hideLoading()
+          this.isCanClick = true
+          //  去订单详情
+          this.goToDetailOrder()
+        }, 100)
+      }, (err) => {
+        Taro.showToast({
+          title: `异常${err}`,
+          icon: 'none',
+          duration: 2000
+        })
+      })
+    } else {
+      this.isCanClick = true
     }
   }
 
@@ -337,11 +409,18 @@ export default class Index extends Taro.Component {
             })}
         </View>
         <View className="bx-home-content" style={{height: autoHeight}}>
-            <View className="start-bx-button" onClick={this.goToDetailOrder}>
-                <Image className="start-bx-button-image" src={require('./img/start_button.png')} />
-                <View className="start-bx-button-text">
+            <View className="start-bx-button">
+                <Button
+                  className="login-start-button"
+                  size="mini"
+                  openType="getUserInfo"
+                  onGetUserInfo={this.getUserInfoByStartButton}
+                >
+                  <Image className="start-bx-button-image" src={require('./img/start_button.png')} />
+                  <View className="start-bx-button-text">
                     <Text>立马托管</Text>
-                </View>
+                  </View>
+                </Button>
             </View>
         </View>
       </View>

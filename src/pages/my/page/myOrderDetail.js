@@ -176,6 +176,28 @@ export default class MyOrder extends Taro.Component {
     })
   }
 
+  delShareRecord(row) {
+    console.log('删除', row)
+    Taro.showLoading({
+      title: Taro.loadingText,
+      mask: true
+    })
+    let delParams = {
+      orderId: this.state.orderId,
+      userId: Taro.getStorageSync('userId').toString(),
+      sharedUserId: row.id
+    }
+    service.requestDeleteShareRecord(delParams, {}).then((res) => {
+      Taro.hideLoading()
+      Taro.showToast({
+        title: '删除成功',
+        icon: 'success',
+        duration: 2000
+      })
+      this.getSharePersonList()
+    })
+  }
+
   render () {
     const {insuranceList, schemeId, orderId, shareList, buyCount, currentTab, total, current} = this.state
     return (
@@ -184,25 +206,38 @@ export default class MyOrder extends Taro.Component {
             <View>
                 <Text style={{fontSize: '34rpx', color: '#222222'}}>我的家人</Text>
             </View>
-            <View className="my-family-row" style={{marginTop: '26rpx'}}>
-                {shareList.map((item) => {
-                  return <Image src={item.avatar} className="family-avator-col" />
-                })}
-              {currentTab == 1?
-                <Button
-                  style={shareList.length === 0?{margin: 0}: ''}
-                  openType="share"
-                  className="my-image-share-button"
-                >
-                  <Image
-                    src={require('../image/add-family.png')}
-                    className="family-avator-col"
-                  />
-                </Button>
-                :
-                ''
-              }
-            </View>
+            <ScrollView scrollX={true} style={{marginTop: '26rpx'}}>
+                <View className="my-family-row">
+                  {shareList.map((item, index) => {
+                    return (
+                      <View className="family-col" key={`family-col${index}`}>
+                        <Image src={item.avatar} className="family-avator-col" />
+                        {currentTab != 2 &&
+                        <Image
+                          className="close-image"
+                          onClick={() => {this.delShareRecord(item)}}
+                          src={require('../image/close.png')}
+                        />
+                        }
+                      </View>
+                    )
+                  })}
+                  {currentTab == 1?
+                    <Button
+                      style={shareList.length === 0?{margin: 0}: ''}
+                      openType="share"
+                      className="my-image-share-button"
+                    >
+                      <Image
+                        src={require('../image/add-family.png')}
+                        className="family-avator-col"
+                      />
+                    </Button>
+                    :
+                    ''
+                  }
+                </View>
+            </ScrollView>
         </View>
 
         <View className="order-details-sub-titles">

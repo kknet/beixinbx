@@ -32,3 +32,9 @@ export function requestGetMyClientData(data, options={}) {
 export function requestGetMyClientOrderList(data, options={}) {
   return httpInstance.post('/app/insurance/getMyClientOrderList', data, options)
 }
+
+
+// 删除分享的用户
+export function requestDeleteShareRecord(data, options={}) {
+  return httpInstance.post('/app/insurance/deleteShareRecord', data, options)
+}

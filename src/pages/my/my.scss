@@ -69,13 +69,12 @@
   margin-top: 20px;
 }
 .my-family-row{
+  padding-top: 32px;
+  width: 680px;
   display: flex;
   align-items: center;
 }
 .family-avator-col{
-  &:not(:first-child) {
-    margin-left: 30px;
-  }
   width: 120px;
   height: 120px;
 }
@@ -145,6 +144,7 @@
 }
 .my-contact-button:after, .my-image-share-button:after{
   border: none;
+  padding: 0;
 }
 .my-image-share-button{
   margin: 0 0 0 30px;
@@ -193,4 +193,19 @@
 
 .useless-status{
   color: #333333;
+}
+
+.close-image{
+  position: absolute;
+  right: -21px;
+  top: -34px;
+  width: 49px;
+  height: 50px;
+}
+
+.family-col{
+  position: relative;
+  &:not(:first-child) {
+    margin-left: 30px;
+  }
 }
