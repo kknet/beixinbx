@@ -191,15 +191,12 @@ export default class Index extends Taro.Component {
         success: (res) => {
           queryData.code = res.code
           service.requestGetOpenId(queryData, {}).then((result) => {
-            Taro.setStorage({
-              key:"openId",
-              data:result.data.data.openid
-            })
-            Taro.setStorage({
-              key:"sessionKey",
-              data:result.data.data.session_key
-            })
+            Taro.setStorageSync("openId", result.data.data.openid)
+            Taro.setStorageSync("sessionKey", result.data.data.session_key)
+            Taro.setStorageSync("unionid", result.data.data.unionid)
             queryData.openId = result.data.data.openid
+            queryData.unionId = result.data.data.unionid
+            console.log('queryData', queryData)
             reslove(queryData)
           })
         }
@@ -212,6 +209,7 @@ export default class Index extends Taro.Component {
     const res2 = await this.getOpenId()
     let userInfo = Taro.getStorageSync('userInfo')
     const loginData = Object.assign({}, userInfo)
+
     loginData.openId = res2.openId
     loginData.code = res2.code
 
@@ -221,8 +219,8 @@ export default class Index extends Taro.Component {
     submitData.country = userInfo.country
     submitData.nickname = userInfo.nickname
     submitData.openId = res2.openId
+    submitData.unionId = res2.unionId
     submitData.province = userInfo.province
-    submitData.unionId = userInfo.unionId
     submitData.wechat = userInfo.wechat
 
     Taro.showLoading({
@@ -265,6 +263,7 @@ export default class Index extends Taro.Component {
       })
       submitData.avatar = submitData.avatarurl
       submitData.openId = submitData.openid
+      submitData.unionId = res2.unionId
       delete submitData.openid
       delete submitData.avatarurl
       delete submitData.gender
@@ -331,6 +330,7 @@ export default class Index extends Taro.Component {
       })
       submitData.avatar = submitData.avatarurl
       submitData.openId = submitData.openid
+      submitData.unionId = res2.unionId
       delete submitData.openid
       delete submitData.avatarurl
       delete submitData.gender

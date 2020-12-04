@@ -50,15 +50,11 @@ export default class myIndex extends Taro.Component {
         success: (res) => {
           queryData.code = res.code
           service.requestGetOpenId(queryData, {}).then((result) => {
-            Taro.setStorage({
-              key:"openId",
-              data:result.data.data.openid
-            })
-            Taro.setStorage({
-              key:"sessionKey",
-              data:result.data.data.session_key
-            })
+            Taro.setStorageSync("openId", result.data.data.openid)
+            Taro.setStorageSync("sessionKey", result.data.data.session_key)
+            Taro.setStorageSync("unionid", result.data.data.unionid)
             queryData.openId = result.data.data.openid
+            queryData.unionId = result.data.data.unionid
             reslove(queryData)
           })
         }
@@ -90,6 +86,7 @@ export default class myIndex extends Taro.Component {
       Object.keys(loginData).forEach((item) => {
         submitData[item.toLowerCase()] = loginData[item]
       })
+      submitData.unionId = res2.unionId
       submitData.avatar = submitData.avatarurl
       submitData.openId = submitData.openid
       delete submitData.openid
