@@ -55,6 +55,8 @@ class App extends Component {
 
   componentWillMount () {
       Taro.goToTarget = (e) => {
+          e.stopPropagation()
+          e.preventDefault()
           const routeUrl = e.currentTarget.dataset.url
           Taro.navigateTo({
               url: `${routeUrl}`

@@ -17,3 +17,8 @@ export function requestAddShareRecord(data, options={}) {
   return httpInstance.post(`/app/insurance/addShareRecord`, data, options)
 }
 
+// 保单报告
+export function getReportService(data, options={}) {
+  return httpInstance.post('/app/insurance/report', data, options)
+}
+

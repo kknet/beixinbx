@@ -15,3 +15,8 @@ export function createOrder(data, options={}) {
 export function requestGetSchemeList(data, options={}) {
   return httpInstance.post('/app/insurance/getSchemeList', data, options)
 }
+
+// 保单报告
+export function getReport(data, options={}) {
+  return httpInstance.post('/app/insurance/report', data, options)
+}

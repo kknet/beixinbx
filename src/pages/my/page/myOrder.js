@@ -6,6 +6,7 @@ import homeUnline from '../image/home-unline.png'
 import personOnline from '../image/person-online.png'
 import personUnline from '../image/person-unline.png'
 import '../my.scss'
+import {startPayMethods} from "../../../utils/payMethods";
 
 export default class MyOrder extends Taro.Component {
   config = {
@@ -248,6 +249,28 @@ export default class MyOrder extends Taro.Component {
     })
   }
 
+  // 续费
+  newOrderPay(e, row) {
+    e.stopPropagation()
+    e.preventDefault()
+    let currentUserId = Taro.getStorageSync('userId').toString()
+    let params = {
+      amount: parseFloat(row.renewPrice),
+      number: row.total,
+      schemeId: row.schemeId,
+      userId: currentUserId,
+      orderId: row.orderId
+    }
+    let productName = row.schemeId === 1?'单份托管': '家庭托管'
+    service.createRenewOrder(params, {}).then((res) => {
+      console.log('res', res.data)
+      let orderInfo = res.data.data
+      startPayMethods(orderInfo.id, postParams.amount, productName).then((result) => {
+        console.log('续订成功')
+      })
+    })
+  }
+
 
   render () {
     const {insuranceList, currentTab} = this.state
@@ -275,6 +298,9 @@ export default class MyOrder extends Taro.Component {
                             <Image src={item.icons} className="my-menu-icons" />
                             <Text className="my-menu-content">{item.schemeId == 1?'单份保单': '家庭保单'}</Text>
                             <Text className="my-order-small-status">{item.statusName}</Text>
+                            <View onClick={e => e.stopPropagation()}>
+                              <Button className="new-order-button" onClick={(e) => {this.newOrderPay(e, item)}}>续订</Button>
+                            </View>
                           </View>
 
                           <View>

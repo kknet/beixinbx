@@ -3,6 +3,7 @@
  */
 // 添加保单
 import Taro from '@tarojs/taro'
+import * as service from './services'
 import { View, Image } from '@tarojs/components'
 import './finishBd.scss'
 
@@ -16,13 +17,15 @@ export default class FinishBd extends Taro.Component {
 
     this.state = {
       descText: '请添加保管家客服咨询进度',
-      type: ''
+      type: '',
+      reportImage: ''
     }
   }
 
   componentDidMount() {
     if(this.$router.params.type) {
       if(this.$router.params.type === 'report') {
+        // this.getReport()
         Taro.setNavigationBarTitle({
           title: '保单报告'
         })
@@ -32,7 +35,7 @@ export default class FinishBd extends Taro.Component {
       }
       this.setState({
         type: this.$router.params.type
-      }) 
+      })
     }
   }
 
@@ -55,7 +58,7 @@ export default class FinishBd extends Taro.Component {
   }
 
   render () {
-    const {descText, type} = this.state
+    const {descText, type, reportImage} = this.state
     console.log('路由', type)
 
     return (
@@ -64,11 +67,12 @@ export default class FinishBd extends Taro.Component {
           <View className="finish-title">
             <Text className="finish-title-words">已提交完成，工作人员处理中…</Text>
           </View>
-          : 
+          :
           ''
         }
         <View className={`finish-scan ${type === 'report'?'report-block': ''}`}>
-          <Image onClick={this.savePicToAlbum} data-src={require('./image/scan.jpg')} src={require('./image/scan.jpg')} className="finish-scan-image" />
+          {/*<Image onClick={this.savePicToAlbum} data-src={require('./image/scan.jpg')} src={require('./image/scan.jpg')} className="finish-scan-image" />*/}
+          <Image onClick={this.savePicToAlbum} data-src={reportImage} src={reportImage} className="finish-scan-image" />
         </View>
         <View className="finish-tips">
           <Text className="finish-tips-words">{descText}</Text>

@@ -38,3 +38,13 @@ export function requestGetMyClientOrderList(data, options={}) {
 export function requestDeleteShareRecord(data, options={}) {
   return httpInstance.post('/app/insurance/deleteShareRecord', data, options)
 }
+
+// 生成续费订单
+export function createRenewOrder(data, options={}) {
+  return httpInstance.post('/app/insurance/createRenewOrder', data, options)
+}
+
+// 保单报告
+export function getReportService(data, options={}) {
+  return httpInstance.post('/app/insurance/report', data, options)
+}

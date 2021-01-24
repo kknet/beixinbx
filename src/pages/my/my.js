@@ -65,9 +65,13 @@ export default class myIndex extends Taro.Component {
   getUserInfoByStartButton = async (userInfo) => {
     if(Taro.getStorageSync('authorize')) {
       let routerType = userInfo.currentTarget.dataset.url
-      Taro.navigateTo({
-        url: `${routerType}`
-      })
+      if(routerType === 'report') {
+        this.getReport()
+      } else {
+        Taro.navigateTo({
+          url: `${routerType}`
+        })
+      }
       return
     }
     if(!this.isCanClick) return
@@ -117,9 +121,14 @@ export default class myIndex extends Taro.Component {
           if(routerType === 'current') {
 
           } else {
-            Taro.navigateTo({
-              url: `${routerType}`
-            })
+            console.log(routerType)
+            if(routerType === 'report') {
+              this.getReport()
+            } else {
+              Taro.navigateTo({
+                url: `${routerType}`
+              })
+            }
           }
         }, 100)
       }, (err) => {
@@ -133,7 +142,34 @@ export default class myIndex extends Taro.Component {
       this.isCanClick = true
     }
   }
-    
+
+  getReport() {
+    let currentUserId = Taro.getStorageSync('userId').toString()
+    let params = {
+      userId: currentUserId
+    }
+    service.getReportService(params, {}).then((res) => {
+      this.setState({
+        reportImage: res.data.data || ""
+      }, () => {
+        Taro.downloadFile({
+          url: res.data.data, //仅为示例，并非真实的资源
+          success: function (res1) {
+            // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+            if (res1.statusCode === 200) {
+              Taro.openDocument({
+                filePath: res1.tempFilePath,
+                success: function (res2) {
+
+                }
+              })
+            }
+          }
+        })
+      })
+    })
+  }
+
 
   render () {
     const {userInfo, autoHeight} = this.state
@@ -174,14 +210,14 @@ export default class myIndex extends Taro.Component {
                     <Image src={require('./image/right-arrow.png')} className="my-menu-right-arrow-icons" />
                 </View>
               </Button>
-                
+
                 <View className="line"></View>
 
               <Button
                 className="my-contact-button"
                 openType="getUserInfo"
                 onGetUserInfo={this.getUserInfoByStartButton}
-                data-url="/pages/startBxOrder/finishBd?type=report"
+                data-url="report"
               >
                 <View className="my-menu-row">
                     <View style={{display: 'flex', alignItems: 'center'}}>
