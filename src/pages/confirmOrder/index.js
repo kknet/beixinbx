@@ -117,7 +117,7 @@ export default class ConfirmOrder extends Taro.Component {
       console.log('创建订单参数', postParams)
       service.createBxOrder(postParams, {}).then((res) => {
         let orderInfo = res.data.data
-        startPayMethods(orderInfo.id, postParams.amount, productName).then((result) => {
+        startPayMethods(orderInfo.id, postParams.amount, productName, 1).then((result) => {
           Taro.navigateTo({
             url: `/pages/startBxOrder/addBxBd?orderId=${result.orderId}&schemeId=${this.state.currentType}&buyCount=${this.state.currentType == 1?this.state.buyCount: this.state.buyCount-1}&total=${this.state.buyCount}&current=0`
           })

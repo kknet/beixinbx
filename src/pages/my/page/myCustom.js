@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
-import { View, Image, ScrollView } from '@tarojs/components'
+import { View, Image,Textarea , ScrollView } from '@tarojs/components'
+import { AtTextarea, AtTabs, AtTabsPane, AtInputNumber, AtModal, AtModalHeader, AtModalContent, AtModalAction } from 'taro-ui'
 import * as service from '../services'
 import '../myCustom.scss'
 
@@ -12,6 +13,9 @@ export default class MyOrder extends Taro.Component {
     super(...arguments)
 
     this.state = {
+	    editUserId: '',
+	    editRemark: '',
+	    isShowEditModal: false,
       scoreDataObj: {},
       scoreData: [
           {
@@ -127,9 +131,47 @@ export default class MyOrder extends Taro.Component {
     })
   }
 
+  showEditReamrk = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+
+	  let userId = e.currentTarget.dataset.userid
+	  let remark = e.currentTarget.dataset.content || ''
+    this.setState({
+	    isShowEditModal: true,
+	    editUserId: userId,
+	    editRemark: remark
+    })
+  }
+
+	editRemarkHandler = () => {
+		const {editRemark, editUserId} = this.state
+		let params = {
+			id: parseInt(editUserId, 10),
+			remark: editRemark
+		}
+
+		service.editRemark(params, {}).then((res) => {
+			this.setState({
+				page: 1
+			}, () => {
+				this.requestGetClientOrderList()
+				this.setState({
+					isShowEditModal: false
+				})
+			})
+		})
+	}
+
+	inputRemark = (ev) => {
+		this.setState({
+			editRemark: ev
+		})
+	}
+
 
   render () {
-      const { scoreData, clientOrderList, scoreDataObj } = this.state
+      const { scoreData, clientOrderList, scoreDataObj, isShowEditModal, editRemark } = this.state
     return (
       <View className='bx-page'>
           <View className="my-score-section">
@@ -186,7 +228,12 @@ export default class MyOrder extends Taro.Component {
                     >
                       <View style={{display: 'flex', alignItems: 'center'}}>
                         <View className="my-custom-name">
-                          <Text style={{fontSize: '32rpx', color: '#333333', marginRight: '20rpx'}}>{item.name}</Text>
+                          <View>
+                            <Text style={{fontSize: '32rpx', color: '#333333', marginRight: '20rpx'}}>{item.name}</Text>
+                          </View>
+                          <View>
+                            <Text style={{fontSize: '32rpx', color: '#333333', marginRight: '20rpx'}}>{item.remark?item.remark: ''}</Text>
+                          </View>
                         </View>
                         <View style={{marginLeft: '20rpx'}}>
                           <Text className="small-tips">{item.schemeId == 1?'单份': '家庭'}保单 {item.count}份</Text>
@@ -201,13 +248,37 @@ export default class MyOrder extends Taro.Component {
                           <Text className="small-tips">积分 {item.points}分</Text>
                         </View>
                       </View>
+
+                      <View data-content={item.remark} data-userid={item.userId} onClick={this.showEditReamrk}>
+                        <Image src={require('../image/edit.png')} style={{width: '20px',height: '20px'}} />
+                      </View>
                     </View>
 
                     <View className="my-score-info-line"></View>
                   </View>
                 )
               })}
+
+	          <View className="bottom-words">
+		          您已滑到底部
+	          </View>
           </ScrollView>
+
+
+          <AtModal isOpened={isShowEditModal} closeOnClickOverlay={false}>
+	          <AtModalContent>
+							<AtTextarea
+								value={this.state.editRemark}
+								onChange={this.inputRemark}
+								style="width: 100%;min-height: 80px;padding: 0 15px;position: relative;"
+							  maxLength="300"
+							/>
+	          </AtModalContent>
+	          <AtModalAction>
+		          <Button type="secondary" onClick={() => {this.setState({isShowEditModal:false})}}>关闭</Button>
+		          <Button style={{color: '#FE9B14'}} onClick={this.editRemarkHandler}>编辑</Button>
+	          </AtModalAction>
+          </AtModal>
 
 
       </View>

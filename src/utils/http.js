@@ -3,7 +3,7 @@
  */
 // const host = 'http://120.78.84.243:9035'
 const host = 'https://baoguanjia.ltd'
-const baseUrl = '/baoguanjiatest'
+const baseUrl = '/baoguanjia'
 import Taro, { Component } from '@tarojs/taro'
 
 function HttpConstructor(url, methods, data, headers) {
@@ -25,6 +25,13 @@ function HttpConstructor(url, methods, data, headers) {
           })
           return
         }
+	      if(res.data.code === -1) {
+		      Taro.showToast({
+			      title: `网络异常`,
+			      icon: 'none',
+			      duration: 2000
+		      })
+	      }
         reslove(res)
       },
       error: (error) => {

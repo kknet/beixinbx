@@ -12,6 +12,7 @@ export default class MyOrder extends Taro.Component {
     super(...arguments)
 
     this.state = {
+	    bottomHeight: '66%',
       buyCount: 0,
       orderId: '',
       schemeId: '',
@@ -26,7 +27,13 @@ export default class MyOrder extends Taro.Component {
   }
 
   componentDidMount() {
-
+		const height = wx.getSystemInfoSync().screenHeight
+	  if(height > 812) {
+		  this.setState({
+			  bottomHeight: '68%'
+		  })
+	  }
+	  console.log('高度', height)
   }
 
   // 对应 onShow
@@ -120,9 +127,9 @@ export default class MyOrder extends Taro.Component {
     const userId = Taro.getStorageSync('userId').toString()
     const {schemeId, orderId, buyCount, currentTab, total, current} = this.state
     return {
-      title: '这是我已经托管的家庭保险资产，很重要，亲爱的你也需要知道。',
+      title: '这是我们的家庭保险资产，有几件很重要的事，你知道吗？',
       path: `/pages/home/home?userId=${userId}&orderId=${orderId}&jump=true&type=shareRegister&schemeId=${schemeId}&buyCount=${buyCount}&currentTab=${2}&total=${total}&current=${current}`,
-      imageUrl: `${require('../image/scan.jpg')}`
+      imageUrl: `${require('../image/share-image.png')}`
     }
   }
 
@@ -199,7 +206,7 @@ export default class MyOrder extends Taro.Component {
   }
 
   render () {
-    const {insuranceList, schemeId, orderId, shareList, buyCount, currentTab, total, current} = this.state
+    const {bottomHeight, insuranceList, schemeId, orderId, shareList, buyCount, currentTab, total, current} = this.state
     return (
       <View className='bx-page'>
         <View className="my-family-section">
@@ -229,7 +236,7 @@ export default class MyOrder extends Taro.Component {
                       className="my-image-share-button"
                     >
                       <Image
-                        src={require('../image/add-family.png')}
+                        src={require('../image/add-family-yellow.png')}
                         className="family-avator-col"
                       />
                     </Button>
@@ -244,7 +251,7 @@ export default class MyOrder extends Taro.Component {
             {schemeId == '1'?'单份保单': '家庭保单'}
         </View>
 
-        <ScrollView className="order-detail-info-section" scrollY={true} onScrollToLower={() => {this.loadMore()}}>
+        <ScrollView style={{height: bottomHeight}} className="order-detail-info-section" scrollY={true} onScrollToLower={() => {this.loadMore()}}>
             {insuranceList.map((item, index) => {
               return (
                 <View key={`order-detail-${index}`}>
@@ -257,19 +264,26 @@ export default class MyOrder extends Taro.Component {
                     <View className="float-right-button">
                       <Text style={item.status == 0?{color: '#999999', fontSize: '26rpx'}:{color: '#FE9B14', fontSize: '26rpx'}}>{item.statusText}</Text>
                     </View>
-                    <View>
+                    <View className="order-detail-insurance-name">
                       <Text>{item.name === null?'':item.name}</Text>
                     </View>
+	                  <View>
+		                  <Text className="order-detail-info-tips">投保人：{item.policyHolder === null?'':item.policyHolder}</Text>
+	                  </View>
                     <View>
                       <Text className="order-detail-info-tips">被保险人：{item.insurant === null?'':item.insurant}</Text>
                     </View>
+
+	                  <View>
+		                  <Text className="order-detail-info-tips">保费: {item.cost === null? '': item.cost}</Text>
+	                  </View>
 
                     <View>
                       <Text className="order-detail-info-tips">保额: {item.coverage === null? '': item.coverage}</Text>
                     </View>
 
                     <View>
-                      <Text className="order-detail-info-tips">保障期限：{item.limit === null? '': item.limit}</Text>
+                      <Text className="order-detail-info-tips">保单生效日：{item.limit === null? '': item.limit}</Text>
                     </View>
                   </View>
                   {insuranceList.length-1 === index?''
@@ -311,7 +325,7 @@ export default class MyOrder extends Taro.Component {
                 onClick={(e) => {this.goToAddNewOrder(e)}}
                 data-url={`/pages/startBxOrder/addBxBd?schemeId=${schemeId}&orderId=${orderId}&buyCount=${buyCount}&total=${total}&current=${current}`}
               >
-                <Image src={require('../image/add-new-order.png')} className="add-new-order-button-image" />
+                <Image src={require('../image/add-new-order-yellow.png')} className="add-new-order-button-image" />
                 <View>
                   <Text style={{color: '#999999', fontSize: '26rpx'}}>添加保单</Text>
                 </View>

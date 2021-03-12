@@ -71,8 +71,7 @@ export default class FinishBd extends Taro.Component {
           ''
         }
         <View className={`finish-scan ${type === 'report'?'report-block': ''}`}>
-          {/*<Image onClick={this.savePicToAlbum} data-src={require('./image/scan.jpg')} src={require('./image/scan.jpg')} className="finish-scan-image" />*/}
-          <Image onClick={this.savePicToAlbum} data-src={reportImage} src={reportImage} className="finish-scan-image" />
+          <Image onClick={this.savePicToAlbum} data-src={require('./image/scan.jpg')} src={require('./image/scan.jpg')} className="finish-scan-image" />
         </View>
         <View className="finish-tips">
           <Text className="finish-tips-words">{descText}</Text>

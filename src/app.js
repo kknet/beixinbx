@@ -21,7 +21,9 @@ class App extends Component {
         'pages/confirmOrder/index', // 确认订单页
         'pages/startBxOrder/addBxBd',  // 添加保单
         'pages/startBxOrder/finishBd',  // 已完成等待
-        'pages/register/index'
+        'pages/register/index',
+	      'pages/web/webview',
+        'pages/web/articleWebview'
     ],
     window: {
       backgroundTextStyle: 'light',

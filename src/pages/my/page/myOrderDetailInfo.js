@@ -72,7 +72,17 @@ let fields = [
                 filedsName: '保障期限',
                 value: 'mainReturnVO.duration',
                 filedsValue: ''
-            }
+            },
+		        {
+			        filedsName: '保险利益',
+			        value: 'mainReturnVO.benefite',
+			        filedsValue: ''
+		        },
+		        {
+			        filedsName: '缴费状态',
+			        value: 'mainReturnVO.costState',
+			        filedsValue: ''
+		        },
         ]
     }
 ]
@@ -177,7 +187,12 @@ export default class MyOrder extends Taro.Component {
                                           <Text>{item.filedsName}</Text>
                                       </View>
                                       <View className="basic-info-title-tips">
-                                          <Text>{item.filedsValue}</Text>
+                                        <Text>{item.filedsValue}</Text>
+	                                      {item.filedsValue && item.value === 'mainReturnVO.benefite' &&
+	                                      <View><Text style={{fontSize: '12px'}}>＊保单实际权益以合同为准</Text></View>}
+
+	                                      {item.filedsValue && item.value === 'mainReturnVO.costState' &&
+	                                      <View><Text style={{fontSize: '12px'}}>＊本缴费为系统默认，缴费状态以实际缴费为准，如有异议请联系客服调整状态。</Text></View>}
                                       </View>
                                   </View>
 
@@ -234,6 +249,26 @@ export default class MyOrder extends Taro.Component {
                     </View>
                   </View>
 
+	                <View className="basic-info-row">
+		                <View className="basic-info-title-name">
+			                <Text>保险利益</Text>
+		                </View>
+		                <View className="basic-info-title-tips">
+			                <Text>{item.benefite}</Text>
+			                {item.benefite && <View><Text style={{fontSize: '12px'}}>＊保单实际权益以合同为准</Text></View>}
+		                </View>
+	                </View>
+
+	                <View className="basic-info-row">
+		                <View className="basic-info-title-name">
+			                <Text>缴费状态</Text>
+		                </View>
+		                <View className="basic-info-title-tips">
+			                <Text>{item.costState}</Text>
+			                {item.costState && <View><Text style={{fontSize: '12px'}}>＊本缴费为系统默认，缴费状态以实际缴费为准，如有异议请联系客服调整状态。</Text></View>}
+		                </View>
+	                </View>
+
                   <View className="basic-info-line"></View>
                 </View>
               </View>
@@ -273,7 +308,7 @@ export default class MyOrder extends Taro.Component {
           <View>
             <View className="basic-info-row" style="flex-wrap: wrap;">
               <View className="basic-info-title-tips">
-                <Text>{insuranceObj.remark}</Text>
+                <Text>{insuranceObj.remark || ""}</Text>
               </View>
             </View>
 

@@ -20,7 +20,7 @@ export default class MyOrder extends Taro.Component {
       insuranceList: [],
       currentPage: 1,
       currentTab: 1,
-      currentPageSize: 5
+      currentPageSize: 15
     }
   }
 
@@ -30,9 +30,11 @@ export default class MyOrder extends Taro.Component {
 
   componentDidShow() {
     this.setState({
-      currentTab: 1
+      currentTab: 1,
+	    currentPage: 1
+    }, () => {
+	    this.requestGetAllInsurance()
     })
-    this.requestGetAllInsurance()
   }
 
   requestGetAllInsurance() {
@@ -129,7 +131,7 @@ export default class MyOrder extends Taro.Component {
     this.setState({
       currentTab: tabsIndex,
       currentPage: 1,
-      currentPageSize: 5
+      currentPageSize: 15
     }, () => {
       if(tabsIndex === 1) {
         this.requestGetAllInsurance()
@@ -256,8 +258,6 @@ export default class MyOrder extends Taro.Component {
     let currentUserId = Taro.getStorageSync('userId').toString()
     let params = {
       amount: parseFloat(row.renewPrice),
-      number: row.total,
-      schemeId: row.schemeId,
       userId: currentUserId,
       orderId: row.orderId
     }
@@ -265,8 +265,8 @@ export default class MyOrder extends Taro.Component {
     service.createRenewOrder(params, {}).then((res) => {
       console.log('res', res.data)
       let orderInfo = res.data.data
-      startPayMethods(orderInfo.id, postParams.amount, productName).then((result) => {
-        console.log('续订成功')
+      startPayMethods(orderInfo.orderId, orderInfo.amount, productName, 2).then((result) => {
+	      this.requestGetAllInsurance()
       })
     })
   }
@@ -298,9 +298,9 @@ export default class MyOrder extends Taro.Component {
                             <Image src={item.icons} className="my-menu-icons" />
                             <Text className="my-menu-content">{item.schemeId == 1?'单份保单': '家庭保单'}</Text>
                             <Text className="my-order-small-status">{item.statusName}</Text>
-                            <View onClick={e => e.stopPropagation()}>
-                              <Button className="new-order-button" onClick={(e) => {this.newOrderPay(e, item)}}>续订</Button>
-                            </View>
+	                          {item.renew == '1' && <View onClick={e => e.stopPropagation()}>
+		                          <Button className="new-order-button" onClick={(e) => {this.newOrderPay(e, item)}}>续订</Button>
+	                          </View>}
                           </View>
 
                           <View>
@@ -315,8 +315,10 @@ export default class MyOrder extends Taro.Component {
                     )
                   })
                 }
-
             </View>
+	          <View className="bottom-words">
+		          您已滑到底部
+	          </View>
             {insuranceList.length === 0?
               <View className='no-data-block'>
                 <View>

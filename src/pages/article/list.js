@@ -63,7 +63,7 @@ export default class ArticleList extends Taro.Component {
               <View>
                 <View
                   className='article-list-row'
-                  data-url={`/pages/article/detail?id=${item.id}`}
+                  data-url={`/pages/web/articleWebview?articleId=${item.id}`}
                   onClick={Taro.goToTarget}
                 >
                   <Image src={item.imageUrl} className='article-image' />

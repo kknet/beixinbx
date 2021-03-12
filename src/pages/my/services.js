@@ -48,3 +48,9 @@ export function createRenewOrder(data, options={}) {
 export function getReportService(data, options={}) {
   return httpInstance.post('/app/insurance/report', data, options)
 }
+
+// 修改备注
+export function editRemark(data, options={}) {
+	return httpInstance.post('/app/insurance/editRemark', data, options)
+}
+

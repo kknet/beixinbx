@@ -56,6 +56,9 @@ export default class ArticleDetail extends Taro.Component {
     }
   }
 
+	onWxParseTagATap(ev) {
+		console.log('超链接解析', ev)
+	}
 
   // <Text style={{marginLeft: '25rpx'}}>{articleInfo.summary}</Text>
   render () {

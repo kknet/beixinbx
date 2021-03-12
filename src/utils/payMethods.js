@@ -249,15 +249,17 @@ let insuranceType = {
   '0006':'其他'
 }
 
-function startPayMethods(orderId, totalFee, productName) {
+function startPayMethods(orderId, totalFee, productName, type) {
   console.log('商品名称', productName)
+	let newOrderId = `${orderId.toString()}-${new Date().getTime()}`
   return new Promise((resolve, reject) => {
     let payParams = {
       body: productName,
       openid: Taro.getStorageSync('openId'),
-      orderId: orderId.toString(),
+      orderId: newOrderId,
       totalFee: totalFee,
-      attach: '0'
+      attach: '0',
+	    type: type.toString()
     }
     httpInstance.post('/app/pay/tenpayAddOrderJSAPI', payParams, {}).then((res) => {
       let payObj = res.data.data

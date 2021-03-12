@@ -12,8 +12,10 @@ export default class myIndex extends Taro.Component {
     super(...arguments)
 
     this.state = {
+	    isLoadingFile: false,
       userInfo: Taro.getStorageSync('userInfo'),
-      autoHeight: '97%'
+      autoHeight: '97%',
+	    downLoadPercent: 0
     }
     this.isCanClick = true
   }
@@ -25,7 +27,7 @@ export default class myIndex extends Taro.Component {
   onShareAppMessage () {
     return {
       title: '朋友，这里可以做保单托管，以后你的保单就有人服务了。',
-      path: '/pages/home/home',
+      path: '/pages/home/home?isShare=1',
       imageUrl: `${require('../../assets/images/share.png')}`
     }
   }
@@ -93,6 +95,8 @@ export default class myIndex extends Taro.Component {
       submitData.unionId = res2.unionId
       submitData.avatar = submitData.avatarurl
       submitData.openId = submitData.openid
+	    submitData.resource = Taro.getStorageSync('resource').toString()
+
       delete submitData.openid
       delete submitData.avatarurl
       delete submitData.gender
@@ -148,33 +152,85 @@ export default class myIndex extends Taro.Component {
     let params = {
       userId: currentUserId
     }
+
     service.getReportService(params, {}).then((res) => {
+	    console.log('数据', res.data.data)
+	    if(res.data.data === '' || res.data.data === null) {
+		    Taro.showToast({
+			    title: `您暂无保单报告`,
+			    icon: 'none',
+			    duration: 2000
+		    })
+		    return
+	    } else {
+		    Taro.navigateTo({
+			    url: `/pages/web/webview`
+		    })
+	    }
+	    
+	    return
       this.setState({
         reportImage: res.data.data || ""
       }, () => {
-        Taro.downloadFile({
+	      Taro.showLoading({
+		      title: Taro.loadingText,
+		      mask: true
+	      })
+	      this.setState({
+		      isLoadingFile: true
+	      })
+        const downLoadTask = wx.downloadFile({
           url: res.data.data, //仅为示例，并非真实的资源
-          success: function (res1) {
+          success: (res1) => {
             // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
             if (res1.statusCode === 200) {
               Taro.openDocument({
                 filePath: res1.tempFilePath,
-                success: function (res2) {
-
-                }
+                success: (res2) => {
+	                Taro.hideLoading()
+	                this.setState({
+		                isLoadingFile: false
+	                })
+                },
+	              fail: function(err) {
+		              console.log('网络异常', err)
+		              Taro.showToast({
+			              title: `网络异常`,
+			              icon: 'none',
+			              duration: 2000
+		              })
+		              Taro.hideLoading()
+	              }
               })
             }
-          }
+          },
+	        fail: function(error) {
+		        console.log('网络异常', error)
+		        Taro.showToast({
+			        title: `网络异常`,
+			        icon: 'none',
+			        duration: 2000
+		        })
+		        Taro.hideLoading()
+	        }
         })
+	      downLoadTask.onProgressUpdate((res) => {
+		      this.setState({
+			      downLoadPercent: res.progress
+		      })
+	      })
       })
     })
   }
 
 
   render () {
-    const {userInfo, autoHeight} = this.state
+    const {userInfo, autoHeight, downLoadPercent, isLoadingFile} = this.state
     return (
       <View className='bx-page'>
+	      {isLoadingFile && <View className='download-percent'>
+		      <Text>进度: {downLoadPercent}%</Text>
+	      </View>}
         <View className="my-container" style={{margin: '20rpx 0 20rpx 0', height: autoHeight}}>
             <View className="avator-section">
               <Button

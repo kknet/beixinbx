@@ -44,6 +44,13 @@ export default class Index extends Taro.Component {
   async componentDidMount() {
     // await this.getOpenId()
     // this.getUserInfo()
+	  // 分享的参数, 有则证明是分享进来的
+	  const {shareId, articleId, isShare} = this.$router.params
+	  if(shareId || articleId || isShare) {
+		  Taro.setStorageSync('resource', 2)
+	  } else {
+		  Taro.setStorageSync('resource', 1)
+	  }
     this.autoSetHeight()
     let token = Taro.getStorageSync('token')
     let authorize = Taro.getStorageSync('authorize')
@@ -77,18 +84,19 @@ export default class Index extends Taro.Component {
     const shareId = this.$router.params.shareId
     const schemeId = this.$router.params.schemeId
     const buyCount = parseInt(this.$router.params.buyCount, 10)
-    if(shareId) {
-      Taro.navigateTo({
-        url: `/pages/confirmOrder/index?type=${schemeId}&schemeId=${this.state.schemeId}&shareId=${shareId}&buyCount=${buyCount}`
-      })
-    }
+	  let authorize = Taro.getStorageSync('authorize')
+	  if(shareId) {
+		  Taro.navigateTo({
+			  url: `/pages/confirmOrder/index?type=${schemeId}&schemeId=${this.state.schemeId}&shareId=${shareId}&buyCount=${buyCount}`
+		  })
+	  }
   }
 
   goToShareArticleInfo() {
     const articleId = this.$router.params.articleId
     if(articleId) {
       Taro.navigateTo({
-        url: `/pages/article/detail?id=${articleId}`
+        url: `/pages/web/articleWebview?articleId=${articleId}`
       })
     }
   }
@@ -146,7 +154,7 @@ export default class Index extends Taro.Component {
   onShareAppMessage () {
     return {
       title: '朋友，这里可以做保单托管，以后你的保单就有人服务了。',
-      path: '/pages/home/home',
+      path: '/pages/home/home?isShare=1',
       imageUrl: `${require('../../assets/images/share.png')}`
     }
   }
@@ -223,6 +231,8 @@ export default class Index extends Taro.Component {
     submitData.province = userInfo.province
     submitData.wechat = userInfo.wechat
 
+	  // submitData.resource = Taro.getStorageSync('resource').toString() // 来源
+
     Taro.showLoading({
       title: '加载中',
       mask: true
@@ -257,6 +267,7 @@ export default class Index extends Taro.Component {
       const loginData = Object.assign({}, userInfo.detail.userInfo)
       loginData.openId = res2.openId
       loginData.code = res2.code
+	    loginData.resource = Taro.getStorageSync('resource').toString() // 来源
 
       Object.keys(loginData).forEach((item) => {
         submitData[item.toLowerCase()] = loginData[item]
@@ -264,6 +275,7 @@ export default class Index extends Taro.Component {
       submitData.avatar = submitData.avatarurl
       submitData.openId = submitData.openid
       submitData.unionId = res2.unionId
+
       delete submitData.openid
       delete submitData.avatarurl
       delete submitData.gender
@@ -331,6 +343,8 @@ export default class Index extends Taro.Component {
       submitData.avatar = submitData.avatarurl
       submitData.openId = submitData.openid
       submitData.unionId = res2.unionId
+	    submitData.resource = Taro.getStorageSync('resource').toString() // 来源
+
       delete submitData.openid
       delete submitData.avatarurl
       delete submitData.gender
@@ -350,7 +364,10 @@ export default class Index extends Taro.Component {
           Taro.hideLoading()
           this.isCanClick = true
           //  去订单详情
-          this.goToDetailOrder()
+          // this.goToDetailOrder()
+	        this.registerShareRecord()
+	        this.shareBxOrder()
+	        this.goToShareArticleInfo()
         }, 100)
       }, (err) => {
         Taro.showToast({
