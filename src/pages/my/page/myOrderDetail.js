@@ -126,9 +126,16 @@ export default class MyOrder extends Taro.Component {
   onShareAppMessage () {
     const userId = Taro.getStorageSync('userId').toString()
     const {schemeId, orderId, buyCount, currentTab, total, current} = this.state
+
+	  let shareTitle = '这是我们的家庭保险资产，有几件很重要的事，你知道吗？'
+	  let shareUrl = `/pages/home/home?userId=${userId}&orderId=${orderId}&jump=true&type=shareRegister&schemeId=${schemeId}&buyCount=${buyCount}&currentTab=${2}&total=${total}&current=${current}`
+	  if(currentTab == 2) {
+		  shareTitle = '朋友，这里可以做保单托管，以后你的保单就有人服务了。'
+		  shareUrl = '/pages/home/home?isShare=1'
+	  }
     return {
-      title: '这是我们的家庭保险资产，有几件很重要的事，你知道吗？',
-      path: `/pages/home/home?userId=${userId}&orderId=${orderId}&jump=true&type=shareRegister&schemeId=${schemeId}&buyCount=${buyCount}&currentTab=${2}&total=${total}&current=${current}`,
+      title: shareTitle,
+      path: shareUrl,
       imageUrl: `${require('../image/share-image.png')}`
     }
   }
