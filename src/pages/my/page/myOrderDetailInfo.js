@@ -3,6 +3,7 @@ import { View, Image } from '@tarojs/components'
 import * as service from '../services'
 import '../myOrderInfo.scss'
 import BZOnline from '../image/online-icons.png'
+import BZCancel from '../image/cancel.png'
 
 let fields = [
     {
@@ -44,7 +45,7 @@ let fields = [
                 filedsValue: ''
             },
             {
-                filedsName: '保费',
+                filedsName: '总保费',
                 value: 'cost',
                 filedsValue: ''
             },
@@ -68,6 +69,11 @@ let fields = [
                 value: 'mainReturnVO.coverage',
                 filedsValue: ''
             },
+		        {
+			        filedsName: '保费',
+			        value: 'mainReturnVO.cost',
+			        filedsValue: ''
+		        },
             {
                 filedsName: '保障期限',
                 value: 'mainReturnVO.duration',
@@ -157,7 +163,8 @@ export default class MyOrder extends Taro.Component {
       return (
       <View className='bx-page' style={{overflow: 'auto'}}>
         <View className="bx-header-info">
-            <Image src={BZOnline} className="bz-online-image" />
+	          {insuranceObj.state == 2?<Image src={BZCancel} className="bz-online-image" />:<Image src={BZOnline} className="bz-online-image" />}
+
             <View>
                 <Text className="bx-info-small-words">{insuranceObj.name?insuranceObj.name: ''}</Text>
             </View>
@@ -239,6 +246,15 @@ export default class MyOrder extends Taro.Component {
                       <Text>{item.coverage}</Text>
                     </View>
                   </View>
+
+	                <View className="basic-info-row">
+		                <View className="basic-info-title-name">
+			                <Text>保费</Text>
+		                </View>
+		                <View className="basic-info-title-tips">
+			                <Text>{item.cost}</Text>
+		                </View>
+	                </View>
 
                   <View className="basic-info-row">
                     <View className="basic-info-title-name">

@@ -80,16 +80,13 @@ export default class MyOrder extends Taro.Component {
     service.requestGetMyInsuranceList(queryParams, {}).then((res) => {
       Taro.hideLoading()
       res.data.data.list.forEach((v) => {
-        if(v.status == 0) {
-          v.statusText = '已失效'
-        } else {
-          v.statusText = '保障中'
-        }
-
-        // 0未处理  1已处理
-        if(v.state == 0) {
-          v.statusText = '处理中'
-        }
+	      if(v.state == 1) {
+		      v.statusText = '保障中'
+	      } else if(v.state == 0) {
+		      v.statusText = '处理中'
+	      } else {
+		      v.statusText = '已失效'
+	      }
       })
       let buyCount = 0
       if(this.state.schemeId == 1) {
@@ -157,16 +154,13 @@ export default class MyOrder extends Taro.Component {
       service.requestGetMyInsuranceList(queryParams, {}).then((res) => {
         Taro.hideLoading()
         res.data.data.list.forEach((v) => {
-          if(v.status == 0) {
-            v.statusText = '已失效'
-          } else {
-            v.statusText = '保障中'
-          }
-
-          // 0未处理  1已处理
-          if(v.state == 0) {
-            v.statusText = '处理中'
-          }
+	        if(v.state == 1) {
+		        v.statusText = '保障中'
+	        } else if(v.state == 0) {
+		        v.statusText = '处理中'
+	        } else {
+		        v.statusText = '已失效'
+	        }
           historyArr.push(v)
         })
 
