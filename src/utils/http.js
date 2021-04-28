@@ -3,7 +3,7 @@
  */
 // const host = 'http://120.78.84.243:9035'
 const host = 'https://baoguanjia.ltd'
-const baseUrl = '/baoguanjiatest'
+const baseUrl = '/baoguanjia'
 import Taro, { Component } from '@tarojs/taro'
 
 function HttpConstructor(url, methods, data, headers) {
